@@ -12,7 +12,7 @@ Madeline Pochowicz: My name is Madeline! I am a Data Science and Data Analytics 
 
 Hussein Alsowadi:
 
-Lynaa Yousef:
+Lynaa Yousef: I am a Data Science and Analytics major with concentration in Web Analytics. I'm super excited to be graduating in December. I am also a Data Conversion Consultant and Engineer at ModMed, located in Boca Raton, Florida. I work remotely! Things I like to do when I am not working or in class are going on drives, weightlifting/training, bike rides, and eating as I am a big foodie.
 
 Sean Mick:
 
