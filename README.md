@@ -5,7 +5,7 @@ Team name: SourPatch Kids
 
 Team Project: 
 
-Team Bios:
+# Team Bios
 
 
 Madeline Pochowicz: My name is Madeline! I am a Data Science and Data Analytics major with a concentration in Advance Data Analysis. I also have a minor in general business. I will be graduating this December and can't wait! I actually am a transfer from the University of Toledo where I was originally a chemical engineering major. Things I enjoy are sports, reading and doing anything outside (when it's warm). I love the Fall and watching the trees change color and I absolutely hate the cold and winter. 
@@ -26,4 +26,4 @@ Arieonna Hearn:
 
 Sai Greeshma:
 
-Matthew Sweebe: 
+Matthew Sweebe: My name is Matt and I am working on my second Bachelor's degree in Computer Science planning to graduate in December. I got my first degree in Simulation, Animation and Gaming concentraing on Animation. I would love one day to be a character animator for Pixar one day or even a technical animator so I can combine my degree in Animation and Comp Sci. I love gaming, bouldering and traveling
