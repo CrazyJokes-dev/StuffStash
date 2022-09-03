@@ -11,7 +11,7 @@ Team Project:
 ### Madeline Pochowicz
 > My name is Madeline! I am a Data Science and Data Analytics major with a concentration in Advance Data Analysis. I also have a minor in general business. I will be graduating this December and can't wait! I actually am a transfer from the University of Toledo where I was originally a chemical engineering major. Things I enjoy are sports, reading and doing anything outside (when it's warm). I love the Fall and watching the trees change color and I absolutely hate the cold and winter. 
 
-Hussein Alsowadi:
+### Hussein Alsowadi:
 Hi there! My name is Hussein, and I am a Computer Science major graduating at the end of the Fall 2022 Semester!  My topics of interest are mobile and web development. Some things that I enjoy are video games, traveling, I love watching and playing all kinds of sports, and I also raise chickens and ducks!  
 
 ### Lynaa Yousef
