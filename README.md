@@ -22,7 +22,7 @@ Sean Mick:
 Estefan Valencia Moore:
 
 
-Nivethaa Srijayanthi:
+###Nivethaa Ravichandran:
 > Hi All , I am a full time Computer science major graduating next winter . My topics of interest are web development and data mining .  I have a toddler at home and I love spending time with my daughter , additionally I like playing sports and reading in my free time . 
 
 ### Arieonna Hearn:
