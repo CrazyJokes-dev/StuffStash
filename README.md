@@ -24,8 +24,8 @@ Estefan Valencia Moore:
 
 Nivethaa Srijayanthi:
 
-Arieonna Hearn:
-
+### Arieonna Hearn:
+> My name is Arie and I am double majoring in Computer Science and Spanish. I am planning to graduate this December. I am most interested in backend and desktop development. Swimming, skateboarding, and immersing myself in Spanish are my favorite things to do during my free time.
 
 Sai Greeshma:
 
