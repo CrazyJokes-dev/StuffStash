@@ -32,7 +32,7 @@ Our project is Asset Management Software. The purpose of our software is to log,
 > My name is Arie and I am double majoring in Computer Science and Spanish. I am planning to graduate this December. I am most interested in backend and desktop development. Swimming, skateboarding, and immersing myself in Spanish are my favorite things to do during my free time.
 
 ### Sai Greeshma:
-> My name is Sai and i am major in Computer Science, I am freshman. My topics of intrest are HTML and web development. These days i am learning driving and love to spend time with my sister and making crafts.
+> My name is Sai and I am major in Computer Science. My topics of intrest are HTML and web development. I have done my undergrade projects using HTML and Java Script. These days i am learning driving, things i enjoy during free time is making crafts and painting.
 
 ### Matthew Sweebe 
 > My name is Matt and I am working on my second Bachelor's degree in Computer Science planning to graduate in December. I got my first degree in Simulation, Animation and Gaming concentraing on Animation. I would love one day to be a character animator for Pixar one day or even a technical animator so I can combine my degree in Animation and Comp Sci. I love gaming, bouldering and traveling
