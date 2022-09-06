@@ -25,7 +25,7 @@ Our project is Asset Management Software. The purpose of our software is to log,
 ### Estefan Valencia Moore:
 > Hello, My name is Estefan and I am a Computer Science Major. Hopefully I end up graduating at the end of the Winter 2022 Semester. My topics of interest are mainly web development. Things I enjoy doing in my free time are video games, reading comics, and doing martial arts. 
 
-**Nivethaa Ravichandran:**
+### Nivethaa Ravichandran:
 > Hi All , I am a full time Computer science major graduating next winter . My topics of interest are web development and data mining .  I have a toddler at home and I love spending time with my daughter , additionally I like playing sports and reading in my free time . 
 
 ### Arieonna Hearn:
