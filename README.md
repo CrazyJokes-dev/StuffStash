@@ -3,7 +3,7 @@ capstone-project-sour-patch-kids created by GitHub Classroom
 
 Team name: SourPatch Kids
 
-Team Project: 
+Team Project: Stuff Stash
 Our project is Asset Management Software. The purpose of our software is to log, maintain, organize, and create reports for assets.  (particularly interested in IT assets, laptops, projectors, monitors,etc). Users will be able to add assets and create custom attributes.  Once entered the assets will be logged into a database and assigned a "stockroom" and can be organized, arranged, and sorted based their attributes. The software can also create reports based on the attributes. (location, condition, etc etc)
 
 
