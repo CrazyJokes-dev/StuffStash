@@ -31,7 +31,7 @@ Our project is Asset Management Software. The purpose of our software is to log,
 ### Arieonna Hearn:
 > My name is Arie and I am double majoring in Computer Science and Spanish. I am planning to graduate this December. I am most interested in backend and desktop development. Swimming, skateboarding, and immersing myself in Spanish are my favorite things to do during my free time.
 
-###Sai Greeshma:
+### Sai Greeshma:
 > My name is Sai and i am major in Computer Science, I am freshman. My topics of intrest are HTML and web development. These days i am learning driving and love to spend time with my sister and making crafts.
 
 ### Matthew Sweebe 
