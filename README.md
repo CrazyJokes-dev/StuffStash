@@ -1,4 +1,4 @@
-# capstone-project-sour-patch-kids
+# asset Manager
 capstone-project-sour-patch-kids created by GitHub Classroom
 
 Team name: SourPatch Kids
