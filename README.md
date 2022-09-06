@@ -17,7 +17,8 @@ Team Project:
 ### Lynaa Yousef
 > I am a Data Science and Analytics major with concentration in Web Analytics. I'm super excited to be graduating in December. I am also a Data Conversion Consultant and Engineer at ModMed, located in Boca Raton, Florida. I work remotely! Things I like to do when I am not working or in class are going on drives, weightlifting/training, bike rides, and eating as I am a big foodie.
 
-Sean Mick:
+### Sean Mick:
+> My name is Sean Mick and I'm a Computer Science major/Communication minor in my senior year, intending to graduate in Winter 2023. I'm currently a full time student seeking an internship, and greatly looking forward to this class! I'm hoping to create a cool project that allows me to learn a lot and gives me a good item to put on my portfolio. In my free time, you'll likely find me reading, playing games, or painting.
 
 ### Estefan Valencia Moore:
 > Hello, My name is Estefan and I am a Computer Science Major. Hopefully I end up graduating at the end of the Winter 2022 Semester. My topics of interest are mainly web development. Things I enjoy doing in my free time are video games, reading comics, and doing martial arts. 
