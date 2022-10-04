@@ -1,0 +1,3 @@
+environment-variables:
+  test: "TEST"
+  blah: blah
