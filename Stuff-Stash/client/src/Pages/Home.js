@@ -10,14 +10,15 @@ import Axios from "axios";
 
 const Home = () =>{
 
-  
-
   const [listOfUsers, setListOfUsers] = useState([]);
   const [recentUser, setRecentUser] = useState([]);
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [organizationID, setOrganizationID] = useState("");
 
   const fetchUser = async () => {
-    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users');
+    // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users');
+    const res = await fetch('http://localhost:3000/api/v1/users');
     const data = await res.json();
     //console.log("users/ - DATA ", data);
     //setRecentUser(data.data);
@@ -27,6 +28,7 @@ const Home = () =>{
   
   const fetchUsers = async () => {
     const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/getUsers');
+    // const res = await fetch('http://localhost:3000/api/v1/users/getUsers');
     const data = await res.json();
     //console.log("users/getUsers - DATA:", data);
     //setListOfUsers(data.data);
@@ -35,14 +37,17 @@ const Home = () =>{
     
   const createUser = async (e) => {
     e.preventDefault();
-    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users', {
+    // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users', {
+    const res = await fetch('http://localhost:3000/api/v1/users/createUser', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name
+        username,
+        password,
+        organizationID
       })
     })
     
@@ -51,7 +56,9 @@ const Home = () =>{
     if (data.success) {
       await fetchUsers()
     }
-    setName('');
+    setUsername('');
+    setPassword('');
+    setOrganizationID('');
     //Axios.post("/createUser", {
     //  name: name,
     //}).then((response) => {
@@ -63,11 +70,11 @@ const Home = () =>{
     //});
   };
 
-  useEffect(() => {
+  useEffect(() => { // Gets the most recent user from the database using the server
     fetchUser()
   })
 
-  useEffect(() => {
+  useEffect(() => { // Gets every single user registered from the database using the server
     fetchUsers()
   }, [])
 
@@ -79,14 +86,16 @@ return (
         {recentUser.map((user) => {
           return (
             <div>
-              <h1>Hello {user.name}</h1>
+              <h1>Hello {user.username}</h1>
             </div>
           );  
         })}
       </div>
 
       <div>
-        <input id='userName' type="text" placeholder="Name..." onChange={(event) => {setName(event.target.value);}} />
+        <input id='username' type="text" placeholder="Name..." onChange={(event) => {setUsername(event.target.value);}} />
+        <input id='password' type="text" placeholder="Password..." onChange={(event) => {setPassword(event.target.value);}} />
+        <input id='organizationID' type="text" placeholder="Organization ID..." onChange={(event) => {setOrganizationID(event.target.value);}} />
         <button onClick={createUser}> Greet User </button>
       </div>
     </div>
