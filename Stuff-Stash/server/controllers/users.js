@@ -20,7 +20,7 @@ exports.getUsers = async (req, res, next) => {
 }
 
 // @desc      Add user
-// @route     POST /api/v1/users
+// @route     POST /api/v1/users/createUser
 // @access    Public
 exports.addUser = async (req, res, next) => {
   const { firstName, lastName } = req.body
