@@ -15,23 +15,23 @@ const Home = () =>{
 
   
 
-  const fetchOrg = async () => {
-    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs');
+ // const fetchOrg = async () => {
+   // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs');
     //const res = await fetch('http://localhost:3000/api/v1/users');
-    const data = await res.json();
+   // const data = await res.json();
     //console.log("users/ - DATA ", data);  
     //setRecentUser(data.data);
     //setRecentUser(data);
-  };
+  //};
     
   
-  const fetchOrgs = async () => {
-    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs/getOrgs');
-    const data = await res.json();
+  //const fetchOrgs = async () => {
+   // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs/getOrgs');
+   // const data = await res.json();
     //console.log("users/getUsers - DATA:", data);
     //setListOfUsers(data.data);
    // setListOfUsers(data); 
-  };
+  //};
     
   const addOrg = async (e) => {
     e.preventDefault();
@@ -63,7 +63,7 @@ const Home = () =>{
     //    },
     //  ]);
     //});
- // };
+ };
 
  // useEffect(() => {
  //   fetchUser()
@@ -101,4 +101,4 @@ return (
   );
 }
 
-export default Home;
+export default CreateOrg;
