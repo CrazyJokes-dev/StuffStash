@@ -1,4 +1,4 @@
-import { Button, Form } from "react-bootstrap";
+import React from "react";
 
 function UserLogin() {
   return (
@@ -6,23 +6,50 @@ function UserLogin() {
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm">
-          <Form>
-            <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="username" placeholder="Enter username" />
-            </Form.Group>
+          <h2>User Login</h2>
+          <form action="/action_page.php">
+            <div class="form-group">
+              <label for="Username" class="text-primary">
+                Username:
+              </label>
+              <input
+                type="Username"
+                class="form-control"
+                id="Username"
+                placeholder="Enter username"
+                name="Username"
+              />
+            </div>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formKeepLoggedIn">
-              <Form.Check type="checkbox" label="Remember Me" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
+            <div class="form-group">
+              <label for="pwd" class="text-primary">
+                Password:
+              </label>
+              <input
+                type="password"
+                class="form-control"
+                id="pwd"
+                placeholder="Enter password"
+                name="pwd"
+              />
+            </div>
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="defaultCheck1"
+              />
+              <label class="form-check-label" for="stay logged in">
+                Remember Me
+              </label>
+            </div>
+
+            <button type="login" class="btn btn-primary">
               Login
-            </Button>
-          </Form>
+            </button>
+          </form>
         </div>
         <div class="col-sm"></div>
       </div>
