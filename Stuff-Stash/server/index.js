@@ -46,6 +46,10 @@ app.post("/api/v1/users/createUser", (req, res) => {
         return res.status(400).json({ msg: "Please enter a username and a password"});
      }
 
+     // Checks to see if another username already exists in the database and rejects it if there is one.
+     UserModel.findOne({ username: username}).then((user) => {
+        if (user) return res.status(400).json({ msg: "User already exists" });
+     
      // This creates a model entry into the database with all the current new registration information.
      const newUser = new UserModel({
         username,
@@ -68,6 +72,7 @@ app.post("/api/v1/users/createUser", (req, res) => {
         })
 
      );
+    }); 
 });
 
 app.get('/', (req, res) => {
