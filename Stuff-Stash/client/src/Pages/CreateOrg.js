@@ -8,11 +8,11 @@ import '../App.css';
 import { useState, useEffect } from "react";
 import Axios from "axios";
 
-const Home = () =>{
+const CreateOrg = () =>{
 
-    const [orgname,setorgname]=useState(" ")
-    const [orgid,setorgid]=useState(" ")
-
+    const [name,setorgname]=useState(" ")
+    const [OrgAccessCode,setorgCode]=useState(" ")
+    const [ListOfOrgs, setListOfOrgs] = useState([]);
   
 
  // const fetchOrg = async () => {
@@ -25,13 +25,12 @@ const Home = () =>{
   //};
     
   
-  //const fetchOrgs = async () => {
-   // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs/getOrgs');
-   // const data = await res.json();
-    //console.log("users/getUsers - DATA:", data);
-    //setListOfUsers(data.data);
-   // setListOfUsers(data); 
-  //};
+  const fetchOrgs = async () => {
+    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs/getOrgs');
+    const data = await res.json();
+   console.log("users/getUsers - DATA:", data);
+   setListOfOrgs(data); 
+  };
     
   const addOrg = async (e) => {
     e.preventDefault();
@@ -43,60 +42,45 @@ const Home = () =>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        orgname,
-        orgid
+        name,
+        OrgAccessCode
       })
     })
     
     const data = res.json();
     console.log('data -- ', data);
-   // if (data.success) {
-    //  await fetchUsers()
-    //}
-    //setName('');
-    //Axios.post("/createUser", {
-    //  name: name,
-    //}).then((response) => {
-    //  setListOfUsers([...listOfUsers, 
-    //    {
-    //      name: name, 
-    //    },
-    //  ]);
-    //});
+    if (data.success) {
+      await fetchOrgs()
+    }
+
  };
 
- // useEffect(() => {
- //   fetchUser()
-  //})
+ useEffect(() => {
+    fetchOrgs()
+  })
 
-  //useEffect(() => {
-  //  fetchUsers()
- // }, [])
+  useEffect(() => {
+    fetchOrgs()
+  }, [])
 
 return (
 
-    //<div className="App">
-     // <div className="usersDisplay">
+   <div className="App">
+     <div className="usersDisplay">
         
-       // {recentUser.map((user) => {
-        //  return (
-          //  <div>
-           //   <h1>Hello {user.name}</h1>
-           // </div>
-         // );  
-      //  })}
-     // </div>
+     
+     </div>
 
       <div>
       <form>
             <h1>Enter an organization name:</h1>
-            <input type="text" value={orgname} onChange={(e)=>setorgname(e.target.value)}></input>
+            <input type="text" value={name} onChange={(e)=>setorgname(e.target.value)}></input>
             <h1>Enter an organization id:</h1>
-            <input type="text" value={orgid} onChange={(e)=>setorgid(e.target.value)}></input>
+            <input type="text" value={OrgAccessCode} onChange={(e)=>setorgCode(e.target.value)}></input>
             <button onClick={addOrg}>Submit</button>
             </form>
       </div>
-   // </div>
+    </div>
   
   );
 }
