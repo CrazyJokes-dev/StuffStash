@@ -1,10 +1,7 @@
-import './App.css';
-import Navbar from './Pages/navbar';
-import { BrowserRouter as Redirect, Route, Switch } from 'react-router-dom';
-
-import Home from "./Pages/Home";
-import Helpme from './Pages/ListOfUsers';
-import React from 'react';
+import Navbar from "./components/common/navbar";
+import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
+import welcome from "./components/welcome";
+import React from "react";
 
 function App() {
   return (
@@ -13,14 +10,12 @@ function App() {
       <div className="content">
         <Navbar />
         <Switch>
-          <Route path="/list" component={Helpme} /> 
-          <Route path="/" component={Home} />
-          <Redirect from='*' to='/' />
+          <Route path="/" exact component={welcome} />
+          <Redirect from="*" to="/" />
         </Switch>
       </div>
     </div>
     //</Router>
   );
-} 
+}
 export default App;
-
