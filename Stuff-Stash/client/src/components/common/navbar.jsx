@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import welcome from "../welcome";
 
 const Navbar = () => {
   return (
@@ -25,10 +26,14 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link to="/list" className="nav-link">User Registration</Link>
+              <Link to="/registration" className="nav-link">
+                Register
+              </Link>
             </li>
             <li className="nav-item active">
-              <Link to="/list" className="nav-link">User</Link>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
             </li>
           </ul>
         </div>
