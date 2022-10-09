@@ -1,9 +1,6 @@
-import './App.css';
-import Navbar from './Pages/navbar';
+import Navbar from './components/common/navbar';
 import { BrowserRouter as Redirect, Route, Switch } from 'react-router-dom';
-
-import Home from "./Pages/Home";
-import Helpme from './Pages/ListOfUsers';
+import welcome from './components/welcome';
 import React from 'react';
 
 function App() {
@@ -12,9 +9,8 @@ function App() {
     <div className="App">
       <div className="content">
         <Navbar />
-        <Switch>
-          <Route path="/list" component={Helpme} /> 
-          <Route path="/" component={Home} />
+        <Switch> 
+          <Route path="/" exact component={welcome} />
           <Redirect from='*' to='/' />
         </Switch>
       </div>
