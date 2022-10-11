@@ -52,3 +52,12 @@ app.use('/api/v1/users', users)
 app.listen(PORT, () => {
     console.log("SERVER LISTENING ON PORT ", PORT);
 });
+
+//BEGIN STOCKROOM CALLS
+
+app.post("/api/v1/stockrooms/createStockroom")
+{
+
+}
+
+//END STOCKROOM CALLS
