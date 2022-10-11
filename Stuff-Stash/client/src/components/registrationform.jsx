@@ -28,8 +28,12 @@ function RegForm() {
     const data = res.json();
     console.log('data -- ', data);
     console.log(res.status);
-    if (res.status !== 400 ) {
+    if (res.status === 200 ) {
       history.push("/");
+    } else if (res.status === 399) {
+      alert("Please enter a username and a password");
+    } else if (res.status === 400) {
+      alert("User already exists");
     }
     setUsername('');
     setPassword('');
