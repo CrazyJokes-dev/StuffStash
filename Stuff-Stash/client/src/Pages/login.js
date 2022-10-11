@@ -25,11 +25,13 @@ function UserLogin() {
     const data = res.json();
     console.log('data -- ', data);
     console.log(res.status);
-    if (res.status !== 400 ) {
+    if (res.status === 200 ) {
       history.push("/"); //sends the user to the home page if the login information is authenticated
+    } else {
+      data.then((response) => { alert(response.msg); }) //This pops up an alert box on screen with the response's json msg we sent in server/index.js
     }
-    setUsername("");
-    setPassword("");
+    // setUsername("");
+    // setPassword("");
   };
 
 
