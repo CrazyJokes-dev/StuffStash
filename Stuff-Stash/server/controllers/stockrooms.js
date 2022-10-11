@@ -1,7 +1,7 @@
-const Stockroom = require('..models/stockroom.js');
+const Stockroom = require('../models/stockroom.js');
 
-exports.createStockroom = async (req, res, next) => {
-    //attempt to create a stockroom
+exports.createStockroom = async (req, res) => {
+    //attempt to create the stockroom
     try{
         const stockroom = await Stockroom.create(req.body);
         return res.status(201).json({

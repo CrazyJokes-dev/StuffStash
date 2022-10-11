@@ -13,13 +13,11 @@ const StockroomSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    //a place to store assets (empty for now)
+    //and a place to store assets (empty for now)
     assets: {
         required: false
     },
-    //and a unique ID for backend purposes.
-    stockroomID: {
-        type: String,
-        required: true,
-    },
+
 });
+
+module.exports = mongoose.model('stockrooms', StockroomSchema);

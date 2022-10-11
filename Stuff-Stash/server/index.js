@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/user');
 
+const StockroomModel = require('./models/stockroom');
+const stockrooms = require("./routes/stockrooms");
 
 const cors = require('cors');
 const PORT = process.env.PORT || 3000
@@ -49,15 +51,21 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/users', users)
 
+//BEGIN STOCKROOM CALLS
+
+app.post("/api/v1/stockrooms/createStockroom"), async  (req, res) =>
+{
+    const stockroom = req.body;
+    const newStockroom = new StockroomModel(stockroom);
+    await newStockroom.save();
+    res.json(stockroom);
+}
+
+app.use('/api/v1/stockrooms/', stockrooms)
+
+//END STOCKROOM CALLS
+
 app.listen(PORT, () => {
     console.log("SERVER LISTENING ON PORT ", PORT);
 });
 
-//BEGIN STOCKROOM CALLS
-
-app.post("/api/v1/stockrooms/createStockroom")
-{
-
-}
-
-//END STOCKROOM CALLS
