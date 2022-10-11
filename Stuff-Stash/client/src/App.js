@@ -8,6 +8,7 @@ import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
 import welcome from "./components/welcome";
 import LoginUser from "./components/blah";
 import React from "react";
+import './App.css';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/" exact component={welcome} />
-          <Route path="/" exact component={LoginUser} />
+          <Route path="/login" exact component={LoginUser} />
           <Redirect from="*" to="/" />
         </Switch>
       </div>

@@ -1,21 +1,21 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import "./styles/welcome.css";
 
 const welcome = () => {
   return (
-    <div className="container-fluid bg-warning">
-      <div className="row bg-danger text-center">
-        <div className="col">
-          <div className="jumbotron bg-primary h-100">
-            <h1 className="display-4">Welcome to Stuff Stash</h1>
-            <p className="lead">The all in one Asset Manager</p>
+    <React.Fragment>
+      <div className="container-fluid bg-warning h-100 green">
+        <div className="row bg-danger">
+          <div className="col d-flex align-items-center text-center justify-content-center bg-primary">
+            <div className="jumbotron">
+              <h1 className="display-4">Welcome to Stuff Stash</h1>
+              <p className="lead">The all in one Asset Manager</p>
+            </div>
           </div>
-        </div>
-        <div className="col bg-secondary">
-          <h1>LOGIN COMPONENT GOES HERE (MAYBE?)</h1>
+          <div className="col bg-secondary m-5"></div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

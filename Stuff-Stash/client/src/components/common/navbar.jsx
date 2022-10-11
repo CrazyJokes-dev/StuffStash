@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import welcome from "../welcome";
 
 const Navbar = () => {
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand">Stuff Stash</a>
+        <span className="navbar-brand mx-2">Stuff Stash</span>
         <button
           className="navbar-toggler"
           type="button"
