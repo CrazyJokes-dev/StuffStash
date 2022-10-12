@@ -94,19 +94,11 @@ app.get("/api/v1/orgs/getOrgs", (req, res) => {
 app.post("/api/v1/users/createOrg", (req, res) => {
   const { name, OrgAccessCode } = req.body;
 
-  // Checks to see if the username/password that was entered, wasn't empty.
-  // If it was empty, displays a message on screen telling the user to enter them.
-  //if (OrgAccessCode) {
-  //  return res
-  //    .status(400)
-   //   .json({ msg: "Please enter a username and a password" });
-//  }
-
-  // Checks to see if another username already exists in the database and rejects it if there is one.
-  OrgModel.findOne({ OrgAccessCode: OrgAccessCode }).then((org) => {
+  //Checks to see if another Organization already exists in the database and rejects it if there is one.
+  OrgModel.findOne({ name }).then((org) => {
     if (org) return res.status(400).json({ msg: "User already exists" });
 
-    // This creates a model entry into the database with all the current new registration information.
+    //This creates a model entry into the database with all the current new organiziton information.
     const newOrg = new OrgModel({
       name,
       OrgAccessCode,
@@ -119,7 +111,7 @@ app.post("/api/v1/users/createOrg", (req, res) => {
 
         newOrg.OrgAccessCode = hash;
 
-        // saves the user to the database
+        // saves the org to the database
         // must be inside bcrypt.hash() or else the password saved won't be encrypted
         newOrg
           .save()

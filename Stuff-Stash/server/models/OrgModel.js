@@ -8,6 +8,7 @@ const OrgSchema = new mongoose.Schema({
     OrgAccessCode: {
         type: String,
         required: true,
+        unqiue : true
     },
 });
 
