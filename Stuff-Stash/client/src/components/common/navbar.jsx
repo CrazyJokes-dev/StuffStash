@@ -30,7 +30,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link to="/login" className="nav-link">
+              <Link
+                /* TODO: Change this back to /login but for now will route to dashboard */
+                to="/dashboard"
+                className="nav-link"
+              >
                 Login
               </Link>
             </li>

@@ -7,6 +7,7 @@ import Navbar from "./components/common/navbar";
 import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
 import welcome from "./components/welcome";
 import LoginUser from "./components/blah";
+import Dashboard from "./components/dashboard";
 import React from "react";
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={welcome} />
           <Route path="/login" exact component={LoginUser} />
+          <Route path="/dashboard" exact component={Dashboard} />
           <Redirect from="*" to="/" />
         </Switch>
       </div>
