@@ -51,6 +51,17 @@ app.get('/', (req, res) => {
 
 //BEGIN STOCKROOM CALLS
 
+//this function finds stockrooms that belong to a given organization
+app.get("/api/v1/stockroom/getStockrooms", async (req, res, orgID) => {
+    StockroomModel.find({"org" : orgID}, (err, result) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(result);
+    }})
+});
+
+//this create a stockroom with a given orgID and name
 app.post("/api/v1/stockroom/addStockroom", async  (req, res) => {
     const stockroom = req.body;
     const newStockroom = new StockroomModel(stockroom);
