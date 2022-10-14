@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ReactSession } from 'react-client-session'; // client session chocolate chip cookies
 import { useHistory } from "react-router-dom"; // This allows you to send people to another page
 
 
@@ -26,8 +27,11 @@ function UserLogin() {
     console.log('data -- ', data);
     console.log(res.status);
     if (res.status === 200 ) {
-      //alert(getCookie("session-id"));
-      //history.push("/"); //sends the user to the home page if the login information is authenticated
+      data.then((vars) => {
+        ReactSession.set("username", vars.user.username);
+        ReactSession.set("orgID", vars.user.organizationID);
+      });
+      history.push("/"); //sends the user to the home page if the login information is authenticated
     } else {
       data.then((response) => { alert(response.msg); }) //This pops up an alert box on screen with the response's json msg we sent in server/index.js
     }

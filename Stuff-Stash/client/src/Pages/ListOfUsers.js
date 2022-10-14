@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ReactSession } from 'react-client-session';
 import Axios from "axios";
 
 
@@ -8,6 +9,9 @@ function Helpme () {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [organizationID, setOrganizationID] = useState("");
+
+    const usernameC = ReactSession.get("username");
+    const orgIDC = ReactSession.get("orgID");
 
     useEffect(() => {
         Axios.get("https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users").then((response) => {
@@ -30,9 +34,9 @@ function Helpme () {
               return (
                 <div>
                     <ul>
-                        <li><h2>username: {user.username}</h2></li>
+                        <li><h2>username: {usernameC}</h2></li>
                         <li><h2>password: {user.password}</h2></li>
-                        <li><h2>orgID: {user.organizationID}</h2></li>
+                        <li><h2>orgID: {orgIDC}</h2></li>
                     </ul>
                 </div>
               );  
