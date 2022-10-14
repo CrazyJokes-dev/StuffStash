@@ -5,7 +5,9 @@ import Axios from "axios";
 function Helpme () {
     const [listOfUsers, setListOfUsers] = useState([]);
     const [recentUser, setRecentUser] = useState([]);
-    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [organizationID, setOrganizationID] = useState("");
 
     useEffect(() => {
         Axios.get("https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users").then((response) => {
@@ -14,22 +16,11 @@ function Helpme () {
       });
     
     useEffect(() => {
-      Axios.get("https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/getUsers").then((response) => {
+      //Axios.get("https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/getUsers").then((response) => {
+      Axios.get("http://localhost:3000/api/v1/users/getUsers").then((response) => {
       setListOfUsers(response.data);
       });
     }, []);
-
-    const createUser = () => {
-      Axios.post("https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createUser", {
-        name: name,
-      }).then((response) => {
-        setListOfUsers([...listOfUsers, 
-          {
-            name: name, 
-          },
-        ]);
-      });
-    };
 
 
     return (
@@ -39,7 +30,9 @@ function Helpme () {
               return (
                 <div>
                     <ul>
-                        <li><h2>{user.name}</h2></li>
+                        <li><h2>username: {user.username}</h2></li>
+                        <li><h2>password: {user.password}</h2></li>
+                        <li><h2>orgID: {user.organizationID}</h2></li>
                     </ul>
                 </div>
               );  

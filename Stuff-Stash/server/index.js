@@ -27,25 +27,27 @@ const mongoDBstore = new MongoDBStore({
 
 //app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3001', // this is the url that the client is hosted on, make sure to change the one in package.json
-    optionsSuccessStatus: 200,
-}));
-
-app.use(
-    session({
-        name: 'session-id',
-        secret: 'randomSecret',
-        resave: true,
-        saveUninitialized: false,
-        store: mongoDBstore,
-        cookie: {
-            maxAge: MAX_AGE,
-            sameSite: false,
-            secure: false
-        }
-    })
+app.use(cors()
+//     ({
+//     origin: 'http://localhost:3001', // this is the url that the client is hosted on, make sure to change the one in package.json
+//     optionsSuccessStatus: 200,
+// })
 );
+
+// app.use(
+//     session({
+//         name: 'session-id',
+//         secret: 'randomSecret',
+//         resave: true,
+//         saveUninitialized: false,
+//         store: mongoDBstore,
+//         cookie: {
+//             maxAge: MAX_AGE,
+//             sameSite: false,
+//             secure: false
+//         }
+//     })
+// );
 
 app.get("/api/v1/users/", (req, res) => {
     UserModel.find({}, (err, result) => {
@@ -77,7 +79,7 @@ app.post("/api/v1/users/createUser", async (req, res) => {
 app.post("/api/v1/users/login", (req, res) => {
     const { username, password } = req.body;
 
-    
+
     if (!username || !password) {
         return res.status(400).json({ msg: "Please enter all fields" });
     }
@@ -88,10 +90,11 @@ app.post("/api/v1/users/login", (req, res) => {
         bcrypt.compare(password, user.password).then((isMatch) => {
             if(!isMatch) return res.status(400).json({ msg: "Invalid credentials"});
 
-            const sessUser = { username: user.username, orgID: user.organizationID };
-            req.session.user = sessUser; // Auto saves session data in mongo store
+            // const sessUser = { username: user.username, orgID: user.organizationID };
+            // req.session.user = sessUser; // Auto saves session data in mongo store
 
-            res.status(200).json({ msg: " Logged In Successfully", sessUser});
+            res.send(user);
+            res.status(200).json({ msg: " Logged In Successfully" });
         })
     })
 })
