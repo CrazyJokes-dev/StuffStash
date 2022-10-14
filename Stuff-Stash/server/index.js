@@ -14,7 +14,6 @@ mongoose.connect(
     "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
 
-//app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
