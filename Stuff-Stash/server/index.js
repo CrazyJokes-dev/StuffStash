@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/user');
 
+const StockroomModel = require('./models/stockroom');
+
 
 const cors = require('cors');
 const PORT = process.env.PORT || 3000
@@ -47,8 +49,33 @@ app.get('/', (req, res) => {
     res.send({msg:'hello world'})
 })
 
+//BEGIN STOCKROOM CALLS
+
+//this function finds stockrooms that belong to a given organization
+app.get("/api/v1/stockroom/getStockrooms", async (req, res, orgID) => {
+    StockroomModel.find({"org" : orgID}, (err, result) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(result);
+    }})
+});
+
+//this create a stockroom with a given orgID and name
+app.post("/api/v1/stockroom/addStockroom", async  (req, res) => {
+    const stockroom = req.body;
+    const newStockroom = new StockroomModel(stockroom);
+    await newStockroom.save();
+    res.json(stockroom);
+});
+
+//END STOCKROOM CALLS
+
 app.use('/api/v1/users', users)
+
+
 
 app.listen(PORT, () => {
     console.log("SERVER LISTENING ON PORT ", PORT);
 });
+
