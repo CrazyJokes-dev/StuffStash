@@ -67,6 +67,7 @@ app.get("/api/v1/getStockrooms/:orgID", async (req, res) => {
 
 //this create a stockroom with a given orgID and name
 app.post("/api/v1/addStockroom", async  (req, res) => {
+    console.log("Adding stockroom");
     const stockroom = req.body;
     const newStockroom = new StockroomModel(stockroom);
     await newStockroom.save();
