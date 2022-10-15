@@ -5,38 +5,17 @@
 //https://techstack-demo-deployment.ue.r.appspot.com
 
 import "../App.css";
-import { useState, useEffect } from "react";
-import Axios from "axios";
+import { useState } from "react";
 
 const CreateOrg = () => {
   const [name, setorgname] = useState(" ");
   const [OrgAccessCode, setorgCode] = useState(" ");
-  const [ListOfOrgs, setListOfOrgs] = useState([]);
-
-  // const fetchOrg = async () => {
-  // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs');
-  //const res = await fetch('http://localhost:3000/api/v1/users');
-  // const data = await res.json();
-  //console.log("users/ - DATA ", data);
-  //setRecentUser(data.data);
-  //setRecentUser(data);
-  //};
-
-  //get your orgs
-  const fetchOrgs = async () => {
-    const res = await fetch(
-      "https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs/getOrgs"
-    );
-    const data = await res.json();
-    console.log("users/getUsers - DATA:", data);
-    setListOfOrgs(data);
-  };
 
   // Adds new Org
   const addOrg = async (e) => {
     e.preventDefault();
     //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createOrg', {
-    const res = await fetch("http://localhost:3000/api/v1/users/createOrg", {
+    const res = await fetch("http://localhost:3000/api/v1/org/createOrg", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -50,18 +29,7 @@ const CreateOrg = () => {
 
     const data = res.json();
     console.log("data -- ", data);
-    if (data.success) {
-      await fetchOrgs();
-    }
   };
-
-  useEffect(() => {
-    fetchOrgs();
-  });
-
-  useEffect(() => {
-    fetchOrgs();
-  }, []);
 
   return (
     <div className="App">
