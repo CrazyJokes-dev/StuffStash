@@ -4,6 +4,7 @@ import { BrowserRouter as Redirect, Route, Switch } from 'react-router-dom';
 
 import Home from "./Pages/Home";
 import Helpme from './Pages/ListOfUsers';
+import CreateStockroom from "./Pages/CreateStockRoom";
 import React from 'react';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/list" component={Helpme} /> 
+          <Route path="/createStockRoom" component={CreateStockroom} />
           <Route path="/" component={Home} />
           <Redirect from='*' to='/' />
         </Switch>
