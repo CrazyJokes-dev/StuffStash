@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+
+
 export default function AddOrgUser() {
   const [stockRoom, setStockRoom] = useState("");
   const [userID, setUserID] = useState("");
@@ -24,7 +26,7 @@ export default function AddOrgUser() {
                 value={userID}
                 onChange={(e) => setUserID(e.target.value)}
               />
-              <Form.Label>Enter Stockroom</Form.Label>
+              <Form.Label>Enter Stockroom Name</Form.Label>
               <Form.Control
                 autoFocus
                 type="text"
