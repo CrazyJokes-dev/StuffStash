@@ -103,7 +103,7 @@ app.post("/api/v1/users/createOrg", (req, res) => {
 //  }
 
   // Checks to see if another username already exists in the database and rejects it if there is one.
-  OrgModel.findOne({ OrgAccessCode: OrgAccessCode }).then((org) => {
+  OrgModel.findOne({ OrgAccessCode: OrgAccessCode }).then((org) =>{ 
     if (org) return res.status(400).json({ msg: "User already exists" });
 
     // This creates a model entry into the database with all the current new registration information.
