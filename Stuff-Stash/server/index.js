@@ -64,8 +64,8 @@ app.get("/api/v1/orgs/getOrgs", (req, res) => {
   });
 });
 
-app.post("/api/v1/org/createOrg", (req, res) => {
-  const { name, OrgAccessCode } = req.body;
+  app.post("/api/v1/org/createOrg", (req, res) => {
+   const { name, OrgAccessCode } = req.body;
 
   //Checks to see if another Organization already exists in the database and rejects it if there is one.
   OrgModel.findOne({ name }).then((org) => {
@@ -104,7 +104,7 @@ app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
     { $set: { name: newname } }
   ).then((org) => {
     if (!org) {
-      return res.status(400).json({ msg: "Org does not exist ", org });
+      return res.status(400).json({ msg: "Org does not exist "+ nameFeild });
     }
     // OrgModel.save;
     return res.status(200).json({ msg: "Done, succesfully", org });

@@ -3,43 +3,44 @@
 
 //frontend link
 //https://techstack-demo-deployment.ue.r.appspot.com
-
 import "../App.css";
 import { useState } from "react";
 const RenameOrgPage = () => {
-  const [name, setorgname] = useState("");
+  const [nameFeild, setorgname] = useState("");
   const [newname, setneworgname] = useState("");
 
   // Renames Orginizaiton
   const RenameOrg = async (e) => {
     e.preventDefault();
-    //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createOrg', {
+    //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/RenameOrgPage', {
 
     //Testing to see what the inputs are before sending to backend
-    console.log(name, newname);
+    console.log(nameFeild, newname);
 
     const res = await fetch(
-      "http://localhost:3000/api/v1/orgs/RenameOrgization",
+      'http://localhost:3000/api/v1/orgs/RenameOrgization',
       {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          newname,
+         "Content-Type": "application/json",
+       },
+         body: JSON.stringify({
+          nameFeild,
+           newname,
         }),
+        
       }
     );
 
-    const data = res.json();
+   const data = res.json();
     console.log("data -- ", data);
+
   };
 
   return (
     <div className="App">
-      <div className="usersDisplay"></div>
+      <div className="UserDisplay"></div>
 
       <div>
         <form>
@@ -48,7 +49,7 @@ const RenameOrgPage = () => {
             id="name"
             name="name"
             type="text"
-            value={name}
+            value={nameFeild}
             onChange={(e) => setorgname(e.target.value)}
           />
           <h1>Enter a new organization name:</h1>

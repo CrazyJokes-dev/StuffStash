@@ -13,5 +13,4 @@ const OrgSchema = new mongoose.Schema({
 });
 
 //delcaring collection
-//no need to declare this collection in db, will be done automatically 
 module.exports = mongoose.model('organizations', OrgSchema);
