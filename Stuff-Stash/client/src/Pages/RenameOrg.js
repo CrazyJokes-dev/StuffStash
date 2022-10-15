@@ -36,7 +36,25 @@ const RenameOrgPage = () => {
    const data = res.json();
     console.log("data -- ", data);
 
+    data.then((response)=>{alert(response.msg);})
+
   };
+
+  const reset = () => {
+    setorgname("");
+    setneworgname("");
+  };
+
+  const Namefunction=(e)=>{
+    setorgname((e.target.value).trimStart())
+  
+  }
+  
+  const CodeFunction=(e)=>{
+    setneworgname((e.target.value).trimStart())
+  
+  }
+  
 
   return (
     <div className="App">
@@ -49,18 +67,19 @@ const RenameOrgPage = () => {
             id="name"
             name="name"
             type="text"
-            value={nameFeild}
-            onChange={(e) => setorgname(e.target.value)}
+            value={nameFeild} size="50"
+            onChange={Namefunction}
           />
           <h1>Enter a new organization name:</h1>
           <input
             id="newname"
             name="newname"
-            type="text"
+            type="text" size="50"
             value={newname}
-            onChange={(e) => setneworgname(e.target.value)}
-          />
-          <button onClick={RenameOrg}>Submit</button>
+            onChange={CodeFunction}
+          /><br /><br />
+          <button onClick={RenameOrg}>Submit</button>&nbsp;&nbsp;
+          <button onClick={reset}>Reset</button>
         </form>
       </div>
     </div>

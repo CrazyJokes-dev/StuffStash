@@ -29,6 +29,25 @@ const CreateOrg = () => {
 
     const data = res.json();
     console.log("data -- ", data);
+
+     data.then((response)=>{alert(response.msg);})
+  };
+
+  const handlename=(e)=>{
+    setorgname((e.target.value).trimStart())
+  
+  }
+  
+  const handleaccess=(e)=>{
+    setorgCode((e.target.value).trimStart())
+  
+  }
+  
+  
+  
+  const resetInput = () => {
+    setorgname("");
+    setorgCode("");
   };
 
   return (
@@ -40,16 +59,17 @@ const CreateOrg = () => {
           <h1>Enter an organization name:</h1>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setorgname(e.target.value)}
+            value={name} size="50"
+            onChange={handlename}
           />
-          <h1>Enter an organization id:</h1>
+          <h1>Enter an organization AccessCode:</h1>
           <input
             type="text"
-            value={OrgAccessCode}
-            onChange={(e) => setorgCode(e.target.value)}
-          />
-          <button onClick={addOrg}>Submit</button>
+            value={OrgAccessCode} size="50"
+            onChange={handleaccess}
+          /><br /><br />
+          <button onClick={addOrg}>Submit</button>&nbsp;&nbsp;
+          <button onClick={resetInput}>Reset</button>
         </form>
       </div>
     </div>
