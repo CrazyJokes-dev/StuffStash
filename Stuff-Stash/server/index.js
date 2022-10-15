@@ -9,10 +9,9 @@ const PORT = process.env.PORT || 3000;
 const users = require("./routes/users");
 const orgs = require("./routes/orgs");
 const bcrypt = require("bcrypt");
-  const saltRounds = 12; // <-- The lower the number the more hashes per second. Higher = less hashes per second
+const saltRounds = 12; // <-- The lower the number the more hashes per second. Higher = less hashes per second
 app.use(express.json());
 app.use(cors());
-
 mongoose.connect(
   "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
@@ -54,20 +53,6 @@ app.get("/", (req, res) => {
 app.use("/api/v1/users", users);
 
 //ORGINZATION API REQUESTS
-
-//This finds most recent Org
-app.get("/api/v1/orgs", (req, res) => {
-  OrgModel.find({}, (err, result) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(result);
-    }
-  })
-    .limit(1)
-    .sort({ $natural: -1 });
-});
-
 //All Orgs
 app.get("/api/v1/orgs/getOrgs", (req, res) => {
   OrgModel.find({}, (err, result) => {
@@ -79,19 +64,7 @@ app.get("/api/v1/orgs/getOrgs", (req, res) => {
   });
 });
 
-// app.post("/api/v1/users/createOrg", async (req, res) => {
-//   const { name, OrgAccessCode } = req.body;
-//   OrgModel.findOne({ OrgAccessCode: OrgAccessCode }).then((org) => {
-//     if (org) return res.status(400).json({ msg: "Org code already exists" });
-//     const newOrg = new OrgModel({
-//       name,
-//       OrgAccessCode,
-//     });
-//     newOrg.save();
-//   });
-// });
-
-app.post("/api/v1/users/createOrg", (req, res) => {
+app.post("/api/v1/org/createOrg", (req, res) => {
   const { name, OrgAccessCode } = req.body;
 
   //Checks to see if another Organization already exists in the database and rejects it if there is one.
@@ -122,7 +95,23 @@ app.post("/api/v1/users/createOrg", (req, res) => {
   });
 });
 
-//app.use("/api/v1/orgs/", orgs);
+app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
+  const { nameFeild, newname } = req.body;
+
+  //Checks to see if another Organization already exists in the database and rejects it if there is NOT
+  OrgModel.findOneAndUpdate(
+    { name: nameFeild },
+    { $set: { name: newname } }
+  ).then((org) => {
+    if (!org) {
+      return res.status(400).json({ msg: "Org does not exist ", org });
+    }
+    // OrgModel.save;
+    return res.status(200).json({ msg: "Done, succesfully", org });
+  });
+});
+
+app.use("/api/v1/orgs/", orgs);
 
 app.listen(PORT, () => {
   console.log("SERVER LISTENING ON PORT ", PORT);

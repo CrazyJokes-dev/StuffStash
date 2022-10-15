@@ -7,7 +7,7 @@ import Helpme from "./Pages/ListOfUsers"
 import React from 'react';
 
 import CreateOrg from "./Pages/CreateOrg";
-
+import RenameOrgPage from "./Pages/RenameOrg"
 
 
 
@@ -20,6 +20,7 @@ function App() {
         <Switch>
         <Route path="/list" component={Helpme} /> 
           <Route path="/Org" component={CreateOrg} />
+          <Route path="/RenameOrg" component={RenameOrgPage} />
           <Route path="/" component={Home} />
           <Redirect from='*' to='/' />
         </Switch>
