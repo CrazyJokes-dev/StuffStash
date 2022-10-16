@@ -1,11 +1,19 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
-        required: true,
+        required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
+    organizationID: {
+        type: String,
+        required: false
+    }
 });
 
 //const UserModel = mongoose.model("user", UserSchema);
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('login', UserSchema);

@@ -1,21 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import { ReactSession } from 'react-client-session'; // client session chocolate chip cookies
+import { useHistory } from "react-router-dom"; // This allows you to send people to another page
+
 
 function UserLogin() {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  let history = useHistory(); //must be declared like this inside of the function
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/login', {
+    const res = await fetch('http://localhost:3000/api/v1/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+    const data = res.json();
+    console.log('data -- ', data);
+    console.log(res.status);
+    if (res.status === 200 ) {
+      data.then((vars) => {
+        ReactSession.set("username", vars.user.username);
+        ReactSession.set("orgID", vars.user.organizationID);
+      });
+      history.push("/"); //sends the user to the home page if the login information is authenticated
+    } else {
+      data.then((response) => { alert(response.msg); }) //This pops up an alert box on screen with the response's json msg we sent in server/index.js
+    }
+    
+    // setUsername("");
+    // setPassword("");
+  };
+
+
   return (
     <React.Fragment>
       <span class="border border-1">
-        <div class="container-sm bg-secondary pt-3 text-light">
+        <div class="container-sm bg-secondary text-light">
           <img
             src="https://img.icons8.com/bubbles/100/000000/user.png"
-            class="img-thumbnail center-block d-block mx-auto"
+            class="img-thumbnail"
             alt="user"
           />
 
           <div class="row">
             <div class="col-sm"></div>
-            <div class="col-sm text-center">
+            <div class="col-sm">
               <h2>User Login</h2>
-              <form action="/action_page.php" class="justify-content-center">
+              <form onSubmit={loginUser} class="justify-content-center">
                 <div class="form-group">
                   <label for="Username" class="text-white">
                     Username:
@@ -26,6 +66,7 @@ function UserLogin() {
                     id="Username"
                     placeholder="Enter username"
                     name="Username"
+                    onChange={(event) => {setUsername(event.target.value);}}
                   />
                 </div>
 
@@ -39,6 +80,7 @@ function UserLogin() {
                     id="pwd"
                     placeholder="Enter password"
                     name="pwd"
+                    onChange={(event) => {setPassword(event.target.value);}}
                   />
                 </div>
 

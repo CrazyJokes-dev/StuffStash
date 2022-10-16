@@ -1,14 +1,15 @@
-/**
- * TODO:
- *  > Import correct components for user registration and login
- *  > Add routes that call those components
- */
-import Navbar from "./components/common/navbar";
+import "./App.css";
+import Navbar from "./Pages/navbar";
+import { ReactSession } from 'react-client-session';
 import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
-import welcome from "./components/welcome";
-import Dashboard from "./components/dashboard";
+
+import Home from "./Pages/Home";
+import Helpme from "./Pages/ListOfUsers";
 import UserLogin from "./Pages/login";
 import React from "react";
+
+// sets storage type for session variables
+ReactSession.setStoreType('localStorage');
 
 function App() {
   return (
