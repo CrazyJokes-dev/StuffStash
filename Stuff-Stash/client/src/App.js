@@ -5,9 +5,11 @@ import { BrowserRouter as Redirect, Route, Switch } from 'react-router-dom';
 import Home from './Pages/Home';
 import Helpme from "./Pages/ListOfUsers"
 import React from 'react';
-
+import { ReactSession } from 'react-client-session';
 import CreateOrg from "./Pages/CreateOrg";
 import RenameOrgPage from "./Pages/RenameOrg"
+
+ReactSession.setStoreType('localStorage');
 
 
 

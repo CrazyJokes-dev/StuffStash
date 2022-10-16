@@ -69,7 +69,7 @@ app.get("/api/v1/orgs/getOrgs", (req, res) => {
 
   //Checks to see if another Organization already exists in the database and rejects it if there is one.
   OrgModel.findOne({ name }).then((org) => {
-    if (org) return res.status(400).json({ msg: "User already exists" });
+    if (org) return res.status(400).json({ msg: "Organization already exists" });
 
     //This creates a model entry into the database with all the current new organiziton information.
     const newOrg = new OrgModel({
@@ -88,7 +88,7 @@ app.get("/api/v1/orgs/getOrgs", (req, res) => {
         // must be inside bcrypt.hash() or else the password saved won't be encrypted
         newOrg
           .save()
-          .then(res.json({ msg: "Successfully Registered" }))
+          .then(res.status(200).json({ msg: "Successfully Registered",newOrg }))
           .catch((err) => console.log(err));
       })
     );

@@ -5,11 +5,18 @@
 //https://techstack-demo-deployment.ue.r.appspot.com
 
 import "../App.css";
+
 import { useState } from "react";
+import { ReactSession } from 'react-client-session';
+import { useHistory } from "react-router-dom";
+
 
 const CreateOrg = () => {
   const [name, setorgname] = useState(" ");
   const [OrgAccessCode, setorgCode] = useState(" ");
+
+  let history = useHistory();
+    
 
   // Adds new Org
   const addOrg = async (e) => {
@@ -29,8 +36,17 @@ const CreateOrg = () => {
 
     const data = res.json();
     console.log("data -- ", data);
-
-     data.then((response)=>{alert(response.msg);})
+    console.log(res.status);
+    if(res.status==200){
+        data.then((vars)=>{
+           ReactSession.set("orgname",vars.newOrg.name);
+           data.then((response)=>{alert(response.msg);})
+    });
+      history.push("/CreateStockRoom");
+    }
+    else{
+      data.then((response)=>{alert(response.msg);})
+    }
   };
 
   const handlename=(e)=>{
