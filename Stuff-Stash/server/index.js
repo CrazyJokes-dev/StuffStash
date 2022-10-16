@@ -27,15 +27,15 @@ mongoose.connect(
        /// }}).limit(1).sort({$natural:-1});
 //});
 
-app.get("/api/v1/users/getUsers", (req, res) => {
- UserModel.find({}, (err, result) => {
-      if (err) {
-         res.json(err);
-        } else {
-           res.json(result);
-        }
-    });
-});
+//app.get("/api/v1/users/getUsers", (req, res) => {
+ //UserModel.find({}, (err, result) => {
+      //if (err) {
+       //  res.json(err);
+        //} else {
+           //res.json(result);
+        //}
+    //});
+//});
 
 //app.post("/api/v1/users/createUser", async (req, res) => {
     // const user = req.body;
@@ -45,9 +45,9 @@ app.get("/api/v1/users/getUsers", (req, res) => {
    //  res.json(user);
 //});
 
-app.get('/', (req, res) => {
-    res.send({msg:'hello world'})
-})
+//app.get('/', (req, res) => {
+  //  res.send({msg:'hello world'})
+//})
 
 
 app.post("/api/v1/users/adduserOrg",(req,res)=>{
