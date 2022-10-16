@@ -12,8 +12,8 @@ import { useHistory } from "react-router-dom";
 
 
 const CreateOrg = () => {
-  const [name, setorgname] = useState(" ");
-  const [OrgAccessCode, setorgCode] = useState(" ");
+  const [name, setorgname] = useState("");
+  const [OrgAccessCode, setorgCode] = useState("");
 
   let history = useHistory();
     
