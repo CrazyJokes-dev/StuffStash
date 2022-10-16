@@ -8,8 +8,8 @@ import "../App.css";
 import { useState } from "react";
 
 const CreateOrg = () => {
-  const [name, setorgname] = useState(" ");
-  const [OrgAccessCode, setorgCode] = useState(" ");
+  const [name, setorgname] = useState("");
+  const [OrgAccessCode, setorgCode] = useState("");
 
   // Adds new Org
   const addOrg = async (e) => {
