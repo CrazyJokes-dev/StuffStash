@@ -1,29 +1,40 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { ReactSession } from 'react-client-session';
 
 
 export default function AddStockroom() {
     const [stockRoomName, setStockRoomName] = useState("");
+    const orgid = "A123";
     // const [userID, setUserID] = useState("");
 
     const addStockroom = async (e) => {
       e.preventDefault();
-      console.log("got here");
-      const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
+      //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
+      const res = await fetch("http://localhost:3000/api/v1/addStockroom", {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          stockRoomName,
-          "org":"A123"
-          // SESSION STUFF GOES HERE!
+          name : stockRoomName,
+          org: orgid
         })
       })
+
+      const data = res.json();
+      console.log("data -- ", data);
+      console.log(res.status);
       setStockRoomName('');
-    };
+      };
+
+    const handleaccess=(e)=>{
+      setStockRoomName((e.target.value).trimStart());
+      console.log(stockRoomName);
+    
+    }
 
 
     return (
@@ -38,7 +49,7 @@ export default function AddStockroom() {
                 autoFocus
                 type="text"
                 value={stockRoomName}
-                onChange={(e) => setStockRoomName(e.target.value)}
+                onChange={handleaccess}
               />
             </Form.Group>
 
