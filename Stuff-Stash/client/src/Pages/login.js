@@ -96,7 +96,7 @@ function UserLogin() {
                   </label>
                 </div>
 
-                <button type="login" class="btn btn-primary">
+                <button type="login" class="btn btn-primary m-3 p-1">
                   Login
                 </button>
               </form>

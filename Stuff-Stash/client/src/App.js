@@ -18,9 +18,9 @@ function App() {
       <div className="content">
         <Navbar />
         <Switch>
-          <Route path="/login" component={UserLogin} />
-          <Route path="/list" component={Helpme} />
-          <Route path="/" component={Home} />
+          <Route path="/" exact component={welcome} />
+          <Route path="/login" exact component={UserLogin} />
+          <Route path="/dashboard" exact component={Dashboard} />
           <Redirect from="*" to="/" />
         </Switch>
       </div>
