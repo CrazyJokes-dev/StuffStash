@@ -7,10 +7,11 @@
 import '../App.css';
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import { ReactSession } from 'react-client-session';
 
 const Home = () =>{
 
-  
+  //ReactSession.set("username","randomstuff");
 
   const [listOfUsers, setListOfUsers] = useState([]);
   const [recentUser, setRecentUser] = useState([]);

@@ -7,22 +7,25 @@
 import '../App.css';
 import { useState, useEffect } from "react";
 import validator from 'validator';
+import { ReactSession } from 'react-client-session';
+import { useHistory } from "react-router-dom";
+
+//import Form from "react-bootstrap/Form";
+//import Button from "react-bootstrap/Button";
 //function AddUserOrg(){
 
 const AddUserOrg = () => {
 
-
-
-    const [orgname,setorgname]=useState(" ")
+   const [orgname,setorgname]=useState(" ")
     const [orgid,setorgid]=useState(" ")
-    const [userid,setuserid]=useState(" ")
+    //const [userid,setuserid]=useState(" ")
+
+    let history = useHistory();
     
-    
+    const userid=ReactSession.get("username");
 
 
-  
-
-  //const fetchOrg = async () => {
+//const fetchOrg = async () => {
   //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/orgs');
   //const res = await fetch('http://localhost:3000/api/v1/users');
   //const data = await res.json();
@@ -40,7 +43,7 @@ const AddUserOrg = () => {
   //   setListOfUsers(data); 
   // };
     
-  const addOrg = async (e) => {
+  const addUser = async (e) => {
     e.preventDefault();
 
     //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createOrg', {
@@ -59,6 +62,18 @@ const AddUserOrg = () => {
     
     const data = res.json();
     console.log('data -- ', data);
+    console.log(res.status);
+    if(res.status==200){
+        data.then((vars)=>{
+           ReactSession.set("orgname",vars.org.name);
+           data.then((response)=>{alert(response.msg);})
+    });
+      history.push("/viewstockroomFrontend");
+    }
+    else{
+      data.then((response)=>{alert(response.msg);})
+    }
+   
    // if (data.success) {
     //  await fetchUsers()
     //}
@@ -72,7 +87,9 @@ const AddUserOrg = () => {
     //    },
     //  ]);
     //});
+    
  };
+
 
  const handleorg=(e)=>{
   setorgname((e.target.value).trimStart())
@@ -84,10 +101,15 @@ const handleid=(e)=>{
 
 }
 
-const handleuser=(e)=>{
-  setuserid((e.target.value).trimStart())
+const resetInputField = () => {
+  setorgname("");
+  setorgid("");
+};
 
-}
+//const handleuser=(e)=>{
+  //setuserid((e.target.value).trimStart())
+
+//}
 
  // useEffect(() => { 
  //   fetchUser()
@@ -111,21 +133,22 @@ return (
       //  })}
      // </div>
 
-      <div>
-      <form>
-        <h1>orgname</h1>
-            <input type="text" value={orgname} placeholder="Enter organization name" onChange={handleorg}></input>
-            <h1>orgid</h1>
-            <input type="text" value={orgid} placeholder="Enter organization ID" onChange={handleid}></input>
-            <h1>userid</h1>
-            <input type="text" value={userid} placeholder="Enter User ID" onChange={handleuser}></input>
-            <button onClick={addOrg}>Submit</button>
-      </form>
-      </div>
-   
-  
-  );
+     
+     <div>
+     <form>
+           <h1>Enter Organization Name</h1>
+           <input type="text"  value={orgname}  onChange={handleorg} size="50" />
+           <h1>Enter Organization AccessCode</h1>
+           <input type="text" value={orgid}  onChange={handleid} size="50" /><br />
+           <br /><button onClick={addUser}>Submit</button>&nbsp;&nbsp;
+           <button onClick={resetInputField}>Reset</button>
+           
 
+     </form>
+     </div>
+       
+);
+ 
 }
 
 export default AddUserOrg;

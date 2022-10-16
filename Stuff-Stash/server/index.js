@@ -51,10 +51,10 @@ app.get('/', (req, res) => {
 
 
 app.post("/api/v1/users/adduserOrg",(req,res)=>{
-  const { orgname,orgid,userid } = req.body;    
+  const {orgname,orgid,userid} = req.body;    
 
 
-    if(!orgname||!orgid||!userid){
+    if(!orgname||!orgid){
         return res.status(400).json({msg:"Please enter all the fields"});
     }
     OrgModel.findOne({name:orgname}).then((org) => {
@@ -64,9 +64,11 @@ app.post("/api/v1/users/adduserOrg",(req,res)=>{
         if(!isMatch) return res.status(400).json({msg:"Invalid access code"});
         
         UserModel.findOneAndUpdate({username:userid},{$set:{organizationID:orgname}},{upsert:true}).then((result)=>{
-        if(result) return res.json({msg:"User Added to organization"});
+        if(result) return res.status(200).json({msg:"User added successfully",org});
+        
+       })
 
-           })
+        
           
     })
    })
