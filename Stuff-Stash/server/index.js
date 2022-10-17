@@ -45,7 +45,7 @@ app.post("/api/v1/users/createUser", (req, res) => {
      // Checks to see if the username/password that was entered, wasn't empty.
      // If it was empty, displays a message on screen telling the user to enter them.
      if(!username || !password) {
-        return res.status(400).json({ msg: "Please enter a username and a password"});
+        return res.status(399).json({ msg: "Please enter a username and a password"});
      }
 
      // Checks to see if another username already exists in the database and rejects it if there is one.
