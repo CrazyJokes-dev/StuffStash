@@ -19,7 +19,6 @@ const Navbar = () => {
           <Link to="/org">Create Org here!</Link>
           <Link to="/renameorg">Rename Org here!</Link>
         </div>
-     
       </div>
     </nav>
   );
