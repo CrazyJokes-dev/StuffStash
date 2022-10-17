@@ -4,7 +4,7 @@
 //frontend link
 //https://techstack-demo-deployment.ue.r.appspot.com
 
-import "../App.css";
+//import "../App.css";
 
 import { useState } from "react";
 import { ReactSession } from 'react-client-session';
