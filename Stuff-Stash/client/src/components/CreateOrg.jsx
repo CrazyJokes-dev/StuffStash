@@ -9,7 +9,7 @@
 import { useState } from "react";
 import { ReactSession } from 'react-client-session';
 import { useHistory } from "react-router-dom";
-
+import React from "react";
 
 const CreateOrg = () => {
   const [name, setorgname] = useState("");
@@ -67,10 +67,10 @@ const CreateOrg = () => {
   };
 
   return (
-    <div className="App">
-      <div className="usersDisplay"></div>
-
-      <div>
+  <React.Fragment>
+     <div className="bg fill d-flex align-items-center justify-content-center area p-5">
+ 
+          <div className="col d-flex align-items-center text-center justify-content-center">
         <form>
           <h1>Enter an organization name:</h1>
           <input
@@ -89,6 +89,7 @@ const CreateOrg = () => {
         </form>
       </div>
     </div>
+    </React.Fragment>
   );
 };
 
