@@ -11,9 +11,11 @@ const UserSchema = new mongoose.Schema({
     },
     organizationID: {
         type: String,
-        required:false,
-    },
+        required:false,}
+   
 });
 
 const UserModel = mongoose.model("logins", UserSchema);
 module.exports = UserModel
+//const UserModel = mongoose.model("user", UserSchema);
+//module.exports = mongoose.model('login', UserSchema);
