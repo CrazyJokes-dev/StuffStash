@@ -30,11 +30,11 @@ export default function AddStockroom() {
       setStockRoomName('');
       };
 
-    const handleaccess=(e)=>{
-      setStockRoomName((e.target.value).trimStart());
-      console.log(stockRoomName);
-    
-    }
+
+      const handlename= async (e)=>{
+        await setStockRoomName((e.target.value).trimStart());
+        console.log(stockRoomName)
+      }
 
 
     return (
@@ -49,7 +49,7 @@ export default function AddStockroom() {
                 autoFocus
                 type="text"
                 value={stockRoomName}
-                onChange={handleaccess}
+                onChange={handlename}
               />
             </Form.Group>
 
