@@ -16,9 +16,17 @@ class Dashboard extends Component {
           <div className="col">{/** EMPTY SPACING COLUMN */}</div>
           <div className="col">
             {/** CONTENT */}
-            <button type="button" className="btn btn-success m-1">
-              Create Organization
-            </button>
+            <div className="btn btn-success m-1">
+              <Link to="/org" exact style={linkStyle}>
+                Create Organization
+              </Link>
+            </div>
+            <div className="btn btn-primary m-1">
+              <Link to="/createStockroom" exact style={linkStyle}>
+                Create Stockroom
+              </Link>
+            </div>
+            <hr></hr>
             <button type="button" className="btn btn-danger m-1">
               Log Out
             </button>

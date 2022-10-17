@@ -31,7 +31,7 @@ function UserLogin() {
         ReactSession.set("username", vars.user.username);
         ReactSession.set("orgID", vars.user.organizationID);
       });
-      history.push("/"); //sends the user to the home page if the login information is authenticated
+      history.push("/dashboard"); //sends the user to the home page if the login information is authenticated
     } else {
       data.then((response) => { alert(response.msg); }) //This pops up an alert box on screen with the response's json msg we sent in server/index.js
     }
