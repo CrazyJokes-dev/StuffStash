@@ -9,6 +9,8 @@ const UserModel = require('./models/user');
 const StockroomModel = require('./models/stockroom');
 const OrgModel = require("./models/OrgModel");
 
+const StockroomModel = require('./models/stockroom');
+
 const users = require('./routes/users');
 const orgs = require("./routes/orgs");
 
@@ -120,7 +122,6 @@ app.get('/', (req, res) => {
     res.send({msg:'hello world'})
 })
 
-
 //BEGIN STOCKROOM CALLS
 
 //this function finds stockrooms that belong to a given organization
@@ -148,68 +149,68 @@ app.post("/api/v1/addStockroom", async  (req, res) => {
 
 //END STOCKROOM CALLS
 
-app.use("/api/v1/users", users);
-
 //ORGINZATION API REQUESTS
 //All Orgs
 app.get("/api/v1/orgs/getOrgs", (req, res) => {
-  OrgModel.find({}, (err, result) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
-
-  app.post("/api/v1/org/createOrg", (req, res) => {
-   const { name, OrgAccessCode } = req.body;
-
-  //Checks to see if another Organization already exists in the database and rejects it if there is one.
-  OrgModel.findOne({ name }).then((org) => {
-    if (org) return res.status(400).json({ msg: "Organization already exists" });
-
-    //This creates a model entry into the database with all the current new organiziton information.
-    const newOrg = new OrgModel({
-      name,
-      OrgAccessCode,
+    OrgModel.find({}, (err, result) => {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(result);
+      }
     });
-
-    // encrypts the password with hashing
-    bcrypt.genSalt(saltRounds, (err, salt) =>
-      bcrypt.hash(newOrg.OrgAccessCode, salt, (err, hash) => {
-        if (err) throw err;
-
-        newOrg.OrgAccessCode = hash;
-
-        // saves the org to the database
-        // must be inside bcrypt.hash() or else the password saved won't be encrypted
-        newOrg
-          .save()
-          .then(res.status(200).json({ msg: "Successfully Registered",newOrg }))
-          .catch((err) => console.log(err));
-      })
-    );
   });
-});
-
-app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
-  const { nameFeild, newname } = req.body;
-
-  //Checks to see if another Organization already exists in the database and rejects it if there is NOT
-  OrgModel.findOneAndUpdate(
-    { name: nameFeild },
-    { $set: { name: newname } }
-  ).then((org) => {
-    if (!org) {
-      return res.status(400).json({ msg: "Org does not exist "+ nameFeild });
-    }
-    // OrgModel.save;
-    return res.status(200).json({ msg: "Done, succesfully", org });
+  
+    app.post("/api/v1/org/createOrg", (req, res) => {
+     const { name, OrgAccessCode } = req.body;
+  
+    //Checks to see if another Organization already exists in the database and rejects it if there is one.
+    OrgModel.findOne({ name }).then((org) => {
+      if (org) return res.status(400).json({ msg: "Organization already exists" });
+  
+      //This creates a model entry into the database with all the current new organiziton information.
+      const newOrg = new OrgModel({
+        name,
+        OrgAccessCode,
+      });
+  
+      // encrypts the password with hashing
+      bcrypt.genSalt(saltRounds, (err, salt) =>
+        bcrypt.hash(newOrg.OrgAccessCode, salt, (err, hash) => {
+          if (err) throw err;
+  
+          newOrg.OrgAccessCode = hash;
+  
+          // saves the org to the database
+          // must be inside bcrypt.hash() or else the password saved won't be encrypted
+          newOrg
+            .save()
+            .then(res.status(200).json({ msg: "Successfully Registered",newOrg }))
+            .catch((err) => console.log(err));
+        })
+      );
+    });
   });
-});
+  
+  app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
+    const { nameFeild, newname } = req.body;
+  
+    //Checks to see if another Organization already exists in the database and rejects it if there is NOT
+    OrgModel.findOneAndUpdate(
+      { name: nameFeild },
+      { $set: { name: newname } }
+    ).then((org) => {
+      if (!org) {
+        return res.status(400).json({ msg: "Org does not exist "+ nameFeild });
+      }
+      // OrgModel.save;
+      return res.status(200).json({ msg: "Done, succesfully", org });
+    });
+  });
+  
+  app.use("/api/v1/orgs/", orgs);
 
-app.use("/api/v1/orgs/", orgs);
+app.use('/api/v1/users', users)
 
 
 

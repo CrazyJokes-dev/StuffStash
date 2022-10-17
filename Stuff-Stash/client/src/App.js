@@ -12,8 +12,9 @@ import welcome from "./components/welcome";
 import Dashboard from "./components/dashboard";
 import { ReactSession } from 'react-client-session';
 import CreateOrg from "./components/CreateOrg";
-import RenameOrgPage from "./components/RenameOrg"
 import CreateStockroom from "./Pages/CreateStockRoom";
+import RenameOrgPage from "./components/RenameOrg"
+
 // sets storage type for session variables
 ReactSession.setStoreType("localStorage");
 
@@ -25,6 +26,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/list" component={Helpme} />
+          <Route path="/createStockRoom" component={CreateStockroom} />
           <Route path="/reg" component={RegForm} />
           <Route path="/" exact component={welcome} />
           <Route path="/login" exact component={UserLogin} />
