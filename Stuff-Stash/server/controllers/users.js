@@ -23,7 +23,7 @@ exports.getUsers = async (req, res, next) => {
 // @route     POST /api/v1/users/createUser
 // @access    Public
 exports.addUser = async (req, res, next) => {
-  const { firstName, lastName } = req.body
+  const { username, password, organizationID } = req.body
   try {
     const user = await User.create(req.body)
     return res.status(201).json({

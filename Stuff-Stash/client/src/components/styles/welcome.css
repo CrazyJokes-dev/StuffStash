@@ -1,0 +1,12 @@
+.green {
+  background-color: green;
+}
+.fill {
+  min-height: 100vh;
+  height: 100%;
+}
+
+h1,
+p {
+  color: white;
+}

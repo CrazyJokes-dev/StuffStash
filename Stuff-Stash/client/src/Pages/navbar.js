@@ -13,6 +13,7 @@ const Navbar = () => {
         </div>
         <div className="p-2 d-inline-flex ">
           <Link to="/reg">Register Here!</Link>
+          <Link to="/login">Login In Here!</Link>
         </div>
       </div>
     </nav>

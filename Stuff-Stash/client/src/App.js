@@ -3,9 +3,13 @@ import Navbar from "./Pages/navbar";
 import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
 
 import Home from "./Pages/Home";
-import RegForm from "./components/registrationform";
 import Helpme from "./Pages/ListOfUsers";
+import UserLogin from "./Pages/login";
 import React from "react";
+import RegForm from "./components/registrationform";
+
+// sets storage type for session variables
+ReactSession.setStoreType("localStorage");
 
 function App() {
   return (
@@ -16,7 +20,9 @@ function App() {
         <Switch>
           <Route path="/list" component={Helpme} />
           <Route path="/reg" component={RegForm} />
-          <Route path="/" component={Home} />
+          <Route path="/" exact component={welcome} />
+          <Route path="/login" exact component={UserLogin} />
+          <Route path="/dashboard" exact component={Dashboard} />
           <Redirect from="*" to="/" />
         </Switch>
       </div>
