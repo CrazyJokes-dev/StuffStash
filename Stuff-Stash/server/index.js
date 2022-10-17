@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const UserModel = require("./models/user");
+const jwt = require("jsonwebtoken");
 
 const cors = require("cors");
 const PORT = process.env.PORT || 3000;
@@ -17,7 +18,11 @@ mongoose.connect(
 );
 
 //change room name
-app.post("/stockrooms", room.changeName);
+app.use("/stockrooms", room.changeName);
+
+app.get("/", (req, res) => {
+	res.send({ msg: "hello world" });
+});
 
 app.listen(PORT, () => {
 	console.log("SERVER LISTENING ON PORT ", PORT);
