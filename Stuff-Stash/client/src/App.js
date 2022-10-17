@@ -26,7 +26,6 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/list" component={Helpme} />
-          <Route path="/createStockRoom" component={CreateStockroom} />
           <Route path="/reg" component={RegForm} />
           <Route path="/" exact component={welcome} />
           <Route path="/login" exact component={UserLogin} />

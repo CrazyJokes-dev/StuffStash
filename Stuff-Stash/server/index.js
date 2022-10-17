@@ -9,10 +9,10 @@ const UserModel = require('./models/user');
 const StockroomModel = require('./models/stockroom');
 const OrgModel = require("./models/OrgModel");
 
-const StockroomModel = require('./models/stockroom');
-
 const users = require('./routes/users');
 const orgs = require("./routes/orgs");
+const StockroomModel = require('./models/stockroom');
+
 
 const cors = require('cors');
 const PORT = process.env.PORT || 3000
@@ -209,6 +209,8 @@ app.get("/api/v1/orgs/getOrgs", (req, res) => {
   });
   
   app.use("/api/v1/orgs/", orgs);
+
+
 
 app.use('/api/v1/users', users)
 
