@@ -28,7 +28,7 @@ export default function AddStockroom() {
     const data = res.json();
     console.log(res.status);
     if (res.status == 200) {
-      data.then((response) => { alert(response.msg); })
+      alert("Successfully created " + stockRoomName + " under org ID " + orgid + "!");
     }
     history.push("/dashboard");
   }
