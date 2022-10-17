@@ -1,17 +1,16 @@
 const mongoose = require('mongoose');
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const OrgSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: false,
+        required: true,
     },
     OrgAccessCode: {
         type: String,
-        required: false,
+        required: true,
+        unqiue : true
     },
 });
 
 //delcaring collection
-//no need to declare this collection in db, will be done automatically 
-const OrgModel= mongoose.model('organizations', OrgSchema);
-module.exports=OrgModel;
+module.exports = mongoose.model('organizations', OrgSchema);
