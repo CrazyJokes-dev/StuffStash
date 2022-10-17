@@ -3,6 +3,7 @@ import Navbar from "./Pages/navbar";
 import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
 
 
+
 import Helpme from "./Pages/ListOfUsers";
 import UserLogin from "./Pages/login";
 import React from "react";
@@ -11,7 +12,9 @@ import welcome from "./components/welcome";
 import Dashboard from "./components/dashboard";
 import { ReactSession } from 'react-client-session';
 import CreateOrg from "./components/CreateOrg";
+import CreateStockroom from "./Pages/CreateStockRoom";
 import RenameOrgPage from "./components/RenameOrg"
+
 // sets storage type for session variables
 ReactSession.setStoreType("localStorage");
 
@@ -29,8 +32,8 @@ function App() {
           <Route path="/dashboard" exact component={Dashboard} />
            <Route path="/Org" component={CreateOrg} />
           <Route path="/RenameOrg" component={RenameOrgPage} />
+          <Route path="/createStockRoom" component={CreateStockroom} />
           <Redirect from="*" to="/" />
-
         </Switch>
       </div>
     </div>

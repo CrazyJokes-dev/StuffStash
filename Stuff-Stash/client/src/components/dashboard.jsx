@@ -1,10 +1,17 @@
 import React, { Component } from "react";
+import { ReactSession } from 'react-client-session';
 import { Link } from "react-router-dom";
 
 const linkStyle = {
   textDecoration: "none",
   color: "white",
 };
+
+const logoutUser = async (e) => {
+  ReactSession.remove("username");
+  ReactSession.remove("orgID");
+  alert("You are now logged out!");
+}
 
 class Dashboard extends Component {
   state = {};
@@ -16,10 +23,18 @@ class Dashboard extends Component {
           <div className="col">{/** EMPTY SPACING COLUMN */}</div>
           <div className="col">
             {/** CONTENT */}
-            <button type="button" className="btn btn-success m-1">
-              Create Organization
-            </button>
-            <button type="button" className="btn btn-danger m-1">
+            <div className="btn btn-success m-1">
+              <Link to="/org" exact style={linkStyle}>
+                Create Organization
+              </Link>
+            </div>
+            <div className="btn btn-primary m-1">
+              <Link to="/createStockroom" exact style={linkStyle}>
+                Create Stockroom
+              </Link>
+            </div>
+            <hr></hr>
+            <button onClick={logoutUser} type="button" className="btn btn-danger m-1">
               Log Out
             </button>
             <div className="btn btn-warning m-1">
