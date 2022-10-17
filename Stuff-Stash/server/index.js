@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-
-const session = require("express-session");
 const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
 const saltRounds = 12; // <-- The lower the number the more hashes per second. Higher = less hashes per second
@@ -16,7 +14,6 @@ const room = require("./routes/stockrooms");
 const cors = require('cors');
 const PORT = process.env.PORT || 3000
 
-const users = require('./routes/users')
 
 app.use(express.json());
 app.use(cors());
