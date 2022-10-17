@@ -11,15 +11,17 @@ const OrgModel = require("./models/OrgModel");
 
 const users = require('./routes/users');
 const orgs = require("./routes/orgs");
-
+const room = require("./routes/stockrooms");
 
 const cors = require('cors');
 const PORT = process.env.PORT || 3000
 
+const users = require('./routes/users')
+
 app.use(express.json());
 app.use(cors());
 mongoose.connect(
-    "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
+	"mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
 
 app.use(express.json());
@@ -132,6 +134,9 @@ app.post("/api/v1/addStockroom", async (req, res) => {
     res.json(stockroom);
 });
 
+app.use("/stockrooms", room.changeName);
+
+
 //END STOCKROOM CALLS
 
 //ORGINZATION API REQUESTS
@@ -198,6 +203,6 @@ app.use("/api/v1/orgs/", orgs);
 app.use('/api/v1/users', users)
 
 app.listen(PORT, () => {
-    console.log("SERVER LISTENING ON PORT ", PORT);
+	console.log("SERVER LISTENING ON PORT ", PORT);
 });
 
