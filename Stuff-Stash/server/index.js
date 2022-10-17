@@ -1,20 +1,25 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const UserModel = require("./models/user");
 
-const OrgModel = require("./models/OrgModel");
-const cors = require("cors");
-const PORT = process.env.PORT || 3000;
-const users = require("./routes/users");
-const orgs = require("./routes/orgs");
+const session = require("express-session");
+const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
-const saltRounds = 12; // <-- The lower the number the more hashes per second. Higher = less hashes per second
+  const saltRounds = 12; // <-- The lower the number the more hashes per second. Higher = less hashes per second
+const UserModel = require('./models/user');
+const users = require('./routes/users');
+const OrgModel = require("./models/OrgModel");
+const orgs = require("./routes/orgs");
+const cors = require('cors');
+const PORT = process.env.PORT || 3000
+
 app.use(express.json());
 app.use(cors());
 mongoose.connect(
   "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
+
+app.use(express.json());
+app.use(cors());
 
 app.get("/api/v1/users/", (req, res) => {
   UserModel.find({}, (err, result) => {
@@ -38,17 +43,79 @@ app.get("/api/v1/users/getUsers", (req, res) => {
   });
 });
 
-app.post("/api/v1/users/createUser", async (req, res) => {
-  const user = req.body;
-  const newUser = new UserModel(user);
-  await newUser.save();
 
-  res.json(user);
+// app.post("/api/v1/users/createUser", async (req, res) => {
+//   const user = req.body;
+//   const newUser = new UserModel(user);
+//   await newUser.save();
+
+//   res.json(user);
+// });
+
+// app.get("/", (req, res) => {
+//   res.send({ msg: "hello world" });
+// });
+
+app.post("/api/v1/users/createUser", (req, res) => {
+     const { username, password, organizationID } = req.body;
+    
+     // Checks to see if the username/password that was entered, wasn't empty.
+     // If it was empty, displays a message on screen telling the user to enter them.
+     if(!username || !password) {
+        return res.status(399).json({ msg: "Please enter a username and a password"});
+     }
+
+     // Checks to see if another username already exists in the database and rejects it if there is one.
+     UserModel.findOne({ username: username}).then((user) => {
+        if (user) return res.status(400).json({ msg: "User already exists" });
+     
+     // This creates a model entry into the database with all the current new registration information.
+     const newUser = new UserModel({
+        username,
+        password,
+        organizationID
+     });
+
+     // encrypts the password with hashing
+     bcrypt.genSalt(saltRounds, (err, salt) => 
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+
+            newUser.password = hash;
+            
+            // saves the user to the database
+            // must be inside bcrypt.hash() or else the password saved won't be encrypted
+            newUser.save()
+                   .then(res.json({ msg: "Successfully Registered" } ))
+                   .catch((err) => console.log(err));
+        })
+
+     );
+    }); 
 });
 
-app.get("/", (req, res) => {
-  res.send({ msg: "hello world" });
-});
+app.post("/api/v1/users/login", (req, res) => {
+    const { username, password } = req.body;
+
+
+    if (!username || !password) {
+        return res.status(400).json({ msg: "Please enter all fields" });
+    }
+
+    UserModel.findOne({ username }).then((user) => {
+        if (!user) return res.status(400).json({ msg: "User does not exist" });
+
+        bcrypt.compare(password, user.password).then((isMatch) => {
+            if(!isMatch) return res.status(400).json({ msg: "Invalid credentials"});
+
+            res.status(200).json({ msg: " Logged In Successfully", user });
+        })
+    })
+})
+
+app.get('/', (req, res) => {
+    res.send({msg:'hello world'})
+})
 
 app.use("/api/v1/users", users);
 
