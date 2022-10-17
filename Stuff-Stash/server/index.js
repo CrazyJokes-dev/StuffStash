@@ -17,7 +17,7 @@ mongoose.connect(
 	"mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
 
-app.get("/stockrooms", stockrooms.getRoom);
+app.use("/stockrooms", stockrooms.getRoom);
 
 app.listen(PORT, () => {
 	console.log("SERVER LISTENING ON PORT ", PORT);
