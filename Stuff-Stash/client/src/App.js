@@ -27,16 +27,15 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/list" component={Helpme} />
-          <Route path="/viewstockroom" component={viewstockroomFrontend} />
-          <Route path="/" component={welcome} />
+          <Route path="/viewstockroomFrontend" component={viewstockroomFrontend} />
           <Route path="/reg" component={RegForm} />
-          <Route path="/" exact component={welcome} />
           <Route path="/login" exact component={UserLogin} />
           <Route path="/dashboard" exact component={Dashboard} />
            <Route path="/Org" component={CreateOrg} />
           <Route path="/RenameOrg" component={RenameOrgPage} />
           <Route path="/createStockRoom" component={CreateStockroom} />
            <Route path="/adduserOrg" component={AddUserOrg} />
+           <Route path="/" exact component={welcome} />
           <Redirect from="*" to="/" />
         </Switch>
       </div>

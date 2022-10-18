@@ -161,7 +161,7 @@ app.post("/api/v1/addStockroom", async (req, res) => {
     res.json(stockroom);
 });
 
-app.use("/stockrooms", room.changeName);
+//app.use("/stockrooms", room.changeName);
 
 
 //END STOCKROOM CALLS
