@@ -3,7 +3,8 @@ import React from "react";
 import { ReactSession } from "react-client-session";
 
 const viewstockroomFrontend = () => {
-  const orgid = ReactSession.get("orgname");
+  ReactSession.set("orgid", "f");
+  const orgid = ReactSession.get("orgid");
   const DisplayStockroom = async (e) => {
     e.preventDefault();
     //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users', {
@@ -18,7 +19,9 @@ const viewstockroomFrontend = () => {
         orgid,
       }),
     });
-
+    if (res.status === 200) {
+      alert("Valid stockroom is being displayed");
+    }
     const data = res.json();
     console.log("data -- ", data);
     //if (data.success) {
