@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 //creating our stockroom schema. as of sprint 1, this will always be empty

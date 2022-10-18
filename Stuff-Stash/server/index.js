@@ -4,22 +4,21 @@ const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
 const saltRounds = 12; // <-- The lower the number the more hashes per second. Higher = less hashes per second
 const UserModel = require('./models/user');
-
+const stockrooms = require("./controllers/stockrooms");
 const StockroomModel = require('./models/stockroom');
 const OrgModel = require("./models/OrgModel");
 const users = require('./routes/users');
 const orgs = require("./routes/orgs");
 const room = require("./routes/stockrooms");
+const Room = require("./models/stockroom"); //import user fr
 const cors = require('cors');
 const PORT = process.env.PORT || 3000
-
-
-
 app.use(express.json());
 app.use(cors());
-mongoose.connect(
-	"mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
-);
+
+mongoose.connect("mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority");
+
+
 
 //app.get("/api/v1/users/", (req, res) => {
    // UserModel.find({}, (err, result) => {
@@ -245,4 +244,3 @@ app.use('/api/v1/users', users)
 app.listen(PORT, () => {
 	console.log("SERVER LISTENING ON PORT ", PORT);
 });
-

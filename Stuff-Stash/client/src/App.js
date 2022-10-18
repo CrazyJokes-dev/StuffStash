@@ -1,3 +1,4 @@
+
 //import "./App.css";
 import Navbar from "./components/common/navbar";
 import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
@@ -14,8 +15,8 @@ import RenameOrgPage from "./components/RenameOrg"
 import { Router } from 'react-router-dom';
 import AddUserOrg from './Pages/AddUserOrg';
 import viewstockroomFrontend from "./Pages/viewstockroomFrontend";
-
 // sets storage type for session variables
+
 ReactSession.setStoreType("localStorage");
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/list" component={Helpme} />
+          <Route path="/viewstockroom" component={viewstockroomFrontend} />
+          <Route path="/" component={welcome} />
           <Route path="/reg" component={RegForm} />
           <Route path="/" exact component={welcome} />
           <Route path="/login" exact component={UserLogin} />
@@ -34,7 +37,6 @@ function App() {
           <Route path="/RenameOrg" component={RenameOrgPage} />
           <Route path="/createStockRoom" component={CreateStockroom} />
            <Route path="/adduserOrg" component={AddUserOrg} />
-          <Route path="/viewstockroomFrontend" component={viewstockroomFrontend} />
           <Redirect from="*" to="/" />
         </Switch>
       </div>
