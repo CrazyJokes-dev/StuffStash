@@ -226,6 +226,18 @@ app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
     });
 });
 
+app.post("/api/v1/users/viewstock", (req, res) => {
+    const { orgid } = req.body;
+    StockroomModel.find({ org: orgid }).then(function (err, result) {
+      if (err) {
+        console.log("error");
+        throw err;
+        //throw err;
+      }
+    });
+    res.status(200).json({ msg: "why wont you work" });
+  });
+
 app.use("/api/v1/orgs/", orgs);
 
 app.use('/api/v1/users', users)
