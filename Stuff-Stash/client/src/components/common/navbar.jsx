@@ -28,23 +28,36 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-
             <li className="nav-item active">
-              <Link to="/registration" className="nav-link">
-                Register
+              <Link to="/reg" className="nav-link">
+                Register User
               </Link>
             </li>
             <li className="nav-item active">
               <Link
                 to="/login"
-                className="nav-link"
-              >
+                className="nav-link">
                 Login
               </Link>
             </li>
             <li className="nav-item active">
               <Link to="/dashboard" className="nav-link">
                 Dashboard
+              </Link>
+            </li>
+            <li className="nav-item active">
+              <Link to="/RenameOrg" className="nav-link">
+                Rename Org
+              </Link>
+            </li>
+            <li className="nav-item active">
+              <Link to="/viewstockroomFrontend" className="nav-link">
+                View StockRoom
+              </Link>
+            </li>
+            <li className="nav-item active">
+              <Link to="/adduserOrg" className="nav-link">
+                Add users to org
               </Link>
             </li>
           </ul>

@@ -6,10 +6,9 @@
 
 import '../App.css';
 import { useState, useEffect } from "react";
-import validator from 'validator';
 import { ReactSession } from 'react-client-session';
 import { useHistory } from "react-router-dom";
-
+import React from 'react';
 //import Form from "react-bootstrap/Form";
 //import Button from "react-bootstrap/Button";
 //function AddUserOrg(){
@@ -90,7 +89,6 @@ const AddUserOrg = () => {
     
  };
 
-
  const handleorg=(e)=>{
   setorgname((e.target.value).trimStart())
 
@@ -133,8 +131,10 @@ return (
       //  })}
      // </div>
 
-     
-     <div>
+     <React.Fragment>
+     <div className="bg fill d-flex align-items-center justify-content-center area p-5">
+      
+      <div className="col d-flex align-items-center text-center justify-content-center">
      <form>
            <h1>Enter Organization Name</h1>
            <input type="text"  value={orgname}  onChange={handleorg} size="50" />
@@ -146,6 +146,8 @@ return (
 
      </form>
      </div>
+     </div>
+     </React.Fragment>
        
 );
  

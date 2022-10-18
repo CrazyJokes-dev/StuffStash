@@ -29,7 +29,7 @@ class Dashboard extends Component {
               </Link>
             </div>
             <div className="btn btn-primary m-1">
-              <Link to="/createStockroom" exact style={linkStyle}>
+              <Link to="/createStockRoom" exact style={linkStyle}>
                 Create Stockroom
               </Link>
             </div>

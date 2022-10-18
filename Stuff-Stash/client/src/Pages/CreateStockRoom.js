@@ -5,6 +5,7 @@ import { ReactSession } from 'react-client-session';
 import { useHistory } from "react-router-dom";
 
 
+
 export default function AddStockroom() {
   const [stockRoomName, setStockRoomName] = useState("");
   const orgid = ReactSession.get("orgID");
@@ -51,8 +52,10 @@ function checkSubmission()
 }
 
 return (
-  <div className="addCreateStockRoom container">
-    <div className="row">
+  <React.Fragment>
+<div className="bg fill d-flex align-items-center justify-content-center area p-5">
+ 
+ <div className="col d-flex align-items-center text-center justify-content-center">
       <div className="col"></div>
       <div className="col">
         <Form onSubmit={addStockroom}>
@@ -80,5 +83,6 @@ return (
       <div className="col"></div>
     </div>
   </div>
+  </React.Fragment>
  )
 };
