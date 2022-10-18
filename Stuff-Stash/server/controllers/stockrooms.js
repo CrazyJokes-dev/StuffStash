@@ -1,20 +1,23 @@
 const asyncHandler = require("express-async-handler");
-const Room = require("../models/stockroom"); //import user from models
+const Room = require("../models/stockroom");
+const jwt = require("jsonwebtoken");
 
-//check if orgId exists
-const getRoom = asyncHandler(async (req, res) => {
-  //replace with whatever you want to get room by
-  //let name = "A123";
-  const orgid = req.body;
-  await Room.find({ org: orgid }).then(function (err, result) {
-    if (err) {
-      console.log("error");
-      throw err;
-      //throw err;
-    }
-  });
-  res.send(userReturn);
+//change stock room name, found by owner/username
+const changeName = asyncHandler(async (req, res) => {
+	const code = JSON.stringify(req.body.id);
+	let newName = "My Room";
+	await Room.updateOne({ org: "A123" }, { $set: { name: newName } }).then(
+		function (err, result) {
+			if (!err) {
+				res.status(200).json({ message: "success" });
+			} else {
+				throw err;
+			}
+		}
+	);
 });
+
+//to use function in route
 module.exports = {
-  getRoom,
+	changeName,
 };
