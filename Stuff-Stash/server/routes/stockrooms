@@ -1,0 +1,5 @@
+const express = require("express");
+const router = express.Router();
+const { getRoom } = require("../controllers/stockrooms"); //calls fuction from controllers folder
+
+exports.getRoom = getRoom;
