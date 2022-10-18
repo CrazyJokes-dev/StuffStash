@@ -1,4 +1,4 @@
-const Org = require("../models/Orgmodel");
+const Org = require("../models/OrgModel");
 
 // @desc      Get all orgs
 // @route     GET /api/v1/orgs
@@ -22,11 +22,6 @@ exports.getOrgs = async (req, res, next) => {
 // @desc      Add orgs
 // @route     POST /api/v1/orgs
 // @access    Public
-exports.adduserOrg = async (req, res, next) => {
-  const { orgname,orgid,userid } = req.body;
-
-  try {
-    const org = await Org.find(req.body.orgname);
 exports.addOrg = async (req, res, next) => {
   const { name, OrgAccessCode } = req.body;
   try {
@@ -78,4 +73,3 @@ exports.RenameOrg = async (req, res, next) => {
     }
   }
 };
-

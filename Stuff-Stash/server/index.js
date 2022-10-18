@@ -12,7 +12,6 @@ const orgs = require("./routes/orgs");
 const room = require("./routes/stockrooms");
 const cors = require('cors');
 const PORT = process.env.PORT || 3000
-const bcrypt = require("bcrypt");
 
 
 
@@ -67,9 +66,9 @@ app.post("/api/v1/users/adduserOrg",(req,res)=>{
     bcrypt.compare(orgid,org.OrgAccessCode).then((isMatch)=>{
         if(!isMatch) return res.status(400).json({msg:"Invalid access code"});
         
-        UserModel.findOneAndUpdate({username:userid},{$set:{organizationID:orgname}},{upsert:true}).then((result)=>{
+        UserModel.findOneAndUpdate({username:userid},{$set:{organizationID:orgid}},{upsert:true}).then((result)=>{
         if(result) return res.status(200).json({msg:"User added successfully",org});
-        
+        else{return res.status(400).json({msg:"Something went wrong"});}
        })
 
         
@@ -103,7 +102,7 @@ app.post("/api/v1/users/createUser", (req, res) => {
     // Checks to see if another username already exists in the database and rejects it if there is one.
     UserModel.findOne({ username: username }).then((user) => {
         if (user) return res.status(400).json({ msg: "User already exists" });
-
+        
         // This creates a model entry into the database with all the current new registration information.
         const newUser = new UserModel({
             username,
