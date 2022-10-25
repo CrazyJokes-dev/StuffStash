@@ -1,41 +1,127 @@
-import React from "react";
 import "./styles/welcome.css";
 import "./styles/bg.css";
+import React, { useState } from "react";
+import { ReactSession } from "react-client-session"; // client session chocolate chip cookies
+import { useHistory } from "react-router-dom"; // This allows you to send people to another page
 
-//Styles
-const textStyle = {
-  color: "white",
-};
+function Welcome() {
+  //Styles
+  const textStyle = {
+    color: "white",
+  };
 
-const boxShadow = {
-  backgroundColor: "rgba(0, 0, 0, 0.3)",
-  boxShadow: "5px 5px 50px 5px rgba(0, 0, 0, 0.4)",
-  borderRadius: "10px",
-};
+  const boxShadow = {
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    boxShadow: "5px 5px 50px 5px rgba(0, 0, 0, 0.4)",
+    borderRadius: "10px",
+  };
 
-//Placeholder text -- remove later
-const text =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-const welcome = () => {
-  return (
-    <React.Fragment>
-      <div className="bg fill d-flex align-items-center justify-content-center area p-5">
-        <div className="row p-5" style={boxShadow}>
-          <div className="col d-flex align-items-center text-center justify-content-center">
-            <div className="jumbotron">
-              <h1 className="display-1">Welcome to Stuff Stash</h1>
-              <p className="lead">The all in one Asset Manager</p>
+  const loginUser = async (e) => {
+    e.preventDefault();
+    // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/login', {
+    const res = await fetch("http://localhost:3000/api/v1/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+    const data = res.json();
+    console.log("data -- ", data);
+    console.log(res.status);
+    if (res.status === 200) {
+      data.then((vars) => {
+        ReactSession.set("username", vars.user.username);
+        ReactSession.set("orgID", vars.user.organizationID);
+      });
+      // history.push("/dashboard"); //sends the user to the home page if the login information is authenticated
+    } else {
+      data.then((response) => {
+        alert(response.msg);
+      }); //This pops up an alert box on screen with the response's json msg we sent in server/index.js
+    }
+
+    // setUsername("");
+    // setPassword("");
+  };
+
+  const welcome = () => {
+    return (
+      <React.Fragment>
+        <div className="bg fill d-flex align-items-center justify-content-center area p-5">
+          <div className="row p-5" style={boxShadow}>
+            <div className="col d-flex align-items-center text-center justify-content-center">
+              <div className="jumbotron">
+                <h1 className="display-1">Welcome to Stuff Stash</h1>
+                <p className="lead">The all in one Asset Manager</p>
+              </div>
+            </div>
+            <div className="col m-5 text-center"></div>
+            <div class="row">
+              <div class="col-sm"></div>
+              <div class="col-sm">
+                <h2>User Login</h2>
+                <form onSubmit={loginUser} class="justify-content-center">
+                  <div class="form-group">
+                    <label for="Username" class="text-white">
+                      Username:
+                    </label>
+                    <input
+                      type="Username"
+                      class="form-control"
+                      id="Username"
+                      placeholder="Enter username"
+                      name="Username"
+                      onChange={(event) => {
+                        setUsername(event.target.value);
+                      }}
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pwd" class="text-white">
+                      Password:
+                    </label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="pwd"
+                      placeholder="Enter password"
+                      name="pwd"
+                      onChange={(event) => {
+                        setPassword(event.target.value);
+                      }}
+                    />
+                  </div>
+
+                  <div class="form-check">
+                    <input
+                      class="form-check-label col-sm-1"
+                      type="checkbox"
+                      value=""
+                      id="defaultCheck1"
+                    />
+                    <label class="form-check-label" for="stay logged in">
+                      Remember Me
+                    </label>
+                  </div>
+
+                  <button type="login" class="btn btn-primary m-3 p-1">
+                    Login
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-          <div className="col m-5 text-center" style={textStyle}>
-            Detailed description goes here <br />
-            {text}
-          </div>
         </div>
-      </div>
-    </React.Fragment>
-  );
-};
-
-export default welcome;
+      </React.Fragment>
+    );
+  };
+}
+export default Welcome;
