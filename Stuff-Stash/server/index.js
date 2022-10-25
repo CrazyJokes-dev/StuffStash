@@ -81,28 +81,6 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
 	});
 });
 
-//sign up validation
-
-app.post(
-	"/signup",
-	// username must be greater than 6 characters and
-	body("username").isLength({ min: 6 }),
-	// password must be at least 5 chars long
-	body("password").isLength({ min: 6 }),
-	(req, res) => {
-		// Finds the validation errors in this request and wraps them in an object with handy functions
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() });
-		}
-
-		users.create({
-			username: req.body.username,
-			password: req.body.password,
-		}).then((user) => res.json(user));
-	}
-);
-
 app.post(
 	"/api/v1/users/createUser",
 	// username must be greater than 6 characters and unique
@@ -120,7 +98,9 @@ app.post(
 	// password must be at least 6 chars long
 	body("password")
 		.isLength({ min: 6 })
-		.withMessage("must be at least 6 chars long"),
+		.withMessage("must be at least 6 chars long")
+		.matches(/\d/)
+		.withMessage("must contain a number"),
 	//makes sure orgID field exists
 	body("organizationID").exists(),
 	(req, res) => {
