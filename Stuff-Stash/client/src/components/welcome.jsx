@@ -18,6 +18,7 @@ function Welcome() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  let history = useHistory(); //must be declared like this inside of the function
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -40,7 +41,7 @@ function Welcome() {
         ReactSession.set("username", vars.user.username);
         ReactSession.set("orgID", vars.user.organizationID);
       });
-      // history.push("/dashboard"); //sends the user to the home page if the login information is authenticated
+      history.push("/dashboard"); //sends the user to the home page if the login information is authenticated
     } else {
       data.then((response) => {
         alert(response.msg);
