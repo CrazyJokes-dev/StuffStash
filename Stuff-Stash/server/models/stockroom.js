@@ -15,7 +15,10 @@ const StockroomSchema = new mongoose.Schema({
         required: true,
     },
     //and a place to store assets (empty for now)
-    assets: [assetSchema]
+    assets: {
+        type: [assetSchema],
+        default: undefined
+    }
 
 });
 
