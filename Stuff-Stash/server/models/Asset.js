@@ -1,4 +1,5 @@
-const assetSchema = new mongoose.schema({
+const mongoose = require('mongoose');
+const assetSchema = new mongoose.Schema({
     //assets should have a identifier/name,
     identifier: {
         type: String,
@@ -15,3 +16,5 @@ const assetSchema = new mongoose.schema({
         type: Boolean,
     }
 })
+
+module.exports = mongoose.model('assets', assetSchema);
