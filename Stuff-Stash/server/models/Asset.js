@@ -5,12 +5,13 @@ const assetSchema = new mongoose.schema({
         required: true,
         unique: true
     },
-    //a "type" (ie, laptop, projector, monitor, etc)
+    //a "type" (ie, laptop, projector, monitor, etc),
     category: {
         type: String,
         required: true
     },
-    inUse: {
-
+    //a way to identify availability
+    isAvailable: {
+        type: Boolean,
     }
 })
