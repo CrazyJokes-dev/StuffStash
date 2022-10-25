@@ -51,77 +51,79 @@ function Welcome() {
     // setPassword("");
   };
 
-  const welcome = () => {
-    return (
-      <React.Fragment>
-        <div className="bg fill d-flex align-items-center justify-content-center area p-5">
-          <div className="row p-5" style={boxShadow}>
-            <div className="col d-flex align-items-center text-center justify-content-center">
-              <div className="jumbotron">
-                <h1 className="display-1">Welcome to Stuff Stash</h1>
-                <p className="lead">The all in one Asset Manager</p>
-              </div>
+  //const welcome = () => {
+  return (
+    <React.Fragment>
+      <div className="bg fill d-flex align-items-center justify-content-center area p-5">
+        <div className="row p-5" style={boxShadow}>
+          <div className="col d-flex align-items-center text-center justify-content-center">
+            <div className="jumbotron">
+              <h1 className="display-1">Welcome to Stuff Stash</h1>
+              <p className="lead">The all in one Asset Manager</p>
             </div>
-            <div className="col m-5 text-center"></div>
-            <div class="row">
-              <div class="col-sm"></div>
-              <div class="col-sm">
-                <h2>User Login</h2>
-                <form onSubmit={loginUser} class="justify-content-center">
-                  <div class="form-group">
-                    <label for="Username" class="text-white">
-                      Username:
-                    </label>
-                    <input
-                      type="Username"
-                      class="form-control"
-                      id="Username"
-                      placeholder="Enter username"
-                      name="Username"
-                      onChange={(event) => {
-                        setUsername(event.target.value);
-                      }}
-                    />
-                  </div>
+          </div>
+          <div className="col m-5 text-center"></div>
+          <div class="row">
+            <div class="col-sm"></div>
 
-                  <div class="form-group">
-                    <label for="pwd" class="text-white">
-                      Password:
-                    </label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="pwd"
-                      placeholder="Enter password"
-                      name="pwd"
-                      onChange={(event) => {
-                        setPassword(event.target.value);
-                      }}
-                    />
-                  </div>
+            <div class="col-sm">
+              <h2>User Login</h2>
+              <form onSubmit={loginUser} class="justify-content-center">
+                <div class="form-group">
+                  <label for="Username" class="text-white">
+                    Username:
+                  </label>
+                  <input
+                    type="Username"
+                    class="form-control"
+                    id="Username"
+                    placeholder="Enter username"
+                    name="Username"
+                    onChange={(event) => {
+                      setUsername(event.target.value);
+                    }}
+                  />
+                </div>
 
-                  <div class="form-check">
-                    <input
-                      class="form-check-label col-sm-1"
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck1"
-                    />
-                    <label class="form-check-label" for="stay logged in">
-                      Remember Me
-                    </label>
-                  </div>
+                <div class="form-group">
+                  <label for="pwd" class="text-white">
+                    Password:
+                  </label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="pwd"
+                    placeholder="Enter password"
+                    name="pwd"
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                    }}
+                  />
+                </div>
 
-                  <button type="login" class="btn btn-primary m-3 p-1">
-                    Login
-                  </button>
-                </form>
-              </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-label col-sm-1"
+                    type="checkbox"
+                    value=""
+                    id="defaultCheck1"
+                  />
+                  <label class="form-check-label" for="stay logged in">
+                    Remember Me
+                  </label>
+                </div>
+
+                <button type="login" class="btn btn-primary m-3 p-1">
+                  Login
+                </button>
+              </form>
             </div>
           </div>
         </div>
-      </React.Fragment>
-    );
-  };
+      </div>
+    </React.Fragment>
+  );
+  //};
 }
+
 export default Welcome;
