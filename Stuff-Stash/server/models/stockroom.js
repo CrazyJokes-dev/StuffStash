@@ -1,4 +1,4 @@
-
+const assetSchema = require("/Asset.js");
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 //creating our stockroom schema. as of sprint 1, this will always be empty
@@ -15,9 +15,7 @@ const StockroomSchema = new mongoose.Schema({
         required: true,
     },
     //and a place to store assets (empty for now)
-    assets: {
-        required: false
-    },
+    assets: [assetSchema]
 
 });
 
