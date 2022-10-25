@@ -5,7 +5,7 @@ import Helpme from "./Pages/ListOfUsers";
 import UserLogin from "./Pages/login";
 import React from "react";
 import RegForm from "./components/registrationform";
-import welcome from "./components/welcome";
+import welcome2 from "./components/welcome2";
 import Dashboard from "./components/dashboard";
 import { ReactSession } from "react-client-session";
 import CreateOrg from "./components/CreateOrg";
@@ -14,6 +14,7 @@ import RenameOrgPage from "./components/RenameOrg";
 import { Router } from "react-router-dom";
 import AddUserOrg from "./Pages/AddUserOrg";
 import viewstockroomFrontend from "./Pages/viewstockroomFrontend";
+
 // sets storage type for session variables
 
 ReactSession.setStoreType("localStorage");
@@ -37,7 +38,7 @@ function App() {
           <Route path="/RenameOrg" component={RenameOrgPage} />
           <Route path="/createStockRoom" component={CreateStockroom} />
           <Route path="/adduserOrg" component={AddUserOrg} />
-          <Route path="/" exact component={welcome} />
+          <Route path="/" exact component={welcome2} />
           <Redirect from="*" to="/" />
         </Switch>
       </div>
