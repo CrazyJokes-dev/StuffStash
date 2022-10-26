@@ -237,6 +237,18 @@ app.post("/api/v1/users/viewstock", (req, res) => {
     res.status(200).json({ msg: "why wont you work" });
   });
 
+
+  app.get("/api/v1/orgs/OrgView", (req, res) => {
+     const { userid } = req.body;
+    UserModel.findOne({username:userid},{"organizationID.name":1,_id:0}).then((view)=>{
+          if(view) return res.json(view);
+          else{
+            return res.status(400).json({msg:"Sorry,We did not find any organization for this Username"})
+          }
+    })
+  });
+
+
 app.use("/api/v1/orgs/", orgs);
 
 app.use('/api/v1/users', users)

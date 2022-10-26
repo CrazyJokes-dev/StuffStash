@@ -9,9 +9,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    organizationID: {
-        type: String,
-        required:false,}
+    organizationID:[
+        {
+            name:String,
+            Accesscode:String
+        }
+    ]
    
 });
 
