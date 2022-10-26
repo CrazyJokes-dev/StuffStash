@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -9,10 +8,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    organizationID: {
-        type: String,
-        required:false,}
-   
+    organizationID:[
+        {
+            name:String,
+            Accesscode:String
+        }
+    ]
 });
 
 const UserModel = mongoose.model("logins", UserSchema);
