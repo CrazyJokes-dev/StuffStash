@@ -9,7 +9,11 @@ console.log(user);
 
 class UserProfile extends Component {
   render() {
-    return <div>hello {user}</div>;
+    return (
+      <div className="userDiv">
+        <p>Welcome {user}</p>
+      </div>
+    );
   }
 }
 

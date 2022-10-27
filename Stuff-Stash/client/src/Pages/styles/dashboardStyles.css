@@ -21,3 +21,15 @@
   overflow: scroll;
   background-color: coral;
 }
+
+.userDiv {
+  display: flex;
+  color: rgb(72, 213, 237);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.userDiv p {
+  color: rgb(72, 213, 237);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 50px;
+  text-align: center;
+}
