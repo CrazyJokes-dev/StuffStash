@@ -1,0 +1,23 @@
+.back {
+  min-height: 90vh;
+  height: 100%;
+  margin: 0;
+}
+
+.stckRoomDisplay {
+  background-color: beige;
+  height: 100%;
+  margin: 0;
+  padding: 2em;
+}
+
+.userDisplay {
+  width: 300px;
+  height: 200px;
+  padding: 1rem;
+}
+
+.orgDisplay {
+  overflow: scroll;
+  background-color: coral;
+}
