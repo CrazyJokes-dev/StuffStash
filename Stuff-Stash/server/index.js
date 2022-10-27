@@ -161,6 +161,20 @@ app.post("/api/v1/addStockroom", async (req, res) => {
     res.json(stockroom);
 });
 
+//this creates an asset under a given stockroom
+app.post("/api/v1/addAsset", async (req, res) => {
+    console.log("Adding asset");
+    const stockroom = req.body.stockroomName;
+    const asset = req.body.asset;
+
+    const filter = { "name" : stockroom }
+    console.log(filter);
+    const update = { "assets": asset }
+    console.log(update);
+    StockroomModel.findOneAndUpdate(filter, update)
+    res.json(asset);
+});
+
 //app.use("/stockrooms", room.changeName);
 
 

@@ -13,7 +13,7 @@ const StockroomSchema = new mongoose.Schema({
     //a tag to identify what organization it belongs to...
     org: {
         type: String,
-        required: true,
+        required: true
     },
     //and a place to store assets (empty for now)
     assets: {
