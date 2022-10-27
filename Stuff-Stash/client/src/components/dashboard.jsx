@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ReactSession } from 'react-client-session';
+import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 
 const linkStyle = {
@@ -11,7 +11,8 @@ const logoutUser = async (e) => {
   ReactSession.remove("username");
   ReactSession.remove("orgID");
   alert("You are now logged out!");
-}
+  window.location.href = "http://localhost:3001/";
+};
 
 class Dashboard extends Component {
   state = {};
@@ -34,7 +35,11 @@ class Dashboard extends Component {
               </Link>
             </div>
             <hr></hr>
-            <button onClick={logoutUser} type="button" className="btn btn-danger m-1">
+            <button
+              onClick={logoutUser}
+              type="button"
+              className="btn btn-danger m-1"
+            >
               Log Out
             </button>
             <div className="btn btn-warning m-1">
