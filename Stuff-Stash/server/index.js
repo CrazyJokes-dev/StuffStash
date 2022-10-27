@@ -225,17 +225,23 @@ app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
     });
 });
 
-app.post("/api/v1/users/viewstock", (req, res) => {
-    const { orgid } = req.body;
-    StockroomModel.find({ org: orgid }).then(function (err, result) {
-      if (err) {
-        console.log("error");
-        throw err;
-        //throw err;
-      }
+app.get("/api/v1/users/viewstock", (req, res) => {
+   const { orgid } = req.body;
+   
+   StockroomModel.find({ org: orgid },{name:1,_id:0}).then((result)=>{
+       if(result=="")
+          return res.status(400).json({msg:"Sorry,We did not find any stockrooms under this organization"});
+       else
+          return res.json(result);
     });
-    res.status(200).json({ msg: "why wont you work" });
-  });
+   });
+
+   
+   
+
+       // if(err) return res.status(400).json({msg:"Sorry,We did not find any stockrooms under this organization"})
+       // else return res.json(result);
+  
 
 app.use("/api/v1/orgs/", orgs);
 
