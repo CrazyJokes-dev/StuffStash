@@ -169,9 +169,9 @@ app.post("/api/v1/addAsset", async (req, res) => {
 
     const filter = { "name" : stockroom }
     console.log(filter);
-    const update = { "assets": asset }
+    const update = { $push :  {"assets": asset} }
     console.log(update);
-    StockroomModel.findOneAndUpdate(filter, update)
+    await StockroomModel.findOneAndUpdate(filter, update)
     res.json(asset);
 });
 
