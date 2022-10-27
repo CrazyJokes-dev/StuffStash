@@ -240,6 +240,7 @@ app.post("/api/v1/users/viewstock", (req, res) => {
 
   app.get("/api/v1/orgs/OrgView", (req, res) => {
      const { userid } = req.body;
+     
     UserModel.findOne({username:userid},{"organizationID.name":1,_id:0}).then((view)=>{
           if(view) return res.json(view);
           else{
