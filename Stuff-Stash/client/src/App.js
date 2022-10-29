@@ -24,7 +24,6 @@ function App() {
     //<Router>
     <div className="App">
       <div className="content">
-        <Navbar />
         <Switch>
           <Route path="/list" component={Helpme} />
           <Route

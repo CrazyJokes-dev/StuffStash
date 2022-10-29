@@ -79,7 +79,7 @@ const UserLogin = () => {
                 />
               </div>
 
-              <div class="bg-primary form-check ">
+              <div class=" form-check ">
                 <input
                   class="form-check-label "
                   type="checkbox"
@@ -92,7 +92,7 @@ const UserLogin = () => {
               </div>
               <div class="container">
                 <div class="col-md-12 text-center">
-                  <button type="login" class="btn btn-primary  m-3 p-1">
+                  <button type="login" class="btn btn-primary  m-2 p-1">
                     Login
                   </button>
 
