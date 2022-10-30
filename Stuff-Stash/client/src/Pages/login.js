@@ -79,9 +79,9 @@ const UserLogin = () => {
                 />
               </div>
 
-              <div class=" form-check ">
+              <div class="checkbox-inline ">
                 <input
-                  class="form-check-label "
+                  class="form-check-label col-sm-1  "
                   type="checkbox"
                   value=""
                   id="defaultCheck1"
