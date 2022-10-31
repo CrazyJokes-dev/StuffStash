@@ -1,7 +1,6 @@
-import "../App.css";
 import { useState, useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { ReactSession } from "react-client-session";
-import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import React from "react";
 
@@ -9,14 +8,20 @@ const OrgViewDashboard = () => {
   const [listOfOrgs, setListOfOrgs] = useState({});
   const [error, setError] = useState();
   let history = useHistory();
-  //const userid=ReactSession.get("username");
-  const userid = "Winners";
+  const userid = ReactSession.get("username");
+  //For testing
+  //const userid = "Winners";
+  //const userid = "username";
+
+  const linkStyle = {
+    textDecoration: "none",
+    color: "white",
+  };
 
   useEffect(() => {
-    //Axios.get("https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/getUsers").then((response) => {
     Axios.get(`http://localhost:3000/api/v1/orgs/OrgView/${userid}`)
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setListOfOrgs(response.data);
       })
       .catch((err) => {
@@ -24,27 +29,31 @@ const OrgViewDashboard = () => {
       });
   }, [userid]);
 
-  //console.log(Object.entries(listOfOrgs));
-  // if (error || !Array.isArray(listOfOrgs)) {
-  //  return <p>There was an error loading your data!</p>;
-  // }
+  //   console.log(Object.entries(listOfOrgs));
+  //   if (error || !Array.isArray(listOfOrgs)) {
+  //     return <p>There was an error loading your data!</p>;
+  //   }
 
   return (
-    <div>
-      {Object.entries(listOfOrgs).map(([keys, value]) => {
+    <React.Fragment>
+      {Object.entries(listOfOrgs).map(([key, value]) => {
         return (
-          <div key={keys}>
+          <ul className="list-group list-group-flush">
             {value.map((el) => {
               return (
-                <div id={el.id}>
-                  <button>{el.name}</button>
-                </div>
+                <li className="list-group-item bg-transparent" key={el.name}>
+                  <div className="container-fluid buttonItem shadowbtn">
+                    <Link to="#" exact style={linkStyle}>
+                      <span className="btnLabel">{el.name}</span>
+                    </Link>
+                  </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         );
       })}
-    </div>
+    </React.Fragment>
   );
 };
 export default OrgViewDashboard;

@@ -1,0 +1,92 @@
+.back {
+  /* background-color: blueviolet; */
+  min-height: 90vh;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  z-index: 0;
+}
+
+.leftDisplay {
+  padding: 1em;
+}
+
+.stckRoomDisplay {
+  background-color: beige;
+  max-height: 80vh;
+  margin: 2em;
+  padding: 1em;
+  overflow: auto;
+}
+
+.userDisplay {
+  background-color: antiquewhite;
+  width: 300px;
+  height: 250px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+}
+
+.orgDisplay {
+  max-height: 50vh;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.shadow {
+  box-shadow: 0px 5px 10px 0px gray;
+}
+.shadowbtn {
+  box-shadow: 0px 5px 7px 0px lightgrey;
+}
+
+.outerOrg {
+  background-color: transparent;
+}
+
+.buttonItem {
+  border: none;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: gray;
+  border-radius: 100px;
+}
+.buttonItem span {
+  text-align: center;
+  position: relative;
+  top: 20%;
+}
+
+.buttonItem:hover {
+  background-color: rgb(75, 75, 75);
+  animation: smoothScale 0.15s ease-in forwards;
+}
+.buttonItem:active {
+  background-color: rgb(32, 32, 32);
+  animation: smoothShrink 0.13s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.button:hover {
+  animation: smoothScale 0.15s ease-in forwards;
+}
+
+@keyframes smoothScale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes smoothShrink {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(0.98);
+  }
+}

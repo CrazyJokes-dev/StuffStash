@@ -6,7 +6,7 @@ import UserLogin from "./Pages/login";
 import React from "react";
 import RegForm from "./components/registrationform";
 import welcome from "./components/welcome";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./Pages/dashboard";
 import { ReactSession } from "react-client-session";
 import CreateOrg from "./components/CreateOrg";
 import CreateStockroom from "./Pages/CreateStockRoom";
@@ -37,7 +37,7 @@ function App() {
           <Route path="/Org" component={CreateOrg} />
           <Route path="/RenameOrg" component={RenameOrgPage} />
           <Route path="/createStockRoom" component={CreateStockroom} />
-          <Route path="/OrgViewDashboard" component={OrgViewDashboard} />
+          {/* <Route path="/OrgViewDashboard" component={OrgViewDashboard} /> */}
           <Route path="/adduserOrg" component={AddUserOrg} />
           <Route path="/" exact component={welcome} />
           <Redirect from="*" to="/" />

@@ -249,13 +249,13 @@ app.get("/api/v1/orgs/OrgView/:userid", (req, res) => {
     { username: userid },
     { "organizationID.name": 1, _id: 0 }
   ).then((view) => {
-    if (view) return res.json(view);
-    else {
-      return res
-        .status(400)
-        .json({
-          msg: "Sorry,We did not find any organization for this Username",
-        });
+    if (view) {
+      console.log(view);
+      return res.json(view);
+    } else {
+      return res.status(400).json({
+        msg: "Sorry,We did not find any organization for this Username",
+      });
     }
   });
 });
