@@ -230,7 +230,7 @@ app.post("/api/v1/users/viewstock", (req, res) => {
     StockroomModel.find({ org: orgid }).then(function (err, result) {
       if (err) {
         console.log("error");
-        throw err;
+        //throw err;
         //throw err;
       }
     });
