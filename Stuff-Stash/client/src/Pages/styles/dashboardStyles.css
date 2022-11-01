@@ -37,9 +37,6 @@
 .shadow {
   box-shadow: 0px 5px 10px 0px gray;
 }
-.shadowbtn {
-  box-shadow: 0px 5px 7px 0px lightgrey;
-}
 
 .outerOrg {
   background-color: transparent;
@@ -54,23 +51,29 @@
   background-color: gray;
   border-radius: 100px;
 }
-.buttonItem span {
+/* .buttonItem span {
   text-align: center;
   position: relative;
   top: 20%;
+} */
+.buttonItem button.toggle-btn {
+  color: white;
+  background-color: transparent;
+  width: 100%;
+  border-radius: 100px;
+  border: none;
 }
 
 .buttonItem:hover {
   background-color: rgb(75, 75, 75);
+  box-shadow: 0px 5px 7px 0px lightgrey;
   animation: smoothScale 0.15s ease-in forwards;
-}
-.buttonItem:active {
-  background-color: rgb(32, 32, 32);
-  animation: smoothShrink 0.13s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 
-.button:hover {
-  animation: smoothScale 0.15s ease-in forwards;
+.buttonItem:active {
+  background-color: rgb(32, 32, 32);
+  box-shadow: inset 0px 5px 7px 0px black;
+  animation: smoothShrink 0.13s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 
 @keyframes smoothScale {

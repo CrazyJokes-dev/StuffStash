@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ReactSession } from "react-client-session";
+import { ReactSession } from 'react-client-session';
 import { Link } from "react-router-dom";
 
 import OrgViewDashboard from "./orgView";
@@ -13,7 +13,7 @@ const logoutUser = async (e) => {
   ReactSession.remove("username");
   ReactSession.remove("orgID");
   alert("You are now logged out!");
-};
+}
 
 class Dashboard extends Component {
   state = {};
@@ -36,11 +36,7 @@ class Dashboard extends Component {
               </Link>
             </div>
             <hr></hr>
-            <button
-              onClick={logoutUser}
-              type="button"
-              className="btn btn-danger m-1"
-            >
+            <button onClick={logoutUser} type="button" className="btn btn-danger m-1">
               Log Out
             </button>
             <div className="btn btn-warning m-1">
@@ -50,10 +46,10 @@ class Dashboard extends Component {
             </div>
           </div>
 
-          <div className="col">
-            {/** EMPTY SPACING COLUMN */}ORGS
-            <OrgViewDashboard />
-          </div>
+          
+
+          <div className="col">{/** EMPTY SPACING COLUMN */}ORGS
+          <OrgViewDashboard /></div>
         </div>
       </div>
     );

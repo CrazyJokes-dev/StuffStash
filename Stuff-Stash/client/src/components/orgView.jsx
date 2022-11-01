@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Component } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { ReactSession } from "react-client-session";
 import Axios from "axios";
 import React from "react";
+
+function addToggle() {
+  
+}
 
 const OrgViewDashboard = () => {
   const [listOfOrgs, setListOfOrgs] = useState({});
@@ -43,9 +47,12 @@ const OrgViewDashboard = () => {
               return (
                 <li className="list-group-item bg-transparent" key={el.name}>
                   <div className="container-fluid buttonItem shadowbtn">
-                    <Link to="#" exact style={linkStyle}>
+                    {/* <Link to="#" exact style={linkStyle}>
                       <span className="btnLabel">{el.name}</span>
-                    </Link>
+                    </Link> */}
+                    <button className="toggle-btn" data-active="inactive">
+                      <span className="btnLabel">{el.name}</span>
+                    </button>
                   </div>
                 </li>
               );

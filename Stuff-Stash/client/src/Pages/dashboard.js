@@ -23,9 +23,7 @@ const logoutUser = async (e) => {
   alert("You are now logged out!");
 };
 
-//this returns undefined when logged in ??? -Matt
 const username = ReactSession.get("username");
-console.log(username);
 
 class Dashboard extends Component {
   state = {};
