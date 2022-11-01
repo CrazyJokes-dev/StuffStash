@@ -74,35 +74,36 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
   });
 });
 
-app.post(
-  "/api/v1/users/createUser",
-  // username must be greater than 6 characters and unique
-  check("username")
-    .isLength({ min: 6 })
-    .withMessage("must be at least 6 chars long")
-    .custom((value) => {
-      var query = UserModel.find({ username: value });
-      return query.exec().then((user) => {
-        if (user.length > 0) {
-          return Promise.reject("username already in use");
-        }
-      });
-    }),
-  // password must be at least 6 chars long
-  body("password")
-    .isLength({ min: 6 })
-    .withMessage("must be at least 6 chars long")
-    .matches(/\d/)
-    .withMessage("must contain a number"),
-  //makes sure orgID field exists
-  body("organizationID").exists(),
-  (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+app.post("/api/v1/users/createUser", (req, res) => {
+  const { username, password, password2, organizationID } = req.body;
+  //Creating user and password prereqs
+  if (!username || !password) {
+    return res
+      .status(401)
+      .json({ msg: "Please enter a username and a password" });
+  }
+  if (username.length < 6) {
+    return res
+      .status(401)
+      .json({ msg: "Username must be longer then 6 chars" });
+  }
+  if (password.length < 6) {
+    return res
+      .status(401)
+      .json({ msg: "password must be longer then 6 chars" });
+  }
+  if (password.search(/\d/) == -1) {
+    return res.status(401).json({ msg: "Password Must contain digit" });
+  }
+  if (password != password2) {
+    return res.status(401).json({ msg: "Password does not match" });
+  }
 
-    const { username, password, organizationID } = req.body;
+  // Checks to see if another username already exists in the database and rejects it if there is one.
+  UserModel.findOne({ username: username }).then((user) => {
+    if (user) return res.status(400).json({ msg: "User already exists" });
+
+    // This creates a model entry into the database with all the current new registration information.
     const newUser = new UserModel({
       username,
       password,
@@ -124,8 +125,8 @@ app.post(
           .catch((err) => console.log(err));
       })
     );
-  }
-);
+  });
+});
 
 app.post("/api/v1/users/login", (req, res) => {
   const { username, password } = req.body;
