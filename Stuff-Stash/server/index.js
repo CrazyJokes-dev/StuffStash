@@ -168,9 +168,7 @@ app.post("/api/v1/addAsset", async (req, res) => {
     const asset = req.body.asset;
 
     const filter = { "name" : stockroom }
-    console.log(filter);
     const update = { $push :  {"assets": asset} }
-    console.log(update);
     await StockroomModel.findOneAndUpdate(filter, update)
     res.json(asset);
 });
