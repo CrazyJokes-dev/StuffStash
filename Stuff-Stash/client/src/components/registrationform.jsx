@@ -63,10 +63,6 @@ function RegForm() {
       document.getElementById("id3").innerHTML = "Password does not match";
       document.getElementById("id3").style.color = "#Ff0000";
     }
-
-    setUsername("");
-    setPassword("");
-    setOrganizationID("");
   };
 
   return (
