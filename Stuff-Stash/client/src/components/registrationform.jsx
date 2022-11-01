@@ -31,21 +31,21 @@ function RegForm() {
     const data = res.json();
     console.log("data -- ", data);
     console.log(res.status);
+
     //Alerts
     if (res.status === 200) {
       alert("Registration Successful");
       history.push("/");
+    } else if (res.status === 400 || 401) {
+      alert("Correct errors");
     }
+
+    //Error labels for inputs
     if (res.status === 400) {
       // alert("User already exists");
       document.getElementById("id1").innerHTML = "User already exists";
       document.getElementById("id1").style.color = "#Ff0000";
     }
-    if (res.status === 400 || 401) {
-      alert("Correct errors");
-    }
-
-    //Error labels for inputs
     if (username.length < 6) {
       // alert("Username must be longer then 6 chars");
       document.getElementById("id1").innerHTML =
