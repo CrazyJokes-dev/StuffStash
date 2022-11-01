@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/welcome.css";
 import "./styles/bg.css";
-
+import UserLogin from "../Pages/login";
 //Styles
 const textStyle = {
   color: "white",
@@ -14,10 +14,8 @@ const boxShadow = {
 };
 
 //Placeholder text -- remove later
-const text =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-const welcome = () => {
+const welcome2 = () => {
   return (
     <React.Fragment>
       <div className="bg fill d-flex align-items-center justify-content-center area p-5">
@@ -28,9 +26,8 @@ const welcome = () => {
               <p className="lead">The all in one Asset Manager</p>
             </div>
           </div>
-          <div className="col m-5 text-center" style={textStyle}>
-            Detailed description goes here <br />
-            {text}
+          <div className="col m-5 ">
+            <UserLogin />
           </div>
         </div>
       </div>
@@ -38,4 +35,4 @@ const welcome = () => {
   );
 };
 
-export default welcome;
+export default welcome2;
