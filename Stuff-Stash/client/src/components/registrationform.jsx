@@ -80,6 +80,7 @@ function RegForm() {
               <label for="Username">Username:</label>
               <input
                 type="Username"
+                required
                 class="form-control"
                 id="Username"
                 placeholder="Enter username"
@@ -95,6 +96,7 @@ function RegForm() {
               <label for="pwd">Password:</label>
               <input
                 type="password"
+                required
                 class="form-control"
                 id="pwd"
                 placeholder="Enter password"
@@ -112,6 +114,7 @@ function RegForm() {
               </label>
               <input
                 type="repeat password"
+                required
                 id="repeat password"
                 class="form-control"
                 placeholder="Enter password again"
