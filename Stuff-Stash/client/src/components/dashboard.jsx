@@ -11,6 +11,7 @@ const logoutUser = async (e) => {
   ReactSession.remove("username");
   ReactSession.remove("orgID");
   alert("You are now logged out!");
+  window.location.href = "http://localhost:3001/";
 };
 
 class Dashboard extends Component {
