@@ -10,7 +10,7 @@ import Helpme from "./Pages/ListOfUsers";
 import UserLogin from "./Pages/login";
 import React, { useState } from "react";
 import RegForm from "./components/registrationform";
-import welcome2 from "./components/welcome2";
+import welcome from "./components/welcome2";
 import Dashboard from "./components/dashboard";
 import { ReactSession } from "react-client-session";
 import CreateOrg from "./components/CreateOrg";
