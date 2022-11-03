@@ -1,0 +1,1 @@
+In utils folder you can add background functions in separate js files that aren't components 
