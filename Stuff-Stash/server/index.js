@@ -53,52 +53,70 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
     return res.status(400).json({ msg: "Please enter all the fields" });
   }
   OrgModel.findOne({ name: orgname }).then((org) => {
+    if (!org) {
+      return res.status(400).json({ msg: "Organization name does not exist" });
+    }
+
+    bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
+      if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
+    });
+  });
+});
+
+//app.post("/api/v1/users/createUser", async (req, res) => {
+// const user = req.body;
+// const newUser = new UserModel(user);
+//await newUser.save();
+
+//  res.json(user);
+//});
+
+//app.get('/', (req, res) => {
+//  res.send({msg:'hello world'})
+//})
+
+app.post("/api/v1/users/adduserOrg", (req, res) => {
+  const { orgname, orgid, userid } = req.body;
+
+  if (!orgname || !orgid) {
+    return res.status(400).json({ msg: "Please enter all the fields" });
+  }
+  OrgModel.findOne({ name: orgname }).then((org) => {
     if (!org)
       return res.status(400).json({ msg: "Organization name does not exist" });
 
     bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
 
-//app.post("/api/v1/users/createUser", async (req, res) => {
-    // const user = req.body;
-    // const newUser = new UserModel(user);
-     //await newUser.save();
-
-   //  res.json(user);
-//});
-
-//app.get('/', (req, res) => {
-  //  res.send({msg:'hello world'})
-//})
-
-
-app.post("/api/v1/users/adduserOrg",(req,res)=>{
-  const {orgname,orgid,userid} = req.body;    
-
-
-    if(!orgname||!orgid){
-        return res.status(400).json({msg:"Please enter all the fields"});
-    }
-    OrgModel.findOne({name:orgname}).then((org) => {
-    if (!org) return res.status(400).json({ msg: "Organization name does not exist" });
-    
-    bcrypt.compare(orgid,org.OrgAccessCode).then((isMatch)=>{
-        if(!isMatch) return res.status(400).json({msg:"Invalid access code"});
-        
-       
-       const finduser=UserModel.findOne({username:userid});
-        finduser.findOne({$and:[{"organizationID.name":orgname},{"organizationID.Accesscode":orgid}]}).then((msg)=>{
-        if(msg) return res.status(400).json({ msg: "User alreadys exists under the Organization" });
-        else{
-            const a={"name":orgname,"Accesscode":orgid} ; 
-            UserModel.findOneAndUpdate({username:userid},{$push:{organizationID:[a]}},{upsert:true}).then((result)=>{
-            if(result) return res.status(200).json({msg:"User added successfully",org});
-           })
-           }
-
-        })       
-    })  
-   })
+      const finduser = UserModel.findOne({ username: userid });
+      finduser
+        .findOne({
+          $and: [
+            { "organizationID.name": orgname },
+            { "organizationID.Accesscode": orgid },
+          ],
+        })
+        .then((msg) => {
+          if (msg)
+            return res
+              .status(400)
+              .json({ msg: "User alreadys exists under the Organization" });
+          else {
+            const a = { name: orgname, Accesscode: orgid };
+            UserModel.findOneAndUpdate(
+              { username: userid },
+              { $push: { organizationID: [a] } },
+              { upsert: true }
+            ).then((result) => {
+              if (result)
+                return res
+                  .status(200)
+                  .json({ msg: "User added successfully", org });
+            });
+          }
+        });
+    });
+  });
 });
 
 app.post("/api/v1/users/createUser", (req, res) => {
@@ -126,16 +144,16 @@ app.post("/api/v1/users/createUser", (req, res) => {
     return res.status(401).json({ msg: "Password does not match" });
   }
 
-    // Checks to see if another username already exists in the database and rejects it if there is one.
-    UserModel.findOne({ username: username }).then((user) => {
-        if (user) return res.status(400).json({ msg: "User already exists" });
-        
-        // This creates a model entry into the database with all the current new registration information.
-        const newUser = new UserModel({
-            username,
-            password,
-            organizationID:[]
-        });
+  // Checks to see if another username already exists in the database and rejects it if there is one.
+  UserModel.findOne({ username: username }).then((user) => {
+    if (user) return res.status(400).json({ msg: "User already exists" });
+
+    // This creates a model entry into the database with all the current new registration information.
+    const newUser = new UserModel({
+      username,
+      password,
+      organizationID: [],
+    });
 
     // encrypts the password with hashing
     bcrypt.genSalt(saltRounds, (err, salt) =>
