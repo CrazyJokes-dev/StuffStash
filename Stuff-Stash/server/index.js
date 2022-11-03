@@ -119,29 +119,27 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
   });
 });
 
+// app.post("/api/v1/users/createUser", async (req, res) => {
+//   const user = req.body;
+//   const newUser = new UserModel(user);
+//   await newUser.save();
+
+//   res.json(user);
+// });
+
+// app.get("/", (req, res) => {
+//   res.send({ msg: "hello world" });
+// });
+
 app.post("/api/v1/users/createUser", (req, res) => {
-  const { username, password, password2, organizationID } = req.body;
-  //Creating user and password prereqs
+  const { username, password, organizationID } = req.body;
+
+  // Checks to see if the username/password that was entered, wasn't empty.
+  // If it was empty, displays a message on screen telling the user to enter them.
   if (!username || !password) {
     return res
-      .status(401)
+      .status(399)
       .json({ msg: "Please enter a username and a password" });
-  }
-  if (username.length < 6) {
-    return res
-      .status(401)
-      .json({ msg: "Username must be longer then 6 chars" });
-  }
-  if (password.length < 6) {
-    return res
-      .status(401)
-      .json({ msg: "password must be longer then 6 chars" });
-  }
-  if (password.search(/\d/) == -1) {
-    return res.status(401).json({ msg: "Password Must contain digit" });
-  }
-  if (password != password2) {
-    return res.status(401).json({ msg: "Password does not match" });
   }
 
   // Checks to see if another username already exists in the database and rejects it if there is one.
@@ -248,10 +246,7 @@ app.post("/api/v1/org/createOrg", (req, res) => {
         newOrg
           .save()
           .then(
-            res.status(200).json({
-              msg: "Successfully Registered",
-              newOrg,
-            })
+            res.status(200).json({ msg: "Successfully Registered", newOrg })
           )
           .catch((err) => console.log(err));
       })
