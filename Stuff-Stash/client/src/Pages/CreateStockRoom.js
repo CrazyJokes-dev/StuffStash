@@ -13,8 +13,8 @@ export default function AddStockroom() {
 
   const addStockroom = async (e) => {
     e.preventDefault();
-    //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
-    const res = await fetch("http://localhost:3000/api/v1/addStockroom", {
+    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
+    //const res = await fetch("http://localhost:3000/api/v1/addStockroom", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

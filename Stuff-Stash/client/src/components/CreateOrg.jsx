@@ -21,8 +21,8 @@ const CreateOrg = () => {
   // Adds new Org
   const addOrg = async (e) => {
     e.preventDefault();
-    //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createOrg', {
-    const res = await fetch("http://localhost:3000/api/v1/org/createOrg", {
+    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/org/createOrg', {
+    //const res = await fetch("http://localhost:3000/api/v1/org/createOrg", {
       method: "POST",
       headers: {
         Accept: "application/json",
