@@ -4,12 +4,18 @@ import { useHistory } from "react-router-dom";
 import React, { Component } from "react";
 
 // <img src={require("./sour_patch.jpg")/>
-const user = ReactSession.get("username");
 //for debug will display name of user currently logged in
-console.log(user);
+//console.log(user);
+function getUsername() {
+  window.location.reload()
+  return ReactSession.get("username");
+}
+
 
 class UserProfile extends Component {
   render() {
+    const user = ReactSession.get("username");
+    console.log(user);
     return (
       <React.Fragment>
         <div className="userDiv">
