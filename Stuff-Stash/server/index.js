@@ -1,43 +1,63 @@
 const express = require("express");
+const { body, validationResult } = require("express-validator");
 const app = express();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 12; // <-- The lower the number the more hashes per second. Higher = less hashes per second
-const UserModel = require('./models/user');
+const UserModel = require("./models/user");
 const stockrooms = require("./controllers/stockrooms");
-const StockroomModel = require('./models/stockroom');
+const StockroomModel = require("./models/stockroom");
 const OrgModel = require("./models/OrgModel");
-const users = require('./routes/users');
+const users = require("./routes/users");
 const orgs = require("./routes/orgs");
 const room = require("./routes/stockrooms");
 const Room = require("./models/stockroom"); //import user fr
-const cors = require('cors');
-const PORT = process.env.PORT || 3000
+const cors = require("cors");
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
+const { check } = require("express-validator");
 
-mongoose.connect("mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority");
+mongoose.connect(
+  "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
+);
 
+/*
+app.post("/signUp", (req, res) => {
+	signup: async (req, res) => {
+		const { username, password } = req.body;
+		const newUser = new user({
+			username,
+			password,
+		});
+		try {
+			await newUser.save();
+			return res.status(201).json({
+				success: true,
+				message: "signup successful",
+				data: newUser,
+			});
+		} catch (error) {
+			return res.status(412).send({
+				success: false,
+				message: error.message,
+			});
+		}
+	};
+});*/
 
+app.post("/api/v1/users/adduserOrg", (req, res) => {
+  const { orgname, orgid, userid } = req.body;
 
-//app.get("/api/v1/users/", (req, res) => {
-   // UserModel.find({}, (err, result) => {
-       // if (err) {
-       //     res.json(err);
-       // } else {
-        //    res.json(result);
-       /// }}).limit(1).sort({$natural:-1});
-//});
+  if (!orgname || !orgid) {
+    return res.status(400).json({ msg: "Please enter all the fields" });
+  }
+  OrgModel.findOne({ name: orgname }).then((org) => {
+    if (!org)
+      return res.status(400).json({ msg: "Organization name does not exist" });
 
-//app.get("/api/v1/users/getUsers", (req, res) => {
- //UserModel.find({}, (err, result) => {
-      //if (err) {
-       //  res.json(err);
-        //} else {
-           //res.json(result);
-        //}
-    //});
-//});
+    bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
+      if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
 
 //app.post("/api/v1/users/createUser", async (req, res) => {
     // const user = req.body;
@@ -81,27 +101,30 @@ app.post("/api/v1/users/adduserOrg",(req,res)=>{
    })
 });
 
-
-// app.post("/api/v1/users/createUser", async (req, res) => {
-//   const user = req.body;
-//   const newUser = new UserModel(user);
-//   await newUser.save();
-
-//   res.json(user);
-// });
-
-// app.get("/", (req, res) => {
-//   res.send({ msg: "hello world" });
-// });
-
 app.post("/api/v1/users/createUser", (req, res) => {
-    const { username, password, organizationID } = req.body;
-
-    // Checks to see if the username/password that was entered, wasn't empty.
-    // If it was empty, displays a message on screen telling the user to enter them.
-    if (!username || !password) {
-        return res.status(399).json({ msg: "Please enter a username and a password" });
-    }
+  const { username, password, password2, organizationID } = req.body;
+  //Creating user and password prereqs
+  if (!username || !password) {
+    return res
+      .status(401)
+      .json({ msg: "Please enter a username and a password" });
+  }
+  if (username.length < 6) {
+    return res
+      .status(401)
+      .json({ msg: "Username must be longer then 6 chars" });
+  }
+  if (password.length < 6) {
+    return res
+      .status(401)
+      .json({ msg: "password must be longer then 6 chars" });
+  }
+  if (password.search(/\d/) == -1) {
+    return res.status(401).json({ msg: "Password Must contain digit" });
+  }
+  if (password != password2) {
+    return res.status(401).json({ msg: "Password does not match" });
+  }
 
     // Checks to see if another username already exists in the database and rejects it if there is one.
     UserModel.findOne({ username: username }).then((user) => {
@@ -114,138 +137,142 @@ app.post("/api/v1/users/createUser", (req, res) => {
             organizationID:[]
         });
 
-        // encrypts the password with hashing
-        bcrypt.genSalt(saltRounds, (err, salt) =>
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if (err) throw err;
+    // encrypts the password with hashing
+    bcrypt.genSalt(saltRounds, (err, salt) =>
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
+        if (err) throw err;
 
-                newUser.password = hash;
+        newUser.password = hash;
 
-                // saves the user to the database
-                // must be inside bcrypt.hash() or else the password saved won't be encrypted
-                newUser.save()
-                    .then(res.json({ msg: "Successfully Registered" }))
-                    .catch((err) => console.log(err));
-            })
-
-        );
-    });
+        // saves the user to the database
+        // must be inside bcrypt.hash() or else the password saved won't be encrypted
+        newUser
+          .save()
+          .then(res.json({ msg: "Successfully Registered" }))
+          .catch((err) => console.log(err));
+      })
+    );
+  });
 });
 
 app.post("/api/v1/users/login", (req, res) => {
-    const { username, password } = req.body;
+  const { username, password } = req.body;
 
+  if (!username || !password) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
 
-    if (!username || !password) {
-        return res.status(400).json({ msg: "Please enter all fields" });
-    }
+  UserModel.findOne({ username }).then((user) => {
+    if (!user) return res.status(400).json({ msg: "User does not exist" });
 
-    UserModel.findOne({ username }).then((user) => {
-        if (!user) return res.status(400).json({ msg: "User does not exist" });
+    bcrypt.compare(password, user.password).then((isMatch) => {
+      if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
-        bcrypt.compare(password, user.password).then((isMatch) => {
-            if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+      res.status(200).json({ msg: " Logged In Successfully", user });
+    });
+  });
+});
 
-            res.status(200).json({ msg: " Logged In Successfully", user });
-        })
-    })
-})
-
-app.get('/', (req, res) => {
-    res.send({ msg: 'hello world' })
-})
+app.get("/", (req, res) => {
+  res.send({ msg: "hello world" });
+});
 
 //BEGIN STOCKROOM CALLS
 
 //this create a stockroom with a given orgID and name
 app.post("/api/v1/addStockroom", async (req, res) => {
-    console.log("Adding stockroom");
-    const stockroom = req.body;
-    const newStockroom = new StockroomModel(stockroom);
-    await newStockroom.save();
-    res.json(stockroom);
+  console.log("Adding stockroom");
+  const stockroom = req.body;
+  const newStockroom = new StockroomModel(stockroom);
+  await newStockroom.save();
+  res.json(stockroom);
 });
 
 //app.use("/stockrooms", room.changeName);
-
 
 //END STOCKROOM CALLS
 
 //ORGINZATION API REQUESTS
 //All Orgs
 app.get("/api/v1/orgs/getOrgs", (req, res) => {
-    OrgModel.find({}, (err, result) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
+  OrgModel.find({}, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
 });
 
 app.post("/api/v1/org/createOrg", (req, res) => {
-    const { name, OrgAccessCode } = req.body;
+  const { name, OrgAccessCode } = req.body;
 
-    //Checks to see if another Organization already exists in the database and rejects it if there is one.
-    OrgModel.findOne({ name }).then((org) => {
-        if (org) return res.status(400).json({ msg: "Organization already exists" });
+  //Checks to see if another Organization already exists in the database and rejects it if there is one.
+  OrgModel.findOne({ name }).then((org) => {
+    if (org)
+      return res.status(400).json({ msg: "Organization already exists" });
 
-        //This creates a model entry into the database with all the current new organiziton information.
-        const newOrg = new OrgModel({
-            name,
-            OrgAccessCode,
-        });
-
-        // encrypts the password with hashing
-        bcrypt.genSalt(saltRounds, (err, salt) =>
-            bcrypt.hash(newOrg.OrgAccessCode, salt, (err, hash) => {
-                if (err) throw err;
-
-                newOrg.OrgAccessCode = hash;
-
-                // saves the org to the database
-                // must be inside bcrypt.hash() or else the password saved won't be encrypted
-                newOrg
-                    .save()
-                    .then(res.status(200).json({ msg: "Successfully Registered", newOrg }))
-                    .catch((err) => console.log(err));
-            })
-        );
+    //This creates a model entry into the database with all the current new organiziton information.
+    const newOrg = new OrgModel({
+      name,
+      OrgAccessCode,
     });
+
+    // encrypts the password with hashing
+    bcrypt.genSalt(saltRounds, (err, salt) =>
+      bcrypt.hash(newOrg.OrgAccessCode, salt, (err, hash) => {
+        if (err) throw err;
+
+        newOrg.OrgAccessCode = hash;
+
+        // saves the org to the database
+        // must be inside bcrypt.hash() or else the password saved won't be encrypted
+        newOrg
+          .save()
+          .then(
+            res.status(200).json({
+              msg: "Successfully Registered",
+              newOrg,
+            })
+          )
+          .catch((err) => console.log(err));
+      })
+    );
+  });
 });
 
 app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
-    const { nameFeild, newname } = req.body;
+  const { nameFeild, newname } = req.body;
 
-    //Checks to see if another Organization already exists in the database and rejects it if there is NOT
-    OrgModel.findOneAndUpdate(
-        { name: nameFeild },
-        { $set: { name: newname } }
-    ).then((org) => {
-        if (!org) {
-            return res.status(400).json({ msg: "Org does not exist " + nameFeild });
-        }
-        // OrgModel.save;
-        return res.status(200).json({ msg: "Done, succesfully", org });
-    });
+  //Checks to see if another Organization already exists in the database and rejects it if there is NOT
+  OrgModel.findOneAndUpdate(
+    { name: nameFeild },
+    { $set: { name: newname } }
+  ).then((org) => {
+    if (!org) {
+      return res.status(400).json({ msg: "Org does not exist " + nameFeild });
+    }
+    // OrgModel.save;
+    return res.status(200).json({ msg: "Done, succesfully", org });
+  });
 });
 
 app.post("/api/v1/users/viewstock", (req, res) => {
-    const { orgid } = req.body;
-    StockroomModel.find({ org: orgid }).then(function (err, result) {
-      if (err) {
-        console.log("error");
-        throw err;
-        //throw err;
-      }
-    });
-    res.status(200).json({ msg: "why wont you work" });
+  const { orgid } = req.body;
+  StockroomModel.find({ org: orgid }).then(function (err, result) {
+    if (err) {
+      console.log("error");
+      throw err;
+      //throw err;
+    }
   });
+  res.status(200).json({ msg: "why wont you work" });
+});
 
 app.use("/api/v1/orgs/", orgs);
 
-app.use('/api/v1/users', users)
+app.use("/api/v1/users", users);
 
 app.listen(PORT, () => {
-	console.log("SERVER LISTENING ON PORT ", PORT);
+  console.log("SERVER LISTENING ON PORT ", PORT);
 });
