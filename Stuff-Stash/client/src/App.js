@@ -71,6 +71,7 @@ function App() {
           <Route path="/createStockRoom" exact component={CreateStockroom} />
           <Route path="/adduserOrg" exact component={AddUserOrg} />
           <Route path="/addAssetForm" exact component={AssetForm} />
+
           <Route path="/" exact component={welcome} />
           <Redirect from="*" to="/" />
         </Switch>

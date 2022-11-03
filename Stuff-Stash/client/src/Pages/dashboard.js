@@ -3,6 +3,7 @@ import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
 import UserProfile from "../components/UserProfile";
+
 //styles -----------------------------
 
 const styling = {
@@ -124,6 +125,11 @@ class Dashboard extends Component {
             <div className="btn btn-success m-1 button button2">
               <Link to="/org" exact style={linkStyle}>
                 Create Organization
+              </Link>
+            </div>
+            <div className="btn btn-success m-1 button button1 ">
+              <Link to="/addAssetForm" exact style={linkStyle}>
+                Create Asset
               </Link>
             </div>
             <div
