@@ -35,7 +35,7 @@ class Dashboard extends Component {
             </div>
 
             <div className="btn btn-primary m-1">
-              <Link to="/createAsset" exact style={linkStyle}>
+              <Link to="/addAssetForm" exact style={linkStyle}>
                 Create Asset
               </Link>
             </div>
