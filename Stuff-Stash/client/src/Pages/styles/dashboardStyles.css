@@ -40,14 +40,30 @@
 }
 
 .button:hover {
-  animation: smoothScale .15s ease-in forwards;
+  animation: smoothScale 0.15s ease-in forwards;
 }
 
 @keyframes smoothScale {
   0% {
-    transform: scale(1.0);
+    transform: scale(1);
   }
   100% {
     transform: scale(1.05);
   }
+}
+.userDiv {
+  display: flex;
+  color: rgb(172, 82, 236);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.userDiv p {
+  color: rgb(172, 82, 236);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 45px;
+  text-align: center;
+}
+
+.imgDiv {
+  width: 75px;
+  height: 150px;
 }
