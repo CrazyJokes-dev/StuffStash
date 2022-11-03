@@ -19,8 +19,7 @@ import RenameOrgPage from "./components/RenameOrg";
 import { Router } from "react-router-dom";
 import AddUserOrg from "./Pages/AddUserOrg";
 import viewstockroomFrontend from "./Pages/viewstockroomFrontend";
-// sets storage type for session variables
-
+import AssetForm from "./Pages/addAssetForm";
 // sets storage type for session variables
 ReactSession.setStoreType("localStorage");
 
@@ -71,6 +70,7 @@ function App() {
           <Route path="/RenameOrg" exact component={RenameOrgPage} />
           <Route path="/createStockRoom" exact component={CreateStockroom} />
           <Route path="/adduserOrg" exact component={AddUserOrg} />
+          <Route path="/addAssetForm" exact component={AssetForm} />
           <Route path="/" exact component={welcome} />
           <Redirect from="*" to="/" />
         </Switch>
