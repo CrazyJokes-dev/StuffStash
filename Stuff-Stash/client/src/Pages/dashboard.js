@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
-
+import UserProfile from "../components/UserProfile";
 //styles -----------------------------
 
 const styling = {
@@ -35,7 +35,7 @@ class Dashboard extends Component {
         <div className="leftDisplay">
           <div className="container-fluid userDisplay d-flex justify-content-center shadow">
             {/** Div for welcoming user. Will house any relelvent user info (username, num of orgs in??, num of items checked out??) */}
-            USER DISPLAY
+            <UserProfile />
           </div>
           <div className="container-fluid orgDisplay p-1 justify-content-center">
             {/** Div for displaying the orgs relating to user that is signed in. Should be in some sort of scrollable list. Each item will be clickable*/}
