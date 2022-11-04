@@ -97,6 +97,8 @@
   100% {
     transform: scale(0.98);
   }
+}
+
 .userDiv {
   display: flex;
   color: rgb(172, 82, 236);
