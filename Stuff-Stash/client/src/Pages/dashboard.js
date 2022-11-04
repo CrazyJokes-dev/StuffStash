@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
+import OrgViewDashboard from "../components/orgView";
+
 import UserProfile from "../components/UserProfile";
 //styles -----------------------------
 
@@ -22,9 +24,7 @@ const logoutUser = async (e) => {
   alert("You are now logged out!");
 };
 
-//this returns undefined when logged in ??? -Matt
 const username = ReactSession.get("username");
-console.log(username);
 
 class Dashboard extends Component {
   state = {};
@@ -39,80 +39,7 @@ class Dashboard extends Component {
           </div>
           <div className="container-fluid orgDisplay p-1 justify-content-center">
             {/** Div for displaying the orgs relating to user that is signed in. Should be in some sort of scrollable list. Each item will be clickable*/}
-            {/** --- FOR EXAMPLE ONLY -- REMEMBER TO REMOVE --- */}
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-              <li className="list-group-item bg-transparent">
-                <div className="btn btn-primary">
-                  <Link to="#" exact style={linkStyle}>
-                    Example Org
-                  </Link>
-                </div>
-              </li>
-            </ul>
-            {/** --- */}
+            <OrgViewDashboard />
           </div>
           <div className="d-flex buttonDisplay p-2 justify-content-center">
             {/** Div for displaying the buttons to create an org or join existing or via orgID */}

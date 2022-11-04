@@ -65,7 +65,7 @@ const AddUserOrg = () => {
           alert(response.msg);
         });
       });
-      history.push("/viewstockroomFrontend");
+      history.push("/dashboard");
     } else {
       data.then((response) => {
         alert(response.msg);
