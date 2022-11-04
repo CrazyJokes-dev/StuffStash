@@ -1,4 +1,5 @@
 const express = require("express");
+const { body, validationResult } = require("express-validator");
 const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -15,29 +16,52 @@ const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
+const { check } = require("express-validator");
 
 mongoose.connect(
   "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
 
-//app.get("/api/v1/users/", (req, res) => {
-// UserModel.find({}, (err, result) => {
-// if (err) {
-//     res.json(err);
-// } else {
-//    res.json(result);
-/// }}).limit(1).sort({$natural:-1});
-//});
+/*
+app.post("/signUp", (req, res) => {
+	signup: async (req, res) => {
+		const { username, password } = req.body;
+		const newUser = new user({
+			username,
+			password,
+		});
+		try {
+			await newUser.save();
+			return res.status(201).json({
+				success: true,
+				message: "signup successful",
+				data: newUser,
+			});
+		} catch (error) {
+			return res.status(412).send({
+				success: false,
+				message: error.message,
+			});
+		}
+	};
+});*/
 
-//app.get("/api/v1/users/getUsers", (req, res) => {
-//UserModel.find({}, (err, result) => {
-//if (err) {
-//  res.json(err);
-//} else {
-//res.json(result);
-//}
-//});
-//});
+app.post("/api/v1/users/adduserOrg", (req, res) => {
+  const { orgname, orgid, userid } = req.body;
+
+  if (!orgname || !orgid) {
+    return res.status(400).json({ msg: "Please enter all the fields" });
+  }
+  OrgModel.findOne({ name: orgname }).then((org) => {
+    if (!org) {
+      return res.status(400).json({ msg: "Organization name does not exist" });
+    }
+
+    bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
+      if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
+    });
+  });
+});
 
 //app.post("/api/v1/users/createUser", async (req, res) => {
 // const user = req.body;
@@ -64,17 +88,33 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
     bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
 
-      UserModel.findOneAndUpdate(
-        { username: userid },
-        { $set: { organizationID: orgid } },
-        { upsert: true }
-      ).then((result) => {
-        if (result)
-          return res.status(200).json({ msg: "User added successfully", org });
-        else {
-          return res.status(400).json({ msg: "Something went wrong" });
-        }
-      });
+      const finduser = UserModel.findOne({ username: userid });
+      finduser
+        .findOne({
+          $and: [
+            { "organizationID.name": orgname },
+            { "organizationID.Accesscode": orgid },
+          ],
+        })
+        .then((msg) => {
+          if (msg)
+            return res
+              .status(400)
+              .json({ msg: "User alreadys exists under the Organization" });
+          else {
+            const a = { name: orgname, Accesscode: orgid };
+            UserModel.findOneAndUpdate(
+              { username: userid },
+              { $push: { organizationID: [a] } },
+              { upsert: true }
+            ).then((result) => {
+              if (result)
+                return res
+                  .status(200)
+                  .json({ msg: "User added successfully", org });
+            });
+          }
+        });
     });
   });
 });
@@ -110,7 +150,7 @@ app.post("/api/v1/users/createUser", (req, res) => {
     const newUser = new UserModel({
       username,
       password,
-      organizationID,
+      organizationID: [],
     });
 
     // encrypts the password with hashing

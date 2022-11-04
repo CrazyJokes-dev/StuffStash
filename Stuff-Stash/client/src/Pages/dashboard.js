@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
 import OrgViewDashboard from "../components/orgView";
 
+import UserProfile from "../components/UserProfile";
 //styles -----------------------------
 
 const styling = {
@@ -34,23 +35,103 @@ class Dashboard extends Component {
         <div className="leftDisplay">
           <div className="container-fluid userDisplay d-flex justify-content-center shadow">
             {/** Div for welcoming user. Will house any relelvent user info (username, num of orgs in??, num of items checked out??) */}
-            USER DISPLAY
+            <UserProfile />
           </div>
           <div className="container-fluid orgDisplay p-1 justify-content-center">
             {/** Div for displaying the orgs relating to user that is signed in. Should be in some sort of scrollable list. Each item will be clickable*/}
-
-            <OrgViewDashboard />
+            {/** --- FOR EXAMPLE ONLY -- REMEMBER TO REMOVE --- */}
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+              <li className="list-group-item bg-transparent">
+                <div className="btn btn-primary">
+                  <Link to="#" exact style={linkStyle}>
+                    Example Org
+                  </Link>
+                </div>
+              </li>
+            </ul>
+            {/** --- */}
           </div>
           <div className="d-flex buttonDisplay p-2 justify-content-center">
             {/** Div for displaying the buttons to create an org or join existing or via orgID */}
             <div className="btn btn-success m-1 button button1">
-              <Link to="/#" exact style={linkStyle}>
+              <Link to="/adduserOrg" exact style={linkStyle}>
                 Join Existing Organization
               </Link>
             </div>
             <div className="btn btn-success m-1 button button2">
-              <Link to="/#" exact style={linkStyle}>
+              <Link to="/org" exact style={linkStyle}>
                 Create Organization
+              </Link>
+            </div>
+            <div
+              className="btn btn-success m-1 button button1"
+              onClick={logoutUser}
+            >
+              <Link to="/#" exact style={linkStyle}>
+                Logout
               </Link>
             </div>
           </div>
