@@ -1,4 +1,3 @@
-
 //import "./App.css";
 import Navbar from "./components/common/navbar";
 import {
@@ -11,14 +10,14 @@ import Helpme from "./Pages/ListOfUsers";
 import UserLogin from "./Pages/login";
 import React, { useState } from "react";
 import RegForm from "./components/registrationform";
-import welcome from "./components/welcome";
-import Dashboard from "./components/dashboard";
-import { ReactSession } from 'react-client-session';
+import welcome from "./components/welcome2";
+import Dashboard from "./Pages/dashboard";
+import { ReactSession } from "react-client-session";
 import CreateOrg from "./components/CreateOrg";
 import CreateStockroom from "./Pages/CreateStockRoom";
-import RenameOrgPage from "./components/RenameOrg"
-import { Router } from 'react-router-dom';
-import AddUserOrg from './Pages/AddUserOrg';
+import RenameOrgPage from "./components/RenameOrg";
+import { Router } from "react-router-dom";
+import AddUserOrg from "./Pages/AddUserOrg";
 import viewstockroomFrontend from "./Pages/viewstockroomFrontend";
 
 // sets storage type for session variables
@@ -48,7 +47,7 @@ function App() {
   };
 
   return (
-   //<Router>
+    //<Router>
     <div className="App">
       {!isLoggedIn() &&
       pathname !== "/" &&
