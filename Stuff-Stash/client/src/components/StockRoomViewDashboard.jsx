@@ -11,9 +11,10 @@ const StockRoomViewDashboard = () => {
   const [error, setError] = useState();
   let history = useHistory();
   const userid = ReactSession.get("username");
+
   //For testing
-  const orgName = "A123";
-  // setOrgName(ReactSession.set()) -- Not Fully Finished
+  const orgName = "A123"; // This will eventually pull from a react session variable set when a particular org is clicked
+  // setOrgName(ReactSession.get("selectedOrg")) -- Not Fully Finished
   //const userid = "Winners";
   //const userid = "username";
 
@@ -22,29 +23,11 @@ const StockRoomViewDashboard = () => {
     color: "white",
   };
 
-  //this should be something like fectchStockrooms since that's what it is getting -Matt
-  // const fetchOrgName = async () => {
-  //   // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users');
-  //   const res = await fetch(
-  //     `http://localhost:3000/api/v1/users/viewstock${OrgName}`
-  //   )
-  //     .then((response) => {
-  //       //console.log(response);
-  //       setListOfStockRoom(response.data);
-  //     })
-  //     .catch((err) => {
-  //       setError(err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   fetchOrgName();
-  // });
-
   useEffect(() => {
     Axios.get(`http://localhost:3000/api/v1/users/viewstock/${orgName}`)
       .then((response) => {
         console.log("RESPONSE: ", response.data);
+        console.log("OBJ MAP:", Object.entries(response.data)); // => [ ["0", {name}], ["1", {name}], ["2", {name}] ]
         setListOfStockRoom(response.data);
       })
       .catch((err) => {
@@ -52,31 +35,25 @@ const StockRoomViewDashboard = () => {
       });
   }, [orgName]);
 
-  // console.log(Object.entries(listOfStockRoom));
-  // if (error || !Array.isArray(listOfStockRoom)) {
-  //   return <p>There was an error loading your data!</p>;
-  // }
-
   return (
     <React.Fragment>
       {Object.entries(listOfStockRoom).map(([key, value]) => {
+        //FOR DEBUG
+        // console.log("key: ", key);
+        // console.log("value: ", value);
         return (
-          <ul className="list-group list-group-flush">
-            {value.map((el) => {
+          <li className="list-group-item bg-transparent" key={value.name}>
+            {Object.entries(value).map((name, key) => {
+              console.log("el", name);
               return (
-                <li className="list-group-item bg-transparent" key={el.name}>
-                  <div className="container-fluid buttonItem shadowbtn">
-                    <Link to="#" exact style={linkStyle}>
-                      <span className="btnLabel">{el.name}</span>
-                    </Link>
-                  </div>
-                  {/* <button className="toggle-btn" data-active="inactive">
-                    <span className="btnLabel">{el.name}</span>
-                  </button> */}
-                </li>
+                <div className="container-fluid buttonItem shadowbtn" key={name}>
+                  <button className="toggle-btn" data-active="inactive">
+                    <span className="btnLabel">{name}</span>
+                  </button>
+                </div>
               );
             })}
-          </ul>
+          </li>
         );
       })}
     </React.Fragment>

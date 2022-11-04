@@ -48,9 +48,12 @@ class Dashboard extends Component {
               </Link>
             </div>
             <hr />
+            <hr />
             <div>
               Current Stockrooms
-              <StockRoomViewDashboard />
+              <ul className="list-group list-group-flush">
+                <StockRoomViewDashboard />
+              </ul>
             </div>
           </div>
           <div className="col">{/** EMPTY SPACING COLUMN */}</div>
