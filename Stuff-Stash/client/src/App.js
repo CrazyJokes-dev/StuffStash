@@ -35,7 +35,8 @@ function App() {
           <Route path="/login" exact component={UserLogin} />
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/Org" component={CreateOrg} />
-          <Route path="/Org" exact component={StockRoomViewDashboard} />
+          {/** FOR TESTING /stockroom isn't needed */}
+          <Route path="/stockroom" exact component={StockRoomViewDashboard} />
           <Route path="/RenameOrg" component={RenameOrgPage} />
           <Route path="/createStockRoom" component={CreateStockroom} />
           <Route path="/adduserOrg" component={AddUserOrg} />
