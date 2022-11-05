@@ -135,10 +135,12 @@ const AddUserOrg = () => {
         <div className="col d-flex align-items-center text-center justify-content-center">
           <form>
             
-            <input type="text" value={orgname} onChange={handleorg}  placeholder="Enter Organization Name" size="60"></input>
+            <h2>Enter Organization Name:</h2>
+            <input type="text" value={orgname} onChange={handleorg}  size="60"></input>
             <br/>
             <br/>
-            <input  type={isShown ? "text" : "password"}  value={orgid} onChange={handleid} placeholder="Enter Organization AccessCode" size="60"/>
+            <h2>Enter Organization AccessCode:</h2>
+            <input  type={isShown ? "text" : "password"}  value={orgid} onChange={handleid}  size="60"/>
             <br />
             <div className="checkbox-container">
             <label htmlFor="checkbox">Show password?</label>

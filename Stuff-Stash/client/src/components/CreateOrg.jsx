@@ -77,17 +77,18 @@ const CreateOrg = () => {
  
           <div className="col d-flex align-items-center text-center justify-content-center">
         <form>
-          
+          <h2>Enter an organization name:</h2>
           <input
             type="text"
             value={name} size="60"
-            onChange={handlename} placeholder="Enter an organization name"
+            onChange={handlename} 
           />
           <br/> 
           <br/>
+          <h2>Enter an organization AccessCode:</h2>
           <input
             type={isShown ? "text" : "password"}
-            value={OrgAccessCode} size="60" placeholder="Enter an organization AccessCode"
+            value={OrgAccessCode} size="60" 
             onChange={handleaccess}
           />
           <br />
