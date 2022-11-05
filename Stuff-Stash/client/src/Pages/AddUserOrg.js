@@ -14,9 +14,10 @@ import React from "react";
 //function AddUserOrg(){
 
 const AddUserOrg = () => {
-  const [orgname, setorgname] = useState(" ");
-  const [orgid, setorgid] = useState(" ");
+  const [orgname, setorgname] = useState("");
+  const [orgid, setorgid] = useState("");
   //const [userid,setuserid]=useState(" ")
+  const [isShown, setIsSHown] = useState(false);
 
   let history = useHistory();
 
@@ -58,7 +59,7 @@ const AddUserOrg = () => {
     const data = res.json();
     console.log("data -- ", data);
     console.log(res.status);
-    if (res.status == 200) {
+    if (res.status === 200) {
       data.then((vars) => {
         ReactSession.set("orgname", vars.org.name);
         data.then((response) => {
@@ -100,6 +101,9 @@ const AddUserOrg = () => {
     setorgid("");
   };
 
+  const togglePassword = () => {
+    setIsSHown((isShown) => !isShown);
+  };
   //const handleuser=(e)=>{
   //setuserid((e.target.value).trimStart())
 
@@ -130,14 +134,25 @@ const AddUserOrg = () => {
       <div className="bg fill d-flex align-items-center justify-content-center area p-5">
         <div className="col d-flex align-items-center text-center justify-content-center">
           <form>
-            <h1>Enter Organization Name</h1>
-            <input type="text" value={orgname} onChange={handleorg} size="50" />
-            <h1>Enter Organization AccessCode</h1>
-            <input type="text" value={orgid} onChange={handleid} size="50" />
+            
+            <input type="text" value={orgname} onChange={handleorg}  placeholder="Enter Organization Name" size="60"></input>
+            <br/>
+            <br/>
+            <input  type={isShown ? "text" : "password"}  value={orgid} onChange={handleid} placeholder="Enter Organization AccessCode" size="60"/>
             <br />
+            <div className="checkbox-container">
+            <label htmlFor="checkbox">Show password?</label>
+            <input
+            id="checkbox"
+            type="checkbox"
+            checked={isShown}
+            onChange={togglePassword}
+          />
+          </div>
+            
             <br />
-            <button onClick={addUser}>Submit</button>&nbsp;&nbsp;
-            <button onClick={resetInputField}>Reset</button>
+            <button onClick={addUser} size="50">Submit</button>&nbsp;&nbsp;
+            <button onClick={resetInputField} size="50">Reset</button>
           </form>
         </div>
       </div>

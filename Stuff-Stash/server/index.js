@@ -46,22 +46,6 @@ app.post("/signUp", (req, res) => {
 	};
 });*/
 
-app.post("/api/v1/users/adduserOrg", (req, res) => {
-  const { orgname, orgid, userid } = req.body;
-
-  if (!orgname || !orgid) {
-    return res.status(400).json({ msg: "Please enter all the fields" });
-  }
-  OrgModel.findOne({ name: orgname }).then((org) => {
-    if (!org) {
-      return res.status(400).json({ msg: "Organization name does not exist" });
-    }
-
-    bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
-      if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
-    });
-  });
-});
 
 //app.post("/api/v1/users/createUser", async (req, res) => {
 // const user = req.body;
