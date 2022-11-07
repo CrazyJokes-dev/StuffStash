@@ -173,7 +173,12 @@ app.post("/api/v1/addAsset", async (req, res) => {
   const asset = req.body.asset;
   const { identifier, category, isAvailable } = req.body.asset;
   const filter = { name: stockroom };
-  if (identifier == null || category == null || isAvailable == null) {
+  if (
+    identifier == null ||
+    category == null ||
+    isAvailable == null ||
+    stockroom == null
+  ) {
     return res.status(400).json({ msg: "Missing information" });
   } else {
     const update = { $push: { assets: asset } };
