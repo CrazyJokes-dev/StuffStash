@@ -54,16 +54,16 @@ class Dashboard extends Component {
                 Create Organization
               </Link>
             </div>
-            <div className="btn btn-success m-1 button button1 ">
-              <Link to="/addAssetForm" exact style={linkStyle}>
-                Create Asset
-              </Link>
-            </div>
             <div
               className="btn btn-success m-1 button button1"
             >
               <Link to="/createStockRoom" exact style={linkStyle}>
                 Create Stockroom
+              </Link>
+            </div>
+            <div className="btn btn-success m-1 button button1 ">
+              <Link to="/addAssetForm" exact style={linkStyle}>
+                Create Asset
               </Link>
             </div>
             <div
