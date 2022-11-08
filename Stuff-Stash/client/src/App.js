@@ -31,7 +31,7 @@ function App() {
 
   function checkRefresh() {
     console.log(pathname);
-    history.push("/login");
+    history.push("/");
     window.location.reload();
   }
 
@@ -41,7 +41,6 @@ function App() {
       console.log(user);
       return true;
     } else {
-      console.log(pathname);
       return false;
     }
   };
@@ -51,10 +50,9 @@ function App() {
     <div className="App">
       {!isLoggedIn() &&
       pathname !== "/" &&
-      pathname !== "/reg" &&
-      pathname !== "/login"
+      pathname !== "/reg" 
         ? (checkRefresh(), (pathname = window.location.pathname))
-        : console.log("fuck you? no fuck me.")}
+        : console.log("Rerouting")}
       <div className="content">
         <Switch>
           <Route path="/list" exact component={Helpme} />
@@ -64,7 +62,6 @@ function App() {
             component={viewstockroomFrontend}
           />
           <Route path="/reg" exact component={RegForm} />
-          <Route path="/login" exact component={UserLogin} />
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/Org" exact component={CreateOrg} />
           <Route path="/RenameOrg" exact component={RenameOrgPage} />
