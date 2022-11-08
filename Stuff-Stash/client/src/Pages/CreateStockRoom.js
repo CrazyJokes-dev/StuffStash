@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { ReactSession } from 'react-client-session';
 import { useHistory } from "react-router-dom";
+import Axios from "axios";
 
 
 
 export default function AddStockroom() {
   const [stockRoomName, setStockRoomName] = useState("");
-  const orgid = ReactSession.get("orgID");
+  const [listOfOrgs, setListOfOrgs] = useState({});
+  const [orgName, setOrgName] = useState("");
+  const [error, setError] = useState();
+  const username = ReactSession.get("username");
   let history = useHistory();
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/api/v1/orgs/OrgView/${username}`)
+      .then((response) => {
+        //console.log(response);
+        setListOfOrgs(response.data);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  }, [username]);
 
   const addStockroom = async (e) => {
     e.preventDefault();
-    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
-    //const res = await fetch("http://localhost:3000/api/v1/addStockroom", {
+    //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
+    const res = await fetch("http://localhost:3000/api/v1/addStockroom", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -22,14 +37,14 @@ export default function AddStockroom() {
       },
       body: JSON.stringify({
         name: stockRoomName,
-        org: orgid
+        org: orgName
       })
     })
 
     const data = res.json();
     console.log(res.status);
     if (res.status == 200) {
-      alert("Successfully created " + stockRoomName + " under org ID " + orgid + "!");
+      alert("Successfully created " + stockRoomName + " under orgName" + orgName + "!");
     }
     history.push("/dashboard");
   }
@@ -45,7 +60,7 @@ const handlename = async (e) => {
 //2) there is no orgid within the session.
 function checkSubmission()
 {
-  if (!stockRoomName || !orgid)
+  if (!stockRoomName || !orgName)
     return true;
   else
     return false;

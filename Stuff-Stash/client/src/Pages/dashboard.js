@@ -63,15 +63,6 @@ class Dashboard extends Component {
             </div>
             <div
               className="btn btn-success m-1 button button1"
-              onClick={logoutUser}
-            >
-              <Link to="/createStockRoom" exact style={linkStyle}>
-                Create Stockroom
-              </Link>
-            </div>
-            <div
-              className="btn btn-success m-1 button button1"
-              onClick={logoutUser}
             >
               <Link to="/createStockRoom" exact style={linkStyle}>
                 Create Stockroom
