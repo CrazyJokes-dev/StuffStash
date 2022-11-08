@@ -6,7 +6,7 @@ import UserLogin from "./Pages/login";
 import React from "react";
 import RegForm from "./components/registrationform";
 import welcome from "./components/welcome";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./Pages/dashboard";
 import { ReactSession } from "react-client-session";
 import CreateOrg from "./components/CreateOrg";
 import CreateStockroom from "./Pages/CreateStockRoom";
