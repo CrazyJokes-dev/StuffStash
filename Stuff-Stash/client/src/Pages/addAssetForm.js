@@ -46,6 +46,14 @@ export default function AssetForm() {
     setCategory(e.target.value);
   }
 
+  function checkSubmission()
+  {
+    if (!stockroomName || !category || !identifier)
+      return true;
+    else
+      return false;
+  }
+
 //rendering
   return (
     <React.Fragment>
@@ -86,6 +94,7 @@ export default function AssetForm() {
                     block
                     size="sm"
                     type="submit"
+                    disabled={checkSubmission()}
                   >
                     Add Asset
                   </Button>
