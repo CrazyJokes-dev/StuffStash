@@ -43,7 +43,7 @@ const CreateOrg = () => {
            ReactSession.set("orgname",vars.newOrg.name);
            data.then((response)=>{alert(response.msg);})
     });
-      history.push("/CreateStockRoom");
+      history.push("/dashboard");
     }
     else{
       data.then((response)=>{alert(response.msg);})
