@@ -1,23 +1,50 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { ReactSession } from 'react-client-session';
 import { useHistory } from "react-router-dom";
-import Axios from "axios";
 
 export default function AssetForm() {
-  const [stockRoomName, setStockRoomName] = useState("");
+  const [stockroomName, setStockRoomName] = useState("");
   const [identifier, setIdentifier] = useState("");
   const [category, setCategory] = useState("");
+  let history = useHistory();
 
   const addAsset = async (e) => {
-    
+    e.preventDefault();
+    //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
+    const res = await fetch("http://localhost:3000/api/v1/addAsset", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        stockroomName: stockroomName,
+        asset:{
+          identifier: identifier,
+          category: category,
+          isAvailable: "true"
+        }
+      })
+    })
+    const data = res.json();
+    if (res.status == 200) {
+      alert("Successfully created " + identifier + " under the Stockroom named " + stockroomName + "!");
+    }
+    history.push("/dashboard");
   }
 
+  const handleStockName = (e) => {
+    setStockRoomName(e.target.value);
+  }
 
+  const handleIdentifier = (e) => {
+    setIdentifier(e.target.value);
+  }
 
-
-
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
+  }
 
 //rendering
   return (
@@ -32,8 +59,8 @@ export default function AssetForm() {
                     <Form.Control
                       autoFocus
                       type="text"
-                      value={stockRoomName}
-                      onChange={setStockRoomName}
+                      value={stockroomName}
+                      onChange={handleStockName}
                     />
                   </Form.Group>
                   <Form.Group size = "sm" controlId="assetIdentifier">
@@ -42,7 +69,7 @@ export default function AssetForm() {
                       autoFocus
                       type="text"
                       value={identifier}
-                      onChange={setIdentifier}
+                      onChange={handleIdentifier}
                     />
                   </Form.Group>
                   <Form.Group size = "sm" controlId="assetCategory">
@@ -51,7 +78,7 @@ export default function AssetForm() {
                       autoFocus
                       type="text"
                       value={category}
-                      onChange={setCategory}
+                      onChange={handleCategory}
                     />
                   </Form.Group>
                   <Button
