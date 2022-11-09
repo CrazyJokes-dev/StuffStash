@@ -28,7 +28,7 @@ const OrgViewDashboard = () => {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3000/api/v1/orgs/OrgView/${userid}`)
+    Axios.get(`https://stuffstash-a8fm9.ondigitalocean.app/api/v1/orgs/OrgView/${userid}`)
       .then((response) => {
         //console.log(response);
         setListOfOrgs(response.data);

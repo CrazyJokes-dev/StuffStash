@@ -16,7 +16,7 @@ export default function AddStockroom() {
   let history = useHistory();
 
   useEffect(() => {
-    Axios.get(`http://localhost:3000/api/v1/orgs/OrgView/${username}`)
+    Axios.get(`https://stuffstash-a8fm9.ondigitalocean.app/api/v1/orgs/OrgView/${username}`)
       .then((response) => {
         setListOfOrgs(response.data.organizationID.map(organizationID => organizationID.name));
       })
@@ -28,7 +28,7 @@ export default function AddStockroom() {
   const addStockroom = async (e) => {
     e.preventDefault();
     //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
-    const res = await fetch("http://localhost:3000/api/v1/addStockroom", {
+    const res = await fetch("https://stuffstash-a8fm9.ondigitalocean.app/api/v1/addStockroom", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

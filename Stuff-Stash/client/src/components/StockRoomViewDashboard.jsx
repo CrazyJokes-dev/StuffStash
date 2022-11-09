@@ -22,7 +22,7 @@ const StockRoomViewDashboard = () => {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3000/api/v1/users/viewstock/${orgName}`)
+    Axios.get(`https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/viewstock/${orgName}`)
       .then((response) => {
         //console.log("RESPONSE: ", response.data);
         //console.log("OBJ MAP:", Object.entries(response.data)); // => [ ["0", {name}], ["1", {name}], ["2", {name}] ]
