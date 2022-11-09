@@ -12,7 +12,7 @@
 }
 
 .stckRoomDisplay {
-  background-color: beige;
+  /* background-color: beige; */
   max-height: 80vh;
   margin: 2em;
   padding: 1em;
@@ -26,7 +26,7 @@
 }
 
 .userDisplay {
-  background-color: antiquewhite;
+  background-color: rgb(180, 180, 180);
   width: 300px;
   height: 250px;
   padding: 1rem;
@@ -35,15 +35,16 @@
 }
 
 .orgDisplay {
-  background-color: coral;
+  background-color: rgb(180, 180, 180);
   max-height: 50vh;
   border-radius: 10px;
   overflow: auto;
+  margin-top: 1rem;
 }
 
-.shadow {
-  box-shadow: 0px 5px 10px 0px gray;
-}
+/* .shadow {
+  box-shadow: 0px 5px 10px 0px rgb(56, 56, 56);
+} */
 
 .outerOrg {
   background-color: transparent;
@@ -73,7 +74,7 @@
 
 .buttonItem:hover {
   background-color: rgb(75, 75, 75);
-  box-shadow: 0px 5px 7px 0px lightgrey;
+  box-shadow: 0px 5px 7px 0px rgb(119, 119, 119);
   animation: smoothScale 0.15s ease-in forwards;
 }
 
@@ -111,7 +112,7 @@
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 .userDiv p {
-  color: rgb(172, 82, 236);
+  color: rgb(255, 255, 255);
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 45px;
   text-align: center;

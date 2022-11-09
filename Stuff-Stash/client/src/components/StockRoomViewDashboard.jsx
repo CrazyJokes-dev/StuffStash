@@ -5,6 +5,8 @@ import { ReactSession } from "react-client-session";
 import React from "react";
 import Axios from "axios";
 
+
+
 const StockRoomViewDashboard = () => {
   const [listOfStockRoom, setListOfStockRoom] = useState({});
   //const [orgName, setOrgName] = useState({});
@@ -12,11 +14,7 @@ const StockRoomViewDashboard = () => {
   let history = useHistory();
   const userid = ReactSession.get("username");
 
-  //For testing
-  const orgName = "A123"; // This will eventually pull from a react session variable set when a particular org is clicked
-  // setOrgName(ReactSession.get("selectedOrg")) -- Not Fully Finished
-  //const userid = "Winners";
-  //const userid = "username";
+  const orgName = ReactSession.get("selectedOrg"); // This will eventually pull from a react session variable set when a particular org is clicked
 
   const linkStyle = {
     textDecoration: "none",
@@ -26,8 +24,8 @@ const StockRoomViewDashboard = () => {
   useEffect(() => {
     Axios.get(`http://localhost:3000/api/v1/users/viewstock/${orgName}`)
       .then((response) => {
-        console.log("RESPONSE: ", response.data);
-        console.log("OBJ MAP:", Object.entries(response.data)); // => [ ["0", {name}], ["1", {name}], ["2", {name}] ]
+        //console.log("RESPONSE: ", response.data);
+        //console.log("OBJ MAP:", Object.entries(response.data)); // => [ ["0", {name}], ["1", {name}], ["2", {name}] ]
         setListOfStockRoom(response.data);
       })
       .catch((err) => {
@@ -44,7 +42,7 @@ const StockRoomViewDashboard = () => {
         return (
           <li className="list-group-item bg-transparent" key={value.name}>
             {Object.entries(value).map((name, key) => {
-              console.log("el", name);
+              //console.log("el", name);
               return (
                 <div className="container-fluid buttonItem shadowbtn" key={name}>
                   <button className="toggle-btn" data-active="inactive">

@@ -4,9 +4,6 @@ import { ReactSession } from "react-client-session";
 import Axios from "axios";
 import React from "react";
 
-function addToggle() {
-  
-}
 
 const OrgViewDashboard = () => {
   const [listOfOrgs, setListOfOrgs] = useState({});
@@ -16,6 +13,14 @@ const OrgViewDashboard = () => {
   //For testing
   //const userid = "Winners";
   //const userid = "username";
+
+  function handleClick(orgname) {
+    ReactSession.set("selectedOrg", orgname);
+    let selectedOrg = ReactSession.get("selectedOrg");
+    console.log(selectedOrg);
+    history.push("/dashboard");
+  }
+  
 
   const linkStyle = {
     textDecoration: "none",
@@ -50,7 +55,7 @@ const OrgViewDashboard = () => {
                     {/* <Link to="#" exact style={linkStyle}>
                       <span className="btnLabel">{el.name}</span>
                     </Link> */}
-                    <button className="toggle-btn" data-active="inactive">
+                    <button className="toggle-btn" onClick={() => handleClick(el.name)}>
                       <span className="btnLabel">{el.name}</span>
                     </button>
                   </div>
