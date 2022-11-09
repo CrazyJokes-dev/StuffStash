@@ -56,9 +56,7 @@ const handleOrgName = (e) => {
   setOrgName(e.target.value);
 }
 
-//this function will disable the submission button IF:
-//1) there is no submission for stockroom name, OR
-//2) there is no orgid within the session.
+
 function checkSubmission()
 {
   if (!stockRoomName || (!orgName || orgName == "..."))

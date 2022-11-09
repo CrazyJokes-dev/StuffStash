@@ -8,7 +8,7 @@ import Axios from "axios";
 
 
 const StockRoomViewDashboard = () => {
-  const [listOfStockRoom, setListOfStockRoom] = useState({});
+  const [listOfStockRoom, setListOfStockRoom] = useState([]);
   //const [orgName, setOrgName] = useState({});
   const [error, setError] = useState();
   let history = useHistory();
@@ -37,16 +37,16 @@ const StockRoomViewDashboard = () => {
     <React.Fragment>
       {Object.entries(listOfStockRoom).map(([key, value]) => {
         //FOR DEBUG
-        // console.log("key: ", key);
-        // console.log("value: ", value);
+        //console.log("key: ", key);
+        //console.log("value: ", value);
         return (
           <li className="list-group-item bg-transparent" key={value.name}>
             {Object.entries(value).map((name, key) => {
-              //console.log("el", name);
+              console.log("el", name);
               return (
-                <div className="container-fluid buttonItem shadowbtn" key={name}>
+                <div className="container-fluid buttonItem shadowbtn" key={name[1]}>
                   <button className="toggle-btn" data-active="inactive">
-                    <span className="btnLabel">{name}</span>
+                    <span className="btnLabel">{name[1]}</span>
                   </button>
                 </div>
               );
