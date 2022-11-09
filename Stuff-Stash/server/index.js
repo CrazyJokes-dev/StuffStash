@@ -53,32 +53,33 @@ mongoose.connect(
 //  res.send({msg:'hello world'})
 //})
 
-app.post("/api/v1/users/adduserOrg", (req, res) => {
-  const { orgname, orgid, userid } = req.body;
+app.post("/api/v1/users/adduserOrg",(req,res)=>{
+  const {orgname,orgid,userid} = req.body;    
 
-  if (!orgname || !orgid) {
-    return res.status(400).json({ msg: "Please enter all the fields" });
-  }
-  OrgModel.findOne({ name: orgname }).then((org) => {
-    if (!org)
-      return res.status(400).json({ msg: "Organization name does not exist" });
 
-    bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
-      if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
+    if(!orgname||!orgid){
+        return res.status(400).json({msg:"Please enter all the fields"});
+    }
+    OrgModel.findOne({name:orgname}).then((org) => {
+    if (!org) return res.status(400).json({ msg: "Organization name does not exist" });
 
-      UserModel.findOneAndUpdate(
-        { username: userid },
-        { $set: { organizationID: orgid } },
-        { upsert: true }
-      ).then((result) => {
-        if (result)
-          return res.status(200).json({ msg: "User added successfully", org });
-        else {
-          return res.status(400).json({ msg: "Something went wrong" });
-        }
-      });
-    });
-  });
+    bcrypt.compare(orgid,org.OrgAccessCode).then((isMatch)=>{
+        if(!isMatch) return res.status(400).json({msg:"Invalid access code"});
+
+
+       const finduser=UserModel.findOne({username:userid});
+        finduser.findOne({$and:[{"organizationID.name":orgname},{"organizationID.Accesscode":orgid}]}).then((msg)=>{
+        if(msg) return res.status(400).json({ msg: "User alreadys exists under the Organization" });
+        else{
+            const a={"name":orgname,"Accesscode":orgid} ; 
+            UserModel.findOneAndUpdate({username:userid},{$push:{organizationID:[a]}},{upsert:true}).then((result)=>{
+            if(result) return res.status(200).json({msg:"User added successfully",org});
+           })
+           }
+
+        })       
+    })  
+   })
 });
 
 // app.post("/api/v1/users/createUser", async (req, res) => {
@@ -112,7 +113,7 @@ app.post("/api/v1/users/createUser", (req, res) => {
     const newUser = new UserModel({
       username,
       password,
-      organizationID,
+      organizationID: []
     });
 
     // encrypts the password with hashing

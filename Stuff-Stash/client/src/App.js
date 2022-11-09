@@ -19,7 +19,7 @@ import RenameOrgPage from "./components/RenameOrg";
 import { Router } from "react-router-dom";
 import AddUserOrg from "./Pages/AddUserOrg";
 import viewstockroomFrontend from "./Pages/viewstockroomFrontend";
-
+import AssetForm from "./Pages/addAssetForm";
 // sets storage type for session variables
 ReactSession.setStoreType("localStorage");
 
@@ -31,7 +31,7 @@ function App() {
 
   function checkRefresh() {
     console.log(pathname);
-    history.push("/login");
+    history.push("/");
     window.location.reload();
   }
 
@@ -41,7 +41,6 @@ function App() {
       console.log(user);
       return true;
     } else {
-      console.log(pathname);
       return false;
     }
   };
@@ -51,10 +50,9 @@ function App() {
     <div className="App">
       {!isLoggedIn() &&
       pathname !== "/" &&
-      pathname !== "/reg" &&
-      pathname !== "/login"
+      pathname !== "/reg" 
         ? (checkRefresh(), (pathname = window.location.pathname))
-        : console.log("fuck you? no fuck me.")}
+        : console.log("Rerouting")}
       <div className="content">
         <Switch>
           <Route path="/list" exact component={Helpme} />
@@ -64,12 +62,13 @@ function App() {
             component={viewstockroomFrontend}
           />
           <Route path="/reg" exact component={RegForm} />
-          <Route path="/login" exact component={UserLogin} />
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/Org" exact component={CreateOrg} />
           <Route path="/RenameOrg" exact component={RenameOrgPage} />
           <Route path="/createStockRoom" exact component={CreateStockroom} />
           <Route path="/adduserOrg" exact component={AddUserOrg} />
+          <Route path="/addAssetForm" exact component={AssetForm} />
+
           <Route path="/" exact component={welcome} />
           <Redirect from="*" to="/" />
         </Switch>

@@ -5,6 +5,7 @@ import "./styles/dashboardStyles.css";
 import OrgViewDashboard from "../components/orgView";
 import StockRoomViewDashboard from "../components/StockRoomViewDashboard";
 import UserProfile from "../components/UserProfile";
+
 //styles -----------------------------
 
 const styling = {
@@ -41,7 +42,7 @@ class Dashboard extends Component {
             {/** Div for displaying the orgs relating to user that is signed in. Should be in some sort of scrollable list. Each item will be clickable*/}
             <OrgViewDashboard />
           </div>
-          <div className="d-flex buttonDisplay p-2 justify-content-center">
+          <div className="d-flex flex-column buttonDisplay p-2 justify-content-center">
             {/** Div for displaying the buttons to create an org or join existing or via orgID */}
             <div className="btn btn-success m-1 button button1">
               <Link to="/adduserOrg" exact style={linkStyle}>
@@ -51,6 +52,18 @@ class Dashboard extends Component {
             <div className="btn btn-success m-1 button button2">
               <Link to="/org" exact style={linkStyle}>
                 Create Organization
+              </Link>
+            </div>
+            <div
+              className="btn btn-success m-1 button button1"
+            >
+              <Link to="/createStockRoom" exact style={linkStyle}>
+                Create Stockroom
+              </Link>
+            </div>
+            <div className="btn btn-success m-1 button button1 ">
+              <Link to="/addAssetForm" exact style={linkStyle}>
+                Create Asset
               </Link>
             </div>
             <div
