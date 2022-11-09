@@ -42,7 +42,7 @@ const StockRoomViewDashboard = () => {
         return (
           <li className="list-group-item bg-transparent" key={value.name}>
             {Object.entries(value).map((name, key) => {
-              console.log("el", name);
+              //console.log("el", name);
               return (
                 <div className="container-fluid buttonItem shadowbtn" key={name[1]}>
                   <button className="toggle-btn" data-active="inactive">
