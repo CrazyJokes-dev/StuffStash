@@ -1,4 +1,5 @@
 const express = require("express");
+const { body, validationResult } = require("express-validator");
 const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -15,6 +16,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
+const { check } = require("express-validator");
 
 mongoose.connect(
   "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
@@ -164,6 +166,27 @@ app.post("/api/v1/addStockroom", async (req, res) => {
   res.json(stockroom);
 });
 
+//this creates an asset under a given stockroom
+app.post("/api/v1/addAsset", async (req, res) => {
+  console.log("Adding asset");
+  const stockroom = req.body.stockroomName;
+  const asset = req.body.asset;
+  const { identifier, category, isAvailable } = req.body.asset;
+  const filter = { name: stockroom };
+  if (
+    identifier == null ||
+    category == null ||
+    isAvailable == null ||
+    stockroom == null
+  ) {
+    return res.status(400).json({ msg: "Missing information" });
+  } else {
+    const update = { $push: { assets: asset } };
+    await StockroomModel.findOneAndUpdate(filter, update);
+    res.json(asset);
+  }
+});
+
 //app.use("/stockrooms", room.changeName);
 
 //END STOCKROOM CALLS
@@ -246,6 +269,37 @@ app.get("/api/v1/users/viewstock/:orgName", (req, res) => {
 
 // if(err) return res.status(400).json({msg:"Sorry,We did not find any stockrooms under this organization"})
 // else return res.json(result);
+// app.post("/api/v1/users/viewstock", (req, res) => {
+//   const { orgid } = req.body;
+//   StockroomModel.find({ org: orgid }).then(function (err, result) {
+//     if (err) {
+//       console.log("error");
+//       throw err;
+//       //throw err;
+//     }
+//   });
+//   res.status(200).json({ msg: "why wont you work" });
+// });
+
+
+app.get("/api/v1/orgs/OrgView/:userid", (req, res) => {
+  const userid = req.params.userid;
+  //console.log(userid);
+  UserModel.findOne(
+    { username: userid },
+    { "organizationID.name": 1, _id: 0 }
+  ).then((view) => {
+    if (view) {
+      console.log(view);
+      return res.json(view);
+    } else {
+      return res.status(400).json({
+        msg: "Sorry,We did not find any organization for this Username",
+      });
+    }
+  });
+});
+
 
 app.use("/api/v1/orgs/", orgs);
 

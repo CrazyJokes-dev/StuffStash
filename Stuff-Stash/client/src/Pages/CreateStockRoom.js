@@ -1,11 +1,37 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-export default function AddOrgUser() {
-  const [stockRoom, setStockRoom] = useState("");
-  const [userID, setUserID] = useState("");
-  function validateForm() {
-    return userID.length > 0 || stockRoom.lengh > 0;
+import { ReactSession } from 'react-client-session';
+import { useHistory } from "react-router-dom";
+
+
+
+export default function AddStockroom() {
+  const [stockRoomName, setStockRoomName] = useState("");
+  const orgid = ReactSession.get("orgID");
+  let history = useHistory();
+
+  const addStockroom = async (e) => {
+    e.preventDefault();
+    const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
+    //const res = await fetch("http://localhost:3000/api/v1/addStockroom", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: stockRoomName,
+        org: orgid
+      })
+    })
+
+    const data = res.json();
+    console.log(res.status);
+    if (res.status == 200) {
+      alert("Successfully created " + stockRoomName + " under org ID " + orgid + "!");
+    }
+    history.push("/dashboard");
   }
   function handleSubmit(event) {
     event.preventDefault();

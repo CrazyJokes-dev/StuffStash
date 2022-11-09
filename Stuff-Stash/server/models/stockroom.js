@@ -1,4 +1,5 @@
-
+var path = require('path');
+const assetSchema = require(path.resolve(__dirname, "./Asset.js"));
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 //creating our stockroom schema. as of sprint 1, this will always be empty
@@ -12,12 +13,12 @@ const StockroomSchema = new mongoose.Schema({
     //a tag to identify what organization it belongs to...
     org: {
         type: String,
-        required: true,
+        required: true
     },
     //and a place to store assets (empty for now)
     assets: {
-        required: false
-    },
+        type: [assetSchema.Schema]
+    }
 
 });
 

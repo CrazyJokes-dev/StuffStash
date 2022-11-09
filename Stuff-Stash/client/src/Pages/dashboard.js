@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
-
+import OrgViewDashboard from "../components/orgView";
 import StockRoomViewDashboard from "../components/StockRoomViewDashboard";
-
+import UserProfile from "../components/UserProfile";
 //styles -----------------------------
 
 const styling = {
@@ -35,9 +35,11 @@ class Dashboard extends Component {
         <div className="leftDisplay">
           <div className="container-fluid userDisplay d-flex justify-content-center shadow">
             {/** Div for welcoming user. Will house any relelvent user info (username, num of orgs in??, num of items checked out??) */}
+            <UserProfile />
           </div>
           <div className="container-fluid orgDisplay p-1 justify-content-center">
             {/** Div for displaying the orgs relating to user that is signed in. Should be in some sort of scrollable list. Each item will be clickable*/}
+            <OrgViewDashboard />
           </div>
           <div className="d-flex buttonDisplay p-2 justify-content-center">
             {/** Div for displaying the buttons to create an org or join existing or via orgID */}
@@ -63,12 +65,9 @@ class Dashboard extends Component {
         </div>
         {/** COL 2 -- RIGHT SIDE */}
         <div className="container-fluid rightDisplay col">
-          <div className="stckRoomDisplay">
-            <span className="display-2 m-3">Current Stockrooms</span>
+          <div className="d-flex stckRoomDisplay justify-content-center">
             {/** Div for displaying stockrooms of org when org button or link is clicked*/}
-            <ul className="stockroom-list pt-3 list-group list-group-flush">
-              <StockRoomViewDashboard />
-            </ul>
+            STOCKROOM DISPLAY
           </div>
         </div>
       </div>
