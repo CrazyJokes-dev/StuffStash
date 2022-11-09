@@ -3,7 +3,7 @@ import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
 import OrgViewDashboard from "../components/orgView";
-
+import StockRoomViewDashboard from "../components/StockRoomViewDashboard";
 import UserProfile from "../components/UserProfile";
 
 //styles -----------------------------

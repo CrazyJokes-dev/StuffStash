@@ -19,6 +19,12 @@
   overflow: auto;
 }
 
+.stockroom-list {
+    max-width: 600px;
+    text-align: start;
+    /* margin-left: 25%; */
+}
+
 .userDisplay {
   background-color: antiquewhite;
   width: 300px;
@@ -53,10 +59,10 @@
   border-radius: 100px;
 }
 /* .buttonItem span {
-  text-align: center;
-  position: relative;
-  top: 20%;
-} */
+    text-align: center;
+    position: relative;
+    top: 20%;
+  } */
 .buttonItem button.toggle-btn {
   color: white;
   background-color: transparent;
