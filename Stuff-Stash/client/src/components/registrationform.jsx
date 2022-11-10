@@ -15,18 +15,21 @@ function RegForm() {
     // const res = await fetch(
     // "https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createUser",
     // {
-    const res = await fetch("https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/createUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-        password2,
-        organizationID,
-      }),
-    });
+    const res = await fetch(
+      "https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/createUser",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          password2,
+          organizationID,
+        }),
+      }
+    );
 
     const data = res.json();
     console.log("data -- ", data);
@@ -58,7 +61,7 @@ function RegForm() {
         "password must be longer then 6 characters and contain a dight";
       document.getElementById("id2").style.color = "#Ff0000";
     }
-    if (password != password2) {
+    if (password !== password2) {
       // alert("Password does not match");
       document.getElementById("id3").innerHTML = "Password does not match";
       document.getElementById("id3").style.color = "#Ff0000";

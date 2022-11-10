@@ -53,33 +53,48 @@ mongoose.connect(
 //  res.send({msg:'hello world'})
 //})
 
-app.post("/api/v1/users/adduserOrg",(req,res)=>{
-  const {orgname,orgid,userid} = req.body;    
+app.post("/api/v1/users/adduserOrg", (req, res) => {
+  const { orgname, orgid, userid } = req.body;
 
+  if (!orgname || !orgid) {
+    return res.status(400).json({ msg: "Please enter all the fields" });
+  }
+  OrgModel.findOne({ name: orgname }).then((org) => {
+    if (!org)
+      return res.status(400).json({ msg: "Organization name does not exist" });
 
-    if(!orgname||!orgid){
-        return res.status(400).json({msg:"Please enter all the fields"});
-    }
-    OrgModel.findOne({name:orgname}).then((org) => {
-    if (!org) return res.status(400).json({ msg: "Organization name does not exist" });
+    bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
+      if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
 
-    bcrypt.compare(orgid,org.OrgAccessCode).then((isMatch)=>{
-        if(!isMatch) return res.status(400).json({msg:"Invalid access code"});
-
-
-       const finduser=UserModel.findOne({username:userid});
-        finduser.findOne({$and:[{"organizationID.name":orgname},{"organizationID.Accesscode":orgid}]}).then((msg)=>{
-        if(msg) return res.status(400).json({ msg: "User alreadys exists under the Organization" });
-        else{
-            const a={"name":orgname,"Accesscode":orgid} ; 
-            UserModel.findOneAndUpdate({username:userid},{$push:{organizationID:[a]}},{upsert:true}).then((result)=>{
-            if(result) return res.status(200).json({msg:"User added successfully",org});
-           })
-           }
-
-        })       
-    })  
-   })
+      const finduser = UserModel.findOne({ username: userid });
+      finduser
+        .findOne({
+          $and: [
+            { "organizationID.name": orgname },
+            { "organizationID.Accesscode": orgid },
+          ],
+        })
+        .then((msg) => {
+          if (msg)
+            return res
+              .status(400)
+              .json({ msg: "User alreadys exists under the Organization" });
+          else {
+            const a = { name: orgname, Accesscode: orgid };
+            UserModel.findOneAndUpdate(
+              { username: userid },
+              { $push: { organizationID: [a] } },
+              { upsert: true }
+            ).then((result) => {
+              if (result)
+                return res
+                  .status(200)
+                  .json({ msg: "User added successfully", org });
+            });
+          }
+        });
+    });
+  });
 });
 
 // app.post("/api/v1/users/createUser", async (req, res) => {
@@ -95,14 +110,28 @@ app.post("/api/v1/users/adduserOrg",(req,res)=>{
 // });
 
 app.post("/api/v1/users/createUser", (req, res) => {
-  const { username, password, organizationID } = req.body;
-
-  // Checks to see if the username/password that was entered, wasn't empty.
-  // If it was empty, displays a message on screen telling the user to enter them.
+  const { username, password, password2, organizationID } = req.body;
+  //Creating user and password prereqs
   if (!username || !password) {
     return res
-      .status(399)
+      .status(401)
       .json({ msg: "Please enter a username and a password" });
+  }
+  if (username.length < 6) {
+    return res
+      .status(401)
+      .json({ msg: "Username must be longer then 6 chars" });
+  }
+  if (password.length < 6) {
+    return res
+      .status(401)
+      .json({ msg: "password must be longer then 6 chars" });
+  }
+  if (password.search(/\d/) == -1) {
+    return res.status(401).json({ msg: "Password Must contain digit" });
+  }
+  if (password != password2) {
+    return res.status(401).json({ msg: "Password does not match" });
   }
 
   // Checks to see if another username already exists in the database and rejects it if there is one.
@@ -113,7 +142,7 @@ app.post("/api/v1/users/createUser", (req, res) => {
     const newUser = new UserModel({
       username,
       password,
-      organizationID: []
+      organizationID: [],
     });
 
     // encrypts the password with hashing
@@ -282,7 +311,6 @@ app.get("/api/v1/users/viewstock/:orgName", (req, res) => {
 //   res.status(200).json({ msg: "why wont you work" });
 // });
 
-
 app.get("/api/v1/orgs/OrgView/:userid", (req, res) => {
   const userid = req.params.userid;
   //console.log(userid);
@@ -300,7 +328,6 @@ app.get("/api/v1/orgs/OrgView/:userid", (req, res) => {
     }
   });
 });
-
 
 app.use("/api/v1/orgs/", orgs);
 
