@@ -29,7 +29,7 @@ const logoutUser = async (e) => {
 const username = ReactSession.get("username");
 
 const currentOrg = ReactSession.get("selectedOrg");
-console.log(currentOrg)
+console.log(currentOrg);
 
 class Dashboard extends Component {
   state = {};
@@ -42,11 +42,16 @@ class Dashboard extends Component {
             {/** Div for welcoming user. Will house any relelvent user info (username, num of orgs in??, num of items checked out??) */}
             <UserProfile />
           </div>
-          
+
           <div className="container-fluid orgDisplay p-1 justify-content-center">
             {/** Div for displaying the orgs relating to user that is signed in. Should be in some sort of scrollable list. Each item will be clickable*/}
-            <span className="display-5 p-3" style={{color: "white"}}>Current</span> <br />
-            <span className="display-6 p-3" style={{color: "white"}}>Organizations</span>
+            <span className="display-5 p-3" style={{ color: "white" }}>
+              Current
+            </span>{" "}
+            <br />
+            <span className="display-6 p-3" style={{ color: "white" }}>
+              Organizations
+            </span>
             <OrgViewDashboard />
           </div>
           <div className="d-flex flex-column buttonDisplay p-2 justify-content-center">
@@ -61,9 +66,7 @@ class Dashboard extends Component {
                 Create Organization
               </Link>
             </div>
-            <div
-              className="btn btn-success m-1 button button1"
-            >
+            <div className="btn btn-success m-1 button button1">
               <Link to="/createStockRoom" exact style={linkStyle}>
                 Create Stockroom
               </Link>

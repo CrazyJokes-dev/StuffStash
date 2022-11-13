@@ -1,9 +1,3 @@
-//data link
-//https://api-dot-techstack-demo-deployment.ue.r.appspot.com
-
-//frontend link
-//https://techstack-demo-deployment.ue.r.appspot.com
-import "../App.css";
 import { useState } from "react";
 import React from "react";
 const RenameOrgPage = () => {

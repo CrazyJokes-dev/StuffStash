@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ReactSession } from "react-client-session"; // client session chocolate chip cookies
+import { ReactSession } from "react-client-session"; // client session chocolate chip cookies ( yum! -matt )
 import { useHistory } from "react-router-dom"; // This allows you to send people to another page
 
 const UserLogin = () => {
@@ -11,16 +11,19 @@ const UserLogin = () => {
   const loginUser = async (e) => {
     e.preventDefault();
     // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/login', {
-    const res = await fetch("https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
+    const res = await fetch(
+      "https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      }
+    );
     const data = res.json();
     console.log("data -- ", data);
     console.log(res.status);

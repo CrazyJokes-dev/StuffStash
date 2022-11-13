@@ -1,13 +1,5 @@
-//data link
-//https://api-dot-techstack-demo-deployment.ue.r.appspot.com
-
-//frontend link
-//https://techstack-demo-deployment.ue.r.appspot.com
-
 import "../App.css";
 import { useState, useEffect } from "react";
-import Axios from "axios";
-import { ReactSession } from 'react-client-session';
 
 const Home = () => {
   const [listOfUsers, setListOfUsers] = useState([]);
@@ -20,8 +12,6 @@ const Home = () => {
     // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users');
     const res = await fetch("http://localhost:3000/api/v1/users");
     const data = await res.json();
-    //console.log("users/ - DATA ", data);
-    //setRecentUser(data.data);
     setRecentUser(data);
   };
 
@@ -30,8 +20,6 @@ const Home = () => {
       "https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/getUsers"
     );
     const data = await res.json();
-    //console.log("users/getUsers - DATA:", data);
-    //setListOfUsers(data.data);
     setListOfUsers(data);
   };
 
@@ -59,15 +47,6 @@ const Home = () => {
     setUsername("");
     setPassword("");
     setOrganizationID("");
-    //Axios.post("/createUser", {
-    //  name: name,
-    //}).then((response) => {
-    //  setListOfUsers([...listOfUsers,
-    //    {
-    //      name: name,
-    //    },
-    //  ]);
-    //});
   };
 
   useEffect(() => {
