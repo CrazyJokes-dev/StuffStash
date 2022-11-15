@@ -1,5 +1,4 @@
 .back {
-  /* background-color: blueviolet; */
   min-height: 90vh;
   height: 100%;
   margin: 0;
@@ -12,7 +11,6 @@
 }
 
 .stckRoomDisplay {
-  /* background-color: beige; */
   max-height: 80vh;
   margin: 2em;
   padding: 1em;
@@ -20,9 +18,8 @@
 }
 
 .stockroom-list {
-    max-width: 600px;
-    text-align: start;
-    /* margin-left: 25%; */
+  max-width: 600px;
+  text-align: start;
 }
 
 .userDisplay {
@@ -42,10 +39,6 @@
   margin-top: 1rem;
 }
 
-/* .shadow {
-  box-shadow: 0px 5px 10px 0px rgb(56, 56, 56);
-} */
-
 .outerOrg {
   background-color: transparent;
 }
@@ -59,11 +52,7 @@
   background-color: gray;
   border-radius: 100px;
 }
-/* .buttonItem span {
-    text-align: center;
-    position: relative;
-    top: 20%;
-  } */
+
 .buttonItem button.toggle-btn {
   color: white;
   background-color: transparent;
@@ -88,6 +77,23 @@
   animation: smoothScale 0.15s ease-in forwards;
 }
 
+.userDiv {
+  display: flex;
+  color: rgb(172, 82, 236);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.userDiv p {
+  color: rgb(255, 255, 255);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 45px;
+  text-align: center;
+}
+
+.imgDiv {
+  width: 75px;
+  height: 150px;
+}
+
 @keyframes smoothScale {
   0% {
     transform: scale(1);
@@ -104,21 +110,4 @@
   100% {
     transform: scale(0.98);
   }
-}
-
-.userDiv {
-  display: flex;
-  color: rgb(172, 82, 236);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-}
-.userDiv p {
-  color: rgb(255, 255, 255);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 45px;
-  text-align: center;
-}
-
-.imgDiv {
-  width: 75px;
-  height: 150px;
 }
