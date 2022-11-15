@@ -15,7 +15,7 @@ export default function AddStockroom() {
 
   useEffect(() => {
     Axios.get(
-      `https://stuffstash-a8fm9.ondigitalocean.app/api/v1/orgs/OrgView/${username}`
+      `http://localhost:3000/api/v1/orgs/OrgView/${username}`
     )
       .then((response) => {
         setListOfOrgs(
@@ -33,7 +33,7 @@ export default function AddStockroom() {
     e.preventDefault();
     //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
     const res = await fetch(
-      "https://stuffstash-a8fm9.ondigitalocean.app/api/v1/addStockroom",
+      "http://localhost:3000/api/v1/addStockroom",
       {
         method: "POST",
         headers: {

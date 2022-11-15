@@ -20,7 +20,7 @@ const StockRoomViewDashboard = () => {
 
   useEffect(() => {
     Axios.get(
-      `https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/viewstock/${orgName}`
+      `http://localhost:3000/api/v1/users/viewstock/${orgName}`
     )
       .then((response) => {
         setListOfStockRoom(response.data);

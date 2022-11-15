@@ -18,7 +18,7 @@ const AddUserOrg = () => {
 
     //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createOrg', {
     const res = await fetch(
-      "https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/adduserOrg",
+      "http://localhost:3000/api/v1/users/adduserOrg",
       {
         method: "POST",
         headers: {

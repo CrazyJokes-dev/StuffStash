@@ -11,7 +11,7 @@ const RenameOrgPage = () => {
     console.log(nameFeild, newname);
 
     const res = await fetch(
-      "https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/RenameOrgization",
+      "http://localhost:3000/api/v1/users/RenameOrgization",
       {
         // const res = await fetch(
         //   'http://localhost:3000/api/v1/orgs/RenameOrgization',

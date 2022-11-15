@@ -14,7 +14,7 @@ const CreateOrg = () => {
   const addOrg = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      "https://stuffstash-a8fm9.ondigitalocean.app/api/v1/org/createOrg",
+      "http://localhost:3000/api/v1/org/createOrg",
       {
         method: "POST",
         headers: {
