@@ -77,6 +77,23 @@
   animation: smoothScale 0.15s ease-in forwards;
 }
 
+.userDiv {
+  display: flex;
+  color: rgb(172, 82, 236);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.userDiv p {
+  color: rgb(255, 255, 255);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 45px;
+  text-align: center;
+}
+
+.imgDiv {
+  width: 75px;
+  height: 150px;
+}
+
 @keyframes smoothScale {
   0% {
     transform: scale(1);
@@ -93,21 +110,4 @@
   100% {
     transform: scale(0.98);
   }
-}
-
-.userDiv {
-  display: flex;
-  color: rgb(172, 82, 236);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-}
-.userDiv p {
-  color: rgb(255, 255, 255);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 45px;
-  text-align: center;
-}
-
-.imgDiv {
-  width: 75px;
-  height: 150px;
 }
