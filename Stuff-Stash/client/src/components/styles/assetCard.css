@@ -1,0 +1,57 @@
+.asset-info > .cond-text {
+  color: black;
+}
+.card__base .overlay {
+  background: rgba(0, 0, 0, 0.484);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.overlay:hover {
+  opacity: 1;
+}
+
+.card__base {
+  border-radius: 5px;
+  position: relative;
+  background: lightgray;
+  overflow: hidden;
+  padding: 1rem;
+  margin: 2rem;
+  width: 60%;
+  box-shadow: 0px 5px 10px gray;
+}
+
+.img-container {
+  display: flex;
+  /* background: red; */
+}
+
+.img-container > img {
+  height: 20%;
+  width: 20%;
+  border-radius: 15px;
+  margin: 20px;
+}
+
+.img-info {
+  display: block;
+  align-self: center;
+}
+
+.asset-info {
+  /* background: lightgoldenrodyellow; */
+}
+
+.right__card {
+  /* background: teal; */
+}
