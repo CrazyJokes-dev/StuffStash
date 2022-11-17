@@ -4,17 +4,33 @@ const assetSchema = new mongoose.Schema({
     identifier: {
         type: String,
         required: true,
-        unique: true
+        default: "NewAsset"
     },
     //a "type" (ie, laptop, projector, monitor, etc),
     category: {
         type: String,
         required: true
     },
-    //a way to identify availability
+    //a way to identify availability. accepts a string containing the username of the individual 
+    //currently using the username of the individual using the asset,
     isAvailable: {
-        type: Boolean,
+        type: String,
+        required: true
+    },
+    //a variable to note the condition of an asset,
+    condition: {
+        type: String,
+        default: "mint",
+        required: true
+    },
+
+    //and a variable to store the warranty date. 
+    //using a string for now until a better solution presents itself
+    warranty: {
+        type: String
     }
+
+
 })
 
 module.exports = mongoose.model('assets', assetSchema);
