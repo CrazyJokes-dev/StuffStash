@@ -8,8 +8,7 @@ const assetSchema = new mongoose.Schema({
     },
     //a "type" (ie, laptop, projector, monitor, etc),
     category: {
-        type: String,
-        required: true
+        type: String
     },
     //a way to identify availability. accepts a string containing the username of the individual 
     //currently using the username of the individual using the asset,
@@ -23,7 +22,9 @@ const assetSchema = new mongoose.Schema({
         default: "mint",
         required: true
     },
-
+    serialCode: {
+        type: String,
+    },
     //and a variable to store the warranty date. 
     //using a string for now until a better solution presents itself
     warranty: {
