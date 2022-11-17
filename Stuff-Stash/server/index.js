@@ -22,37 +22,6 @@ mongoose.connect(
   "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
 
-//app.get("/api/v1/users/", (req, res) => {
-// UserModel.find({}, (err, result) => {
-// if (err) {
-//     res.json(err);
-// } else {
-//    res.json(result);
-/// }}).limit(1).sort({$natural:-1});
-//});
-
-//app.get("/api/v1/users/getUsers", (req, res) => {
-//UserModel.find({}, (err, result) => {
-//if (err) {
-//  res.json(err);
-//} else {
-//res.json(result);
-//}
-//});
-//});
-
-//app.post("/api/v1/users/createUser", async (req, res) => {
-// const user = req.body;
-// const newUser = new UserModel(user);
-//await newUser.save();
-
-//  res.json(user);
-//});
-
-//app.get('/', (req, res) => {
-//  res.send({msg:'hello world'})
-//})
-
 app.post("/api/v1/users/adduserOrg", (req, res) => {
   const { orgname, orgid, userid } = req.body;
 
@@ -96,18 +65,6 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
     });
   });
 });
-
-// app.post("/api/v1/users/createUser", async (req, res) => {
-//   const user = req.body;
-//   const newUser = new UserModel(user);
-//   await newUser.save();
-
-//   res.json(user);
-// });
-
-// app.get("/", (req, res) => {
-//   res.send({ msg: "hello world" });
-// });
 
 app.post("/api/v1/users/createUser", (req, res) => {
   const { username, password, password2, organizationID } = req.body;
@@ -217,8 +174,6 @@ app.post("/api/v1/addAsset", async (req, res) => {
   }
 });
 
-//app.use("/stockrooms", room.changeName);
-
 //END STOCKROOM CALLS
 
 //ORGINZATION API REQUESTS
@@ -296,20 +251,6 @@ app.get("/api/v1/users/viewstock/:orgName", (req, res) => {
     }
   });
 });
-
-// if(err) return res.status(400).json({msg:"Sorry,We did not find any stockrooms under this organization"})
-// else return res.json(result);
-// app.post("/api/v1/users/viewstock", (req, res) => {
-//   const { orgid } = req.body;
-//   StockroomModel.find({ org: orgid }).then(function (err, result) {
-//     if (err) {
-//       console.log("error");
-//       throw err;
-//       //throw err;
-//     }
-//   });
-//   res.status(200).json({ msg: "why wont you work" });
-// });
 
 app.get("/api/v1/orgs/OrgView/:userid", (req, res) => {
   const userid = req.params.userid;
