@@ -1,14 +1,32 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./styles/assetCard.css";
 
-export default class assetCard extends Component {
-  state = {};
-  render() {
-    return (
-      <>
-        {/** overall container for card */}
-        <div className="card__base row">
-          <div className="overlay"></div>
+// function handleClick() {
+//   console.log(classes);
+//   if(classes !== "card__base row flipped") {
+//     classes += " flipped";
+//   } else {
+//     classes = "card__base row";
+//   }
+//   console.log(classes);
+//   //this.setState({classes: "card__base row flipped"});
+//   console.log("Click Handled");
+// }
+
+const Assetcard = () => {
+  const [flip, setFlip] = useState(false);
+
+  return (
+    <React.Fragment>
+      {/** overall container for card */}
+      <div className={`card ${flip ? "flip" : ""}`}>
+        {/* <div className="overlay">
+          <span className="edit-opt" onClick={() => setFlip(!flip)}>
+            EDIT
+            <span className="edit-ico">&#8594;</span>
+          </span>
+        </div> */}
+        <div className="front" onClick={() => setFlip(!flip)}>
           {/** left side container -- has static img and avail, warrenty, condition */}
           <div className="left__card col">
             {/** contains img and avail */}
@@ -40,7 +58,13 @@ export default class assetCard extends Component {
             <span>More Info Here</span>
           </div>
         </div>
-      </>
-    );
-  }
-}
+        <div className="back row" onClick={() => setFlip(!flip)}>
+          <div className="col">1</div>
+          <div className="col">2</div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default Assetcard;
