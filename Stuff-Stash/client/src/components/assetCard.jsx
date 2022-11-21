@@ -13,20 +13,24 @@ import "./styles/assetCard.css";
 //   console.log("Click Handled");
 // }
 
+
 const Assetcard = () => {
   const [flip, setFlip] = useState(false);
 
+  function test() { 
+    return (
+      <span className="edit-opt" onClick={() => setFlip(!flip)}>
+        EDIT
+        <span className="edit-ico">&#8594;</span>
+      </span>
+    );
+  }
+  
   return (
     <React.Fragment>
       {/** overall container for card */}
-      <div className={`card ${flip ? "flip" : ""}`}>
-        {/* <div className="overlay">
-          <span className="edit-opt" onClick={() => setFlip(!flip)}>
-            EDIT
-            <span className="edit-ico">&#8594;</span>
-          </span>
-        </div> */}
-        <div className="front" onClick={() => setFlip(!flip)}>
+      <div className={`card-grid card ${flip ? "flip" : ""}`}>
+        <div className="front row" onClick={() => setFlip(!flip)}>
           {/** left side container -- has static img and avail, warrenty, condition */}
           <div className="left__card col">
             {/** contains img and avail */}
@@ -59,8 +63,7 @@ const Assetcard = () => {
           </div>
         </div>
         <div className="back row" onClick={() => setFlip(!flip)}>
-          <div className="col">1</div>
-          <div className="col">2</div>
+          <div className="col">Content</div>
         </div>
       </div>
     </React.Fragment>
