@@ -26,6 +26,9 @@ export default function AssetForm() {
             identifier: identifier,
             category: category,
             isAvailable: "true",
+            condition: "mint",
+            serialCode: "",
+            warranty: ""
           },
         }),
       }
