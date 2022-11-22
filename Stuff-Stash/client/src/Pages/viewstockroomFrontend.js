@@ -6,7 +6,7 @@ const viewstockroomFrontend = () => {
   const orgid = ReactSession.get("orgid");
   const DisplayStockroom = async (e) => {
     e.preventDefault();
-    const res = await fetch('https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/viewstock', {
+    const res = await fetch('http://localhost:3000/api/v1/users/viewstock', {
 
     //const res = await fetch("http://localhost:3000/api/v1/users/viewstock", {
       method: "POST",
@@ -23,19 +23,6 @@ const viewstockroomFrontend = () => {
     }
     const data = res.json();
     console.log("data -- ", data);
-    //if (data.success) {
-    //  await fetchUsers()
-    //}
-    //setName('');
-    //Axios.post("/createUser", {
-    //  name: name,
-    //}).then((response) => {
-    //  setListOfUsers([...listOfUsers,
-    //    {
-    //      name: name,
-    //    },
-    //  ]);
-    //});
   };
 
   return (

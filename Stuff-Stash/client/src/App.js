@@ -1,5 +1,3 @@
-//import "./App.css";
-import Navbar from "./components/common/navbar";
 import {
   BrowserRouter as Redirect,
   Route,
@@ -8,7 +6,7 @@ import {
 } from "react-router-dom";
 import Helpme from "./Pages/ListOfUsers";
 import UserLogin from "./Pages/login";
-import React, { useState } from "react";
+import React from "react";
 import RegForm from "./components/registrationform";
 import welcome from "./components/welcome2";
 import Dashboard from "./Pages/dashboard";
@@ -16,7 +14,6 @@ import { ReactSession } from "react-client-session";
 import CreateOrg from "./components/CreateOrg";
 import CreateStockroom from "./Pages/CreateStockRoom";
 import RenameOrgPage from "./components/RenameOrg";
-import { Router } from "react-router-dom";
 import AddUserOrg from "./Pages/AddUserOrg";
 import viewstockroomFrontend from "./Pages/viewstockroomFrontend";
 import AssetForm from "./Pages/addAssetForm";
@@ -46,11 +43,8 @@ function App() {
   };
 
   return (
-    //<Router>
     <div className="App">
-      {!isLoggedIn() &&
-      pathname !== "/" &&
-      pathname !== "/reg" 
+      {!isLoggedIn() && pathname !== "/" && pathname !== "/reg"
         ? (checkRefresh(), (pathname = window.location.pathname))
         : console.log("Rerouting")}
       <div className="content">
@@ -74,7 +68,6 @@ function App() {
         </Switch>
       </div>
     </div>
-    //</Router>
   );
 }
 export default App;

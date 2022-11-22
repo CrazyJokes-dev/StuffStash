@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ReactSession } from "react-client-session"; // client session chocolate chip cookies
+import { ReactSession } from "react-client-session"; // client session chocolate chip cookies ( yum! -matt )
 import { useHistory } from "react-router-dom"; // This allows you to send people to another page
 
 const UserLogin = () => {
@@ -11,16 +11,19 @@ const UserLogin = () => {
   const loginUser = async (e) => {
     e.preventDefault();
     // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/login', {
-    const res = await fetch("https://stuffstash-a8fm9.ondigitalocean.app/api/v1/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
+    const res = await fetch(
+      "http://localhost:3000/api/v1/users/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      }
+    );
     const data = res.json();
     console.log("data -- ", data);
     console.log(res.status);
@@ -44,17 +47,17 @@ const UserLogin = () => {
   return (
     <React.Fragment>
       <div className="col m-5  ">
-        <div class="row">
-          <div class="col-sm m-5 ">
+        <div className="row">
+          <div className="col-sm m-5 ">
             <h2>User Login</h2>
-            <form onSubmit={loginUser} class="justify-content-center">
-              <div class="form-group">
-                <label for="Username" class="text-white">
+            <form onSubmit={loginUser} className="justify-content-center">
+              <div className="form-group">
+                <label htmlFor="Username" className="text-white">
                   Username:
                 </label>
                 <input
                   type="Username"
-                  class="form-control"
+                  className="form-control"
                   id="Username"
                   placeholder="Enter username"
                   name="Username"
@@ -64,13 +67,13 @@ const UserLogin = () => {
                 />
               </div>
 
-              <div class="form-group">
-                <label for="pwd" class="text-white">
+              <div className="form-group">
+                <label htmlFor="pwd" className="text-white">
                   Password:
                 </label>
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   id="pwd"
                   placeholder="Enter password"
                   name="pwd"
@@ -80,24 +83,24 @@ const UserLogin = () => {
                 />
               </div>
 
-              <div class="checkbox-inline ">
+              <div className="checkbox-inline ">
                 <input
-                  class="form-check-label col-sm-1  "
+                  className="form-check-label col-sm-1  "
                   type="checkbox"
                   value=""
                   id="defaultCheck1"
                 />
-                <label class="form-check-label" for="stay logged in">
+                <label className="form-check-label" htmlFor="stay logged in">
                   Remember Me
                 </label>
               </div>
-              <div class="container">
-                <div class="col-md-12 text-center">
-                  <button type="login" class="btn btn-primary  m-2 p-1">
+              <div className="container">
+                <div className="col-md-12 text-center">
+                  <button type="login" className="btn btn-primary  m-2 p-1">
                     Login
                   </button>
 
-                  <a href="/reg" class="btn btn-primary  m-3 p-1 ">
+                  <a href="/reg" className="btn btn-primary  m-3 p-1 ">
                     Sign up
                   </a>
                 </div>

@@ -4,15 +4,11 @@ import { ReactSession } from "react-client-session";
 import Axios from "axios";
 import React from "react";
 
-
 const OrgViewDashboard = () => {
   const [listOfOrgs, setListOfOrgs] = useState({});
   const [error, setError] = useState();
   let history = useHistory();
   const userid = ReactSession.get("username");
-  //For testing
-  //const userid = "Winners";
-  //const userid = "username";
 
   function handleClick(orgname) {
     ReactSession.set("selectedOrg", orgname);
@@ -20,7 +16,6 @@ const OrgViewDashboard = () => {
     console.log(selectedOrg);
     history.push("/dashboard");
   }
-  
 
   const linkStyle = {
     textDecoration: "none",
@@ -28,7 +23,9 @@ const OrgViewDashboard = () => {
   };
 
   useEffect(() => {
-    Axios.get(`https://stuffstash-a8fm9.ondigitalocean.app/api/v1/orgs/OrgView/${userid}`)
+    Axios.get(
+      `http://localhost:3000/api/v1/orgs/OrgView/${userid}`
+    )
       .then((response) => {
         //console.log(response);
         setListOfOrgs(response.data);
@@ -37,11 +34,6 @@ const OrgViewDashboard = () => {
         setError(err);
       });
   }, [userid]);
-
-  //   console.log(Object.entries(listOfOrgs));
-  //   if (error || !Array.isArray(listOfOrgs)) {
-  //     return <p>There was an error loading your data!</p>;
-  //   }
 
   return (
     <React.Fragment>
@@ -55,7 +47,10 @@ const OrgViewDashboard = () => {
                     {/* <Link to="#" exact style={linkStyle}>
                       <span className="btnLabel">{el.name}</span>
                     </Link> */}
-                    <button className="toggle-btn" onClick={() => handleClick(el.name)}>
+                    <button
+                      className="toggle-btn"
+                      onClick={() => handleClick(el.name)}
+                    >
                       <span className="btnLabel">{el.name}</span>
                     </button>
                   </div>

@@ -2,6 +2,7 @@ import React from "react";
 import "./styles/welcome.css";
 import "./styles/bg.css";
 import UserLogin from "../Pages/login";
+
 //Styles
 const textStyle = {
   color: "white",
@@ -12,8 +13,6 @@ const boxShadow = {
   boxShadow: "5px 5px 50px 5px rgba(0, 0, 0, 0.4)",
   borderRadius: "10px",
 };
-
-//Placeholder text -- remove later
 
 const welcome2 = () => {
   return (

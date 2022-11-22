@@ -1,9 +1,3 @@
-//data link
-//https://api-dot-techstack-demo-deployment.ue.r.appspot.com
-
-//frontend link
-//https://techstack-demo-deployment.ue.r.appspot.com
-import "../App.css";
 import { useState } from "react";
 import React from "react";
 const RenameOrgPage = () => {
@@ -19,7 +13,7 @@ const RenameOrgPage = () => {
 
    // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/RenameOrgization', {
      const res = await fetch(
-       'https://stuffstash-a8fm9.ondigitalocean.app/api/v1/orgs/RenameOrgization',
+       'http://localhost:3000/api/v1/orgs/RenameOrgization',
       {
         method: "POST",
         headers: {
