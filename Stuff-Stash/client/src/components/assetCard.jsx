@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles/assetCard.css";
+import UpdateForm from "../utils/UpdateForm";
 
 // function handleClick() {
 //   console.log(classes);
@@ -13,11 +14,10 @@ import "./styles/assetCard.css";
 //   console.log("Click Handled");
 // }
 
-
 const Assetcard = () => {
   const [flip, setFlip] = useState(false);
 
-  function test() { 
+  function test() {
     return (
       <span className="edit-opt" onClick={() => setFlip(!flip)}>
         EDIT
@@ -25,12 +25,17 @@ const Assetcard = () => {
       </span>
     );
   }
-  
+
   return (
     <React.Fragment>
       {/** overall container for card */}
       <div className={`card-grid card ${flip ? "flip" : ""}`}>
-        <div className="front row" onClick={() => setFlip(!flip)}>
+        <div className="front row">
+          <div className="edit-btn">
+            <div className="edit-icon" onClick={() => setFlip(!flip)}>
+              &#9998;
+            </div>
+          </div>
           {/** left side container -- has static img and avail, warrenty, condition */}
           <div className="left__card col">
             {/** contains img and avail */}
@@ -58,12 +63,11 @@ const Assetcard = () => {
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
-          <div className="right__card col">
-            <span>More Info Here</span>
-          </div>
         </div>
-        <div className="back row" onClick={() => setFlip(!flip)}>
-          <div className="col">Content</div>
+        <div className="back row">
+          <div className="col">
+            <UpdateForm />
+          </div>
         </div>
       </div>
     </React.Fragment>
