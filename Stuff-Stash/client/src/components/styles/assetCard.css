@@ -137,5 +137,11 @@
 }
 
 label {
-  margin-right: 10px;
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.btn-confirm {
+  margin-left: auto;
 }

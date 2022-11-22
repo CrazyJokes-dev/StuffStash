@@ -7,7 +7,10 @@ const UpdateForm = () => {
         <label for="Name">Name : </label>
         <input />
       </div>
-
+      <div class="form-group m-3">
+        <label for="Serial Code">Serial Code : </label>
+        <input />
+      </div>
       <div class="form-group m-3">
         <label for="avail">Availability :</label>
         <input />
@@ -28,12 +31,14 @@ const UpdateForm = () => {
         </select>
       </div>
       <div class="form-group m-3">
-        <label for="WarrDate">Warrenty Date :</label>
+        <label for="WarrDate">Warranty Date :</label>
         <input />
       </div>
-      <button type="submit" class="btn btn-primary m-3 ">
-        Confirm{" "}
-      </button>
+      <div className="text-center">
+        <button type="submit" className="btn btn-primary m-3 ">
+          Confirm{" "}
+        </button>
+      </div>
     </form>
   );
 };
