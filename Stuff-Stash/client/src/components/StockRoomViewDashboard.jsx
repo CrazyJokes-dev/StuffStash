@@ -5,12 +5,14 @@ import React from "react";
 import Axios from "axios";
 
 const StockRoomViewDashboard = () => {
+  
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
+  const [org, setOrg] = useState("");
+  const [stockroomName, setStockroomName] = useState("");
   //const [orgName, setOrgName] = useState({});
   const [error, setError] = useState();
   let history = useHistory();
   const userid = ReactSession.get("username");
-
   const orgName = ReactSession.get("selectedOrg");
 
   const linkStyle = {
@@ -18,6 +20,8 @@ const StockRoomViewDashboard = () => {
     color: "white",
   };
 
+
+      
   useEffect(() => {
     Axios.get(
       `http://localhost:3000/api/v1/users/viewstock/${orgName}`
@@ -29,6 +33,32 @@ const StockRoomViewDashboard = () => {
         setError(err);
       });
   }, [orgName]);
+  
+  const handleClick = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/deleteStockroom', {
+        method: 'POST',
+        body: JSON.stringify({
+          org,
+          stockroomName
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      console.log('result is: ', JSON.stringify(result, null, 4));
+    } catch (err) {
+    } finally {
+    }
+  };
 
   return (
     <React.Fragment>
