@@ -30,8 +30,6 @@ const assetSchema = new mongoose.Schema({
     warranty: {
         type: String
     }
-
-
 })
 
 module.exports = mongoose.model('assets', assetSchema);
