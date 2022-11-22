@@ -14,7 +14,7 @@ class UserProfile extends Component {
     console.log(user);
     return (
       <React.Fragment>
-        <div className="userDiv">
+        <div className="userDiv display-6">
           <p>Welcome {user}</p>
         </div>
       </React.Fragment>
