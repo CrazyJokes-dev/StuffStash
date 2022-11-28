@@ -4,14 +4,15 @@ import { ReactSession } from "react-client-session";
 import React from "react";
 import Axios from "axios";
 
-const StockRoomViewDashboard = () => {
+const StockRoomViewDashboard = ({orgName}) => {
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
   //const [orgName, setOrgName] = useState({});
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
+  
   let history = useHistory();
   const userid = ReactSession.get("username");
 
-  const orgName = ReactSession.get("selectedOrg");
+  //const orgName = ReactSession.get("selectedOrg");
 
   const linkStyle = {
     textDecoration: "none",
@@ -24,15 +25,22 @@ const StockRoomViewDashboard = () => {
     )
       .then((response) => {
         setListOfStockRoom(response.data);
+        setError(null);
+        
       })
-      .catch((err) => {
-        setListOfStockRoom("");
-        setError(err);
-      });
+      .catch((err)=>{
+           setListOfStockRoom("");
+           setError(err.response.data.msg);
+             
+      })
   }, [orgName]);
-
+  
+ 
   return (
+   
     <React.Fragment>
+      <br />
+      {error && <div>{error}</div>}
       {Object.entries(listOfStockRoom).map(([key, value]) => {
         return (
           <li className="list-group-item bg-transparent" key={value.name}>
@@ -51,7 +59,9 @@ const StockRoomViewDashboard = () => {
           </li>
         );
       })}
+        
     </React.Fragment>
+      
   );
 };
 export default StockRoomViewDashboard;

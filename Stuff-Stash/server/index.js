@@ -111,9 +111,8 @@ app.get("/api/v1/users/viewstock/:orgName", (req, res) => {
 
   StockroomModel.find({ org: orgName }, { name: 1, _id: 0 }).then((result) => {
     if (result == "")
-      return res.status(400).json({
-        msg: "Sorry,We did not find any stockrooms under this organization",
-      });
+      return res.status(404).json({msg: "Sorry,We did not find any stockrooms under this organization" });
+    
     else {
       return res.json(result);
     }
