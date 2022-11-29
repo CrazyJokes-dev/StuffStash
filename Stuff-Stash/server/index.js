@@ -22,6 +22,49 @@ mongoose.connect(
   "mongodb+srv://estefan:teamwork@cluster0.qf1w4nh.mongodb.net/TechStartUp?retryWrites=true&w=majority"
 );
 
+app.post("/api/v1/users/adduserOrg", (req, res) => {
+  const { orgname, orgid, userid } = req.body;
+
+  if (!orgname || !orgid) {
+    return res.status(400).json({ msg: "Please enter all the fields" });
+  }
+  OrgModel.findOne({ name: orgname }).then((org) => {
+    if (!org)
+      return res.status(400).json({ msg: "Organization name does not exist" });
+
+    bcrypt.compare(orgid, org.OrgAccessCode).then((isMatch) => {
+      if (!isMatch) return res.status(400).json({ msg: "Invalid access code" });
+
+      const finduser = UserModel.findOne({ username: userid });
+      finduser
+        .findOne({
+          $and: [
+            { "organizationID.name": orgname },
+            { "organizationID.Accesscode": orgid },
+          ],
+        })
+        .then((msg) => {
+          if (msg)
+            return res
+              .status(400)
+              .json({ msg: "User alreadys exists under the Organization" });
+          else {
+            const a = { name: orgname, Accesscode: orgid };
+            UserModel.findOneAndUpdate(
+              { username: userid },
+              { $push: { organizationID: [a] } },
+              { upsert: true }
+            ).then((result) => {
+              if (result)
+                return res
+                  .status(200)
+                  .json({ msg: "User added successfully", org });
+            });
+          }
+        });
+    });
+  });
+});
 //**USER API**
 
 app.post("/api/v1/users/createUser", (req, res) => {
@@ -105,6 +148,27 @@ app.post("/api/v1/addStockroom", async (req, res) => {
   await newStockroom.save();
   res.json(stockroom);
 });
+
+//this creates an asset under a given stockroom
+app.post("/api/v1/addAsset", async (req, res) => {
+  console.log("Adding asset");
+  const stockroom = req.body.stockroomName;
+  const asset = req.body.asset;
+  const { identifier, category, isAvailable, condition, serialCode, warranty } = req.body.asset;
+  const filter = { name: stockroom };
+  if (
+    identifier == null ||
+    stockroom == null
+  ) {
+    return res.status(400).json({ msg: "Missing information" });
+  } else {
+    const update = { $push: { assets: asset } };
+    await StockroomModel.findOneAndUpdate(filter, update);
+    res.json(asset);
+  }
+});
+
+//END STOCKROOM CALLS
 
 app.get("/api/v1/users/viewstock/:orgName", (req, res) => {
   const orgName = req.params.orgName;
@@ -229,7 +293,7 @@ app.post("/api/v1/addAsset", async (req, res) => {
   console.log("Adding asset");
   const stockroom = req.body.stockroomName;
   const asset = req.body.asset;
-  const { identifier, category, isAvailable } = req.body.asset;
+  const { identifier, category, isAvailable, condition, serialCode, warranty } = req.body.asset;
   const filter = { name: stockroom };
   if (identifier == null || category == null || isAvailable == null || stockroom == null) {
     return res.status(400).json({ msg: "Missing information" });
