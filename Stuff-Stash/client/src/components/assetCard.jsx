@@ -30,6 +30,11 @@ const Assetcard = () => {
       {/** overall container for card */}
       <div className={`card-grid card ${flip ? "flip" : ""}`}>
         <div className="front row" onClick={() => setFlip(!flip)}>
+          <div className="edit-btn">
+            <div className="edit-icon" onClick={() => setFlip(!flip)}>
+              &#9998;
+            </div>
+          </div>
           {/** left side container -- has static img and avail, warrenty, condition */}
           <div className="left__card col">
             {/** contains img and avail */}
@@ -51,13 +56,17 @@ const Assetcard = () => {
             <hr />
             {/** contains condition and warrenty date */}
             <div className="asset-info">
-              <span className="">Asset Info</span>
+              <span className="">Asset Info </span>
               <p className="cond-text">Condition: Mint</p>
               <p className="cond-text">Warrenty Date: 12/12/2022</p>
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
+          <div className="delete-btn">
+            <div className="delete-icon">&#128465;</div>
+          </div>
         </div>
+
         <div className="back row" onClick={() => setFlip(!flip)}>
           <div className="col">Content</div>
         </div>

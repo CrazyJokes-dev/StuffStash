@@ -123,3 +123,28 @@
 .right__card {
   /* background: teal; */
 }
+.edit-btn {
+  display: flex;
+}
+
+.edit-btn .edit-icon {
+  margin-left: auto;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.edit-icon:hover {
+  transform: scale(1.2);
+}
+
+.delete-btn {
+  display: flex;
+}
+.delete-btn .delete-icon {
+  margin-left: auto;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-icon:hover {
+  transform: scale(1.2);
+}
