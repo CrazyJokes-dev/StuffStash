@@ -2,14 +2,14 @@
   color: black;
 }
 
-/* .card-grid {
+.card-grid {
   display: grid;
   align-items: center;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
   margin: 20px 20px 20px 45px;
   padding: 30px;
-} */
+}
 
 .card {
   display: flex;
@@ -18,15 +18,15 @@
   align-items: center;
   position: relative;
   cursor: pointer;
-  border-radius: .35rem;
+  border-radius: 0.35rem;
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
-  background-color: rgba(245, 245, 245, .973);
+  background-color: rgba(245, 245, 245, 0.973);
   transform-style: preserve-3d;
   transition: 150ms;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
   height: 400px;
-  width: 1000px;
+  width: 500px;
   margin: 10px;
 }
 
@@ -41,7 +41,7 @@
   opacity: 0;
 }
 
-.card:hover  .edit-opt {
+.card:hover .edit-opt {
   text-decoration: underline;
   color: aliceblue;
   opacity: 1;
@@ -51,10 +51,10 @@
   --rotate-y: 180deg;
 }
 
-.card .front{
-  left: 0;
+.card .front {
+  height: 100%;
+  width: 100%;
 }
-
 
 .card .front,
 .card .back {
