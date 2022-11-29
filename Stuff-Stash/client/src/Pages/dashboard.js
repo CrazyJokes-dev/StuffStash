@@ -35,7 +35,7 @@ class Dashboard extends Component {
   state = {};
   render() {
     return (
-      <div className="back container-fluid d-flex m-0 p-0">
+      <div className="back-ground container-fluid d-flex m-0 p-0">
         {/** COL 1 -- LEFT SIDE */}
         <div className="leftDisplay">
           <div className="container-fluid userDisplay d-flex justify-content-center">
