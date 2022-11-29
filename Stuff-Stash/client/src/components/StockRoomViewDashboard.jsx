@@ -61,7 +61,7 @@ const StockRoomViewDashboard = () => {
     setOrg(orgName);
     console.log(event.currentTarget.id);
     setStockroomName(event.currentTarget.id);
-    document.getElementById("deletebutton").hidden = false;
+    document.getElementById("stock" + event.currentTarget.id).hidden = false;
   };
 
   return (
@@ -82,7 +82,7 @@ const StockRoomViewDashboard = () => {
                       <span className="btnLabel">{name[1]}</span>
                     </button>
                   </div>
-                  <button id="deletebutton" onClick={handleClick} type="hidden" hidden="true">
+                  <button id={"stock" + name[1]} onClick={handleClick} type="hidden" hidden="true">
                     Delete
                   </button>
                 </div>
