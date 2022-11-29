@@ -32,36 +32,23 @@ const StockRoomViewDashboard = () => {
       });
   }, [orgName]);
 
-  //function useViewAssets(stockroom) {
-  const useViewAssets = (event) => {
-    const [Assets, setAssets] = useState([]);
+  useEffect(() => {
+    Axios.get(
+      `http://localhost:3000/api/v1/users/viewAssets/${orgName}/${stockroomName}`
+    )
+      .then((response) => {
+        setListOfAssets(response.data);
+        console.log(listOfAssets);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  }, [stockroomName]);
 
-    ReactSession.set("selectedStockroom", event.currentTarget.id);
-    stockroomName = ReactSession.get("selectedStockroom");
-    console.log("Selected Stockroom is currently " + event.currentTarget.id);
-
-    useEffect(() => {
-      Axios.get(
-        `http://localhost:3000/api/v1/users/viewAssets/${orgName}/${stockroomName}`
-      )
-        .then((response) => {
-          setAssets(response.data);
-          console.log(Assets);
-        })
-        .catch((err) => {
-          setError(err);
-        });
-    }, [stockroomName]);
-    
-    return Assets;
-  }
-
-  const SetStockroomSession = (event) => {
-    const Assets = useViewAssets(event);
+  const setStockroomSession = (event) => {
     console.log("Selected Stockroom is currently " + event.currentTarget.id);
     ReactSession.set("selectedStockroom", event.currentTarget.id);
     stockroomName = ReactSession.get("selectedStockroom");
-    
   }
 
   return (
@@ -72,7 +59,7 @@ const StockRoomViewDashboard = () => {
             {Object.entries(value).map((name, key) => {
               return (
                 <div className="container-fluid buttonItem shadowbtn" key={name[1]}>
-                  <button id={name[1]} className="toggle-btn" onClick={useViewAssets} data-active="inactive">
+                  <button id={name[1]} className="toggle-btn" onClick={setStockroomSession} data-active="inactive">
                     <span className="btnLabel">{name[1]}</span>
                   </button>
                 </div>
