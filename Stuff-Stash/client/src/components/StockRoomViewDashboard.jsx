@@ -13,7 +13,7 @@ const StockRoomViewDashboard = () => {
   const userid = ReactSession.get("username");
 
   const orgName = ReactSession.get("selectedOrg");
-  //const stockroomName = ReactSession.get("selectedStock");
+  var stockroomName = ReactSession.get("selectedStockroom");
 
   const linkStyle = {
     textDecoration: "none",
@@ -32,18 +32,37 @@ const StockRoomViewDashboard = () => {
       });
   }, [orgName]);
 
-  useEffect(() => {
-    Axios.get(
-      `http://localhost:3000/api/v1/users/viewAssets/${orgName}`
-    )
-      .then((response) => {
-        setListOfAssets(response.data);
-        //console.log(listOfAssets);
-      })
-      .catch((err) => {
-        setError(err);
-      });
-  }, [orgName]);
+  //function useViewAssets(stockroom) {
+  const useViewAssets = (event) => {
+    const [Assets, setAssets] = useState([]);
+
+    ReactSession.set("selectedStockroom", event.currentTarget.id);
+    stockroomName = ReactSession.get("selectedStockroom");
+    console.log("Selected Stockroom is currently " + event.currentTarget.id);
+
+    useEffect(() => {
+      Axios.get(
+        `http://localhost:3000/api/v1/users/viewAssets/${orgName}/${stockroomName}`
+      )
+        .then((response) => {
+          setAssets(response.data);
+          console.log(Assets);
+        })
+        .catch((err) => {
+          setError(err);
+        });
+    }, [stockroomName]);
+    
+    return Assets;
+  }
+
+  const SetStockroomSession = (event) => {
+    const Assets = useViewAssets(event);
+    console.log("Selected Stockroom is currently " + event.currentTarget.id);
+    ReactSession.set("selectedStockroom", event.currentTarget.id);
+    stockroomName = ReactSession.get("selectedStockroom");
+    
+  }
 
   return (
     <React.Fragment>
@@ -53,7 +72,7 @@ const StockRoomViewDashboard = () => {
             {Object.entries(value).map((name, key) => {
               return (
                 <div className="container-fluid buttonItem shadowbtn" key={name[1]}>
-                  <button id={name[1]} className="toggle-btn" data-active="inactive">
+                  <button id={name[1]} className="toggle-btn" onClick={useViewAssets} data-active="inactive">
                     <span className="btnLabel">{name[1]}</span>
                   </button>
                 </div>
@@ -67,7 +86,7 @@ const StockRoomViewDashboard = () => {
           <li className="list-group-item bg-transparent" key={value.name}>
               {/* {console.log(value.assets[0].identifier)} */}
               <div>
-                <h4>{value.assets[0].identifier}</h4>
+                {/* <h4>{value.assets[0]}</h4> */}
               </div>
           </li>
         );
