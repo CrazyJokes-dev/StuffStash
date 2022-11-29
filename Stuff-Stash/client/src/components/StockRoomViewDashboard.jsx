@@ -29,12 +29,8 @@ const StockRoomViewDashboard = () => {
       });
   }, [orgName]);
 
+  var check = false;
   const handleClick = async (event) => {
-    console.log(event.currentTarget.id);
-    setStockroomName(event.currentTarget.id);
-    setOrg(orgName);
-    console.log(org);
-    console.log(stockroomName);
     try {
       const response = await fetch("http://localhost:3000/api/v1/deleteStockroom", {
         method: "POST",
@@ -57,17 +53,16 @@ const StockRoomViewDashboard = () => {
       console.log("result is: ", JSON.stringify(result, null, 4));
     } catch (err) {
     } finally {
+      window.location.reload();
     }
   };
 
-  // const setstocksession = (event) => {
-  //   console.log(event.currentTarget.id);
-  //   setStockroomName(event.currentTarget.id);
-  //   setOrg(orgName);
-  //   console.log(org);
-  //   console.log(stockroomName);
-  //   handleClick;
-  // };
+  const setsessions = (event) => {
+    setOrg(orgName);
+    console.log(event.currentTarget.id);
+    setStockroomName(event.currentTarget.id);
+    document.getElementById("deletebutton").hidden = false;
+  };
 
   return (
     <React.Fragment>
@@ -78,12 +73,17 @@ const StockRoomViewDashboard = () => {
               return (
                 <div>
                   <div className="container-fluid buttonItem shadowbtn" key={name[1]}>
-                    <button className="toggle-btn" data-active="inactive">
+                    <button
+                      className="toggle-btn"
+                      data-active="inactive"
+                      id={name[1]}
+                      onClick={setsessions}
+                    >
                       <span className="btnLabel">{name[1]}</span>
                     </button>
                   </div>
-                  <button id={name[1]} onClick={handleClick}>
-                    xx
+                  <button id="deletebutton" onClick={handleClick} type="hidden" hidden="true">
+                    Delete
                   </button>
                 </div>
               );
