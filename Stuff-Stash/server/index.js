@@ -197,7 +197,7 @@ app.get("/api/v1/orgs/getOrgs", (req, res) => {
 });
 
 app.post("/api/v1/org/createOrg", (req, res) => {
-  const { name, OrgAccessCode } = req.body;
+  const { name, OrgAccessCode ,userid } = req.body;
 
   //Checks to see if another Organization already exists in the database and rejects it if there is one.
   OrgModel.findOne({ name }).then((org) => {
@@ -216,7 +216,14 @@ app.post("/api/v1/org/createOrg", (req, res) => {
 
         newOrg.OrgAccessCode = hash;
 
-        // saves the org to the database
+        //user joins the organization automatically while creating it
+        const b = { name: name, Accesscode: OrgAccessCode };
+       UserModel.findOneAndUpdate({ username: userid },{ $push: { organizationID: [b] }},{ upsert: true }).then(result=>{
+              if(result) console.log(result);
+       })
+        
+        
+         // saves the org to the database
         // must be inside bcrypt.hash() or else the password saved won't be encrypted
         newOrg
           .save()
@@ -238,6 +245,8 @@ app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
     return res.status(200).json({ msg: "Done, succesfully", org });
   });
 });
+
+
 app.post("/api/v1/users/adduserOrg", (req, res) => {
   const { orgname, orgid, userid } = req.body;
 
