@@ -227,7 +227,7 @@ app.get("/api/v1/users/viewAssets/:orgName/:stockroomName", (req, res) => {
         msg: "Sorry,We did not find any stockrooms under this organization",
       });
     else {
-      return res.json(result);
+      return res.status(200).json(result);
     }
   });
 });
