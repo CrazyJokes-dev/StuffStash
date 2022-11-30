@@ -25,9 +25,10 @@
   transition: 150ms;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
-  height: 400px;
-  width: 500px;
+  height: 350px;
+  width: 800px;
   margin: 10px;
+
 }
 
 .card:hover {

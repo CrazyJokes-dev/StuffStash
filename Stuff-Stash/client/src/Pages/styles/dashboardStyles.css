@@ -10,11 +10,24 @@
   padding: 1em;
 }
 
+.rightDisplay {
+  padding: 1em;
+}
+
 .stckRoomDisplay {
   max-height: 80vh;
-  margin: 2em;
+  margin: 1em;
   padding: 1em;
+  padding-left: 0;
+  margin-left: 0;
   overflow: auto;
+}
+
+.assetDisplay {
+  max-height: 100vh;
+  display: flexbox;
+  padding: 1em;
+  overflow-y: auto;
 }
 
 .stockroom-list {
