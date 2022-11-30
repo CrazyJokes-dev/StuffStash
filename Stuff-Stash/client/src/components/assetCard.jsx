@@ -13,11 +13,10 @@ import "./styles/assetCard.css";
 //   console.log("Click Handled");
 // }
 
-
 const Assetcard = () => {
   const [flip, setFlip] = useState(false);
 
-  function test() { 
+  function test() {
     return (
       <span className="edit-opt" onClick={() => setFlip(!flip)}>
         EDIT
@@ -25,7 +24,7 @@ const Assetcard = () => {
       </span>
     );
   }
-  
+
   return (
     <React.Fragment>
       {/** overall container for card */}
@@ -48,8 +47,8 @@ const Assetcard = () => {
                   <span>Availibility: Checked Out</span>
                 </div>
               </div>
-              <hr />
             </div>
+            <hr />
             {/** contains condition and warrenty date */}
             <div className="asset-info">
               <span className="">Asset Info</span>
@@ -58,9 +57,6 @@ const Assetcard = () => {
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
-          <div className="right__card col">
-            <span>More Info Here</span>
-          </div>
         </div>
         <div className="back row" onClick={() => setFlip(!flip)}>
           <div className="col">Content</div>
