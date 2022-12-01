@@ -5,16 +5,17 @@ import "./styles/dashboardStyles.css";
 import OrgViewDashboard from "../components/orgView";
 import StockRoomViewDashboard from "../components/StockRoomViewDashboard";
 import UserProfile from "../components/UserProfile";
+import ViewMembers from "../components/ViewMembers";
 
 //styles -----------------------------
 
 const styling = {
-  width: "300px",
+	width: "300px",
 };
 
 const linkStyle = {
-  textDecoration: "none",
-  color: "white",
+	textDecoration: "none",
+	color: "white",
 };
 
 //-------------------------------------
@@ -33,6 +34,7 @@ const currentOrg = ReactSession.get("selectedOrg");
 console.log(currentOrg);
 
 class Dashboard extends Component {
+
   state = {};
   render() {
     return (
@@ -94,6 +96,18 @@ class Dashboard extends Component {
             </ul>
           </div>
         </div>
+        {/** COL 3 -- RIGHT SIDE */}
+				<div className="container-fluid rightDisplay col">
+					<div className="stckRoomDisplay justify-content-center">
+						<span className="display-3">
+							Organization Members
+						</span>
+						{/** Div for displaying stockrooms of org when org button or link is clicked*/}
+						<ul className="stockroom-list list-group list-group-flush">
+							<ViewMembers />
+						</ul>
+					</div>
+				</div>
       </div>
     );
   }
