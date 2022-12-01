@@ -1,4 +1,4 @@
-.back {
+.back-ground {
   min-height: 90vh;
   height: 100%;
   margin: 0;
@@ -80,13 +80,13 @@
 .userDiv {
   display: flex;
   color: rgb(172, 82, 236);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 .userDiv p {
   color: rgb(255, 255, 255);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 45px;
+  font-size: 42px;
   text-align: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .imgDiv {
