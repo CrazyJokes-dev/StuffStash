@@ -58,18 +58,13 @@ const StockRoomViewDashboard = () => {
     }
   };
 
-  var flag = false;
   const setsessions = (event) => {
-    console.log("flag is" + flag);
     setOrg(orgName);
-    console.log(event.currentTarget.id);
     setStockroomName(event.currentTarget.id);
-    if (flag == false) {
-      flag = true;
+    if (document.getElementById("stock" + event.currentTarget.id).hidden == true) {
       document.getElementById("stock" + event.currentTarget.id).hidden = false;
-    } else if (flag == true) {
-      document.getElementById("stock" + stockroomName).hidden = true;
-      flag = false;
+    } else if (document.getElementById("stock" + event.currentTarget.id).hidden == false) {
+      document.getElementById("stock" + event.currentTarget.id).hidden = true;
     }
   };
 
