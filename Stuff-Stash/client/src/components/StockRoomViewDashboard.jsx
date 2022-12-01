@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { ReactSession } from "react-client-session";
+import Assetcard from "../components/assetCard";
 import React from "react";
 import Axios from "axios";
 
@@ -75,11 +76,7 @@ const StockRoomViewDashboard = () => {
               return (
                 <div>
                   {console.log(name[1])}
-                  <h5>Identifier: {name[1].identifier}</h5>
-                  <h5>Category: {name[1].category}</h5>
-                  <h5>Availability: {name[1].isAvailable}</h5>
-                  <h5>Current Condition: {name[1].condition}</h5>
-                  <br></br>
+                  <Assetcard name={name[1].identifier} avail={name[1].isAvailable} cond={name[1].condition} date={name[1].warranty}/>
                 </div>
               )
             })}
