@@ -9,16 +9,10 @@ import UserProfile from "../components/UserProfile";
 import Assetcard from "../components/assetCard";
 
 //styles -----------------------------
-
-const styling = {
-  width: "300px",
-};
-
 const linkStyle = {
   textDecoration: "none",
   color: "white",
 };
-
 //-------------------------------------
 
 const logoutUser = async (e) => {
@@ -96,16 +90,6 @@ class Dashboard extends Component {
               <ul className="stockroom-list list-group list-group-flush">
                 <StockRoomViewDashboard />
               </ul>
-            </div>
-            <div className="assetDisplay col">
-              <Assetcard name="Asset One" avail="Checked Out" cond="Broken"/>
-              <Assetcard name="Asset Two"/>
-              <Assetcard />
-              <Assetcard />
-              <Assetcard />
-              <Assetcard />
-              <Assetcard />
-              Factory
             </div>
           </div>
         </div>
