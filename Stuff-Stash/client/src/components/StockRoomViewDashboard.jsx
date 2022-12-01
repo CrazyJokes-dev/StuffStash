@@ -28,7 +28,6 @@ const StockRoomViewDashboard = () => {
         setListOfStockRoom(response.data);
       })
       .catch((err) => {
-        setListOfStockRoom("");
         setError(err);
       });
   }, [orgName]);
@@ -78,7 +77,7 @@ const StockRoomViewDashboard = () => {
                   {console.log(name[1])}
                   <h5>Identifier: {name[1].identifier}</h5>
                   <h5>Category: {name[1].category}</h5>
-                  <h5>Availability: {name[1].isAvaliable}</h5>
+                  <h5>Availability: {name[1].isAvailable}</h5>
                   <h5>Current Condition: {name[1].condition}</h5>
                   <br></br>
                 </div>
