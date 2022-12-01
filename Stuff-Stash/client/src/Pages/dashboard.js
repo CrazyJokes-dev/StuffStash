@@ -24,6 +24,7 @@ const logoutUser = async (e) => {
   ReactSession.remove("orgID");
   ReactSession.remove("selectedOrg");
   alert("You are now logged out!");
+  window.location.reload();
 };
 
 const username = ReactSession.get("username");
@@ -76,10 +77,7 @@ class Dashboard extends Component {
                 Create Asset
               </Link>
             </div>
-            <div
-              className="btn btn-success m-1 button button1"
-              onClick={logoutUser}
-            >
+            <div className="btn btn-success m-1 button button1" onClick={logoutUser}>
               <Link to="/#" exact style={linkStyle}>
                 Logout
               </Link>
