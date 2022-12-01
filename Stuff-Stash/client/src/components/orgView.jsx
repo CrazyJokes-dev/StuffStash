@@ -13,7 +13,8 @@ const OrgViewDashboard = () => {
   function handleClick(orgname) {
     ReactSession.set("selectedOrg", orgname);
     let selectedOrg = ReactSession.get("selectedOrg");
-    console.log(selectedOrg);
+    console.log("The currently selected organization" + selectedOrg);
+    document.getElementById("AssetList").setAttribute("hidden", "hidden");
     history.push("/dashboard");
   }
 

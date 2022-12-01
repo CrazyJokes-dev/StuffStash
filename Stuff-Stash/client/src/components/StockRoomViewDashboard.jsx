@@ -48,6 +48,8 @@ const StockRoomViewDashboard = () => {
       .catch((err) => {
         setError(err);
       });
+
+      document.getElementById("AssetList").removeAttribute("hidden");
   };
 
   return (
@@ -67,6 +69,7 @@ const StockRoomViewDashboard = () => {
           </li>
         );
       })}
+      <div id="AssetList" hidden="hidden">
       {Object.entries(listOfAssets).map(([key, value]) => {
         return (
           <li className="list-group-item bg-transparent" key={value.name}>
@@ -74,18 +77,18 @@ const StockRoomViewDashboard = () => {
             {Object.entries(value.assets).map((name, key) => {
               return (
                 <div>
-                  {console.log(name[1])}
                   <h5>Identifier: {name[1].identifier}</h5>
                   <h5>Category: {name[1].category}</h5>
                   <h5>Availability: {name[1].isAvaliable}</h5>
                   <h5>Current Condition: {name[1].condition}</h5>
-                  <br></br>
+                  <br></br> {/* This makes the whitespace between each asset so they don't look super cluttered*/}
                 </div>
               )
             })}
           </li>
         );
       })}
+      </div>
     </React.Fragment>
   );
 };
