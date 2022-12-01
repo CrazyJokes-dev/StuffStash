@@ -24,9 +24,10 @@
 }
 
 .assetDisplay {
+  background: rgb(109, 107, 107);
   max-height: 100vh;
   display: flexbox;
-  padding: 1em;
+  padding: .5em;
   overflow-y: auto;
 }
 

@@ -17,8 +17,8 @@ import RenameOrgPage from "./components/RenameOrg";
 import AddUserOrg from "./Pages/AddUserOrg";
 import viewstockroomFrontend from "./Pages/viewstockroomFrontend";
 import AssetForm from "./Pages/addAssetForm";
-
 import assetCard from "./components/assetCard";
+import "./App.css";
 
 // sets storage type for session variables
 ReactSession.setStoreType("localStorage");
