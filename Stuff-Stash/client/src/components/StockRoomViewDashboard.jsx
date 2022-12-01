@@ -7,6 +7,7 @@ import Axios from "axios";
 const StockRoomViewDashboard = () => {
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
   const [org, setOrg] = useState("");
+
   const [stockroomName, setStockroomName] = useState("");
   //const [orgName, setOrgName] = useState({});
   const [error, setError] = useState();
@@ -30,7 +31,6 @@ const StockRoomViewDashboard = () => {
       });
   }, [orgName]);
 
-  var check = false;
   const handleClick = async (event) => {
     try {
       const response = await fetch("http://localhost:3000/api/v1/deleteStockroom", {
@@ -58,11 +58,19 @@ const StockRoomViewDashboard = () => {
     }
   };
 
+  var flag = false;
   const setsessions = (event) => {
+    console.log("flag is" + flag);
     setOrg(orgName);
     console.log(event.currentTarget.id);
     setStockroomName(event.currentTarget.id);
-    document.getElementById("stock" + event.currentTarget.id).hidden = false;
+    if (flag == false) {
+      flag = true;
+      document.getElementById("stock" + event.currentTarget.id).hidden = false;
+    } else if (flag == true) {
+      document.getElementById("stock" + stockroomName).hidden = true;
+      flag = false;
+    }
   };
 
   return (
