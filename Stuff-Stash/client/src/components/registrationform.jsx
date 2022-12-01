@@ -106,7 +106,6 @@ function RegForm() {
               />
               <label id="id2"></label>
             </div>
-
             <div class="form-group m-3">
               <label class="form-label" for="repeat password">
                 Repeat Password
@@ -122,21 +121,6 @@ function RegForm() {
                 }}
               />
               <label id="id3"></label>
-            </div>
-            <div class="form-group m-3">
-              <label class="form-label" for="organization ID">
-                Organization ID (Optional)
-              </label>
-              <input
-                type="Organization ID"
-                id="Organization ID"
-                class="form-control"
-                placeholder="Enter organization ID"
-                onChange={(event) => {
-                  setOrganizationID(event.target.value);
-                }}
-              />
-              <label id="id4"></label>
             </div>
             <button type="submit" class="btn btn-primary m-3">
               Submit
