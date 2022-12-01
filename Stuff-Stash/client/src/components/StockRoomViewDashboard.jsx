@@ -25,6 +25,7 @@ const StockRoomViewDashboard = () => {
         setListOfStockRoom(response.data);
       })
       .catch((err) => {
+        setListOfStockRoom("");
         setError(err);
       });
   }, [orgName]);

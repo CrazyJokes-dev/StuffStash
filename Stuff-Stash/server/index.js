@@ -189,8 +189,43 @@ app.post("/api/v1/addAsset", async (req, res) => {
 
 //END STOCKROOM CALLS
 
+app.get("/api/v1/users/viewmembers/:orgName", (req, res) => {
+  const orgName = req.params.orgName;
+  UserModel.find(
+    { organizationID: { $elemMatch: { name: orgName } } },
+    { _id: 0, username: 1 }
+  ).then((result) => {
+    if (result == "")
+      return res.status(400).json({
+        msg: "Sorry,We did not find any members under this organization",
+      });
+    else {
+      res.json(result);
+    }
+  });
+});
+
+//this creates an asset under a given stockroom
+app.post("/api/v1/addAsset", async (req, res) => {
+  console.log("Adding asset");
+  const stockroom = req.body.stockroomName;
+  const asset = req.body.asset;
+  const { identifier, category, isAvailable, condition, serialCode, warranty } = req.body.asset;
+  const filter = { name: stockroom };
+  if (identifier == null || stockroom == null) {
+    return res.status(400).json({ msg: "Missing information" });
+  } else {
+    const update = { $push: { assets: asset } };
+    await StockroomModel.findOneAndUpdate(filter, update);
+    res.json(asset);
+  }
+});
+
+//END STOCKROOM CALLS
+
 app.get("/api/v1/users/viewstock/:orgName", (req, res) => {
   const orgName = req.params.orgName;
+
   StockroomModel.find({ org: orgName }, { name: 1, _id: 0 }).then((result) => {
     if (result == "")
       return res.status(400).json({
@@ -266,7 +301,6 @@ app.post("/api/v1/orgs/RenameOrgization", (req, res) => {
     return res.status(200).json({ msg: "Done, succesfully", org });
   });
 });
-
 app.post("/api/v1/users/adduserOrg", (req, res) => {
   const { orgname, orgid, userid } = req.body;
 
@@ -286,9 +320,7 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
         })
         .then((msg) => {
           if (msg)
-            return res.status(400).json({
-              msg: "User alreadys exists under the Organization",
-            });
+            return res.status(400).json({ msg: "User alreadys exists under the Organization" });
           else {
             const a = { name: orgname, Accesscode: orgid };
             UserModel.findOneAndUpdate(
@@ -296,11 +328,7 @@ app.post("/api/v1/users/adduserOrg", (req, res) => {
               { $push: { organizationID: [a] } },
               { upsert: true }
             ).then((result) => {
-              if (result)
-                return res.status(200).json({
-                  msg: "User added successfully",
-                  org,
-                });
+              if (result) return res.status(200).json({ msg: "User added successfully", org });
             });
           }
         });
