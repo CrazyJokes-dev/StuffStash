@@ -14,13 +14,8 @@ class UserProfile extends Component {
     console.log(user);
     return (
       <React.Fragment>
-        <div className="userDiv">
+        <div className="userDiv display-6">
           <p>Welcome {user}</p>
-        </div>
-        <div class="col-sm">
-          <div class="container-sm">
-            <img className="imgDiv" src={require("./sour_patch.jpg")} />
-          </div>
         </div>
       </React.Fragment>
     );
