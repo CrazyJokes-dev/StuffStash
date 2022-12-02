@@ -391,7 +391,8 @@ app.post("/api/v1/UpdateAsset", async (req, res) => {
       return res.status(200).json({msg:"It worked"});
      });
 
-  app.post("/api/v1/deleteAsset", async (req, res) => {
+});
+app.post("/api/v1/deleteAsset", async (req, res) => {
   console.log("delet asset");
   const stockroom = req.body.stockroomName;
   const { identifier } = req.body;
@@ -404,8 +405,6 @@ app.post("/api/v1/UpdateAsset", async (req, res) => {
       return res.status(200).json({msg:"It worked"});
      });
      
-});
-
 });
 app.use("/api/v1/orgs/", orgs);
 
