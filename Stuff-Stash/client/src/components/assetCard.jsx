@@ -4,9 +4,8 @@ import UpdateForm from "../utils/UpdateForm";
 import { ReactSession } from "react-client-session";
 const Assetcard = (props) => {
   const [flip, setFlip] = useState(false);
-
   var stockroom=ReactSession.get("selectedStockroom");
-   var identifier =props.name;
+  var identifier =props.name;
   
   function test() {
     return (
@@ -17,8 +16,6 @@ const Assetcard = (props) => {
     );
   }
   const deleteAsset = async (event) => {
-    // console.log(identifier);
-    // console.log(stockroom);
    try {
     const response = await fetch("http://localhost:3000/api/v1/deleteAsset", {
       method: "POST",
