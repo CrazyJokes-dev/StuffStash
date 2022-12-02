@@ -81,7 +81,7 @@ const Assetcard = (props) => {
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
-          <div className="delete-btn" onClick={deleteAsset}>
+          <div className="delete-btn" onClick={ () => {deleteAsset(); alert("Asset has been deleted"); }}>
             <div className="delete-icon">&#128465;</div>
           </div>
         </div>
