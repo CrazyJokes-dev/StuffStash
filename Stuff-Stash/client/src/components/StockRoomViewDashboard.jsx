@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { ReactSession } from "react-client-session";
+import Assetcard from "../components/assetCard";
 import React from "react";
 import Axios from "axios";
 
 const StockRoomViewDashboard = ({orgName}) => {
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
+  const [listOfAssets, setListOfAssets] = useState([]);
   //const [orgName, setOrgName] = useState({});
   const [error, setError] = useState(null);
   
@@ -46,11 +48,8 @@ const StockRoomViewDashboard = ({orgName}) => {
           <li className="list-group-item bg-transparent" key={value.name}>
             {Object.entries(value).map((name, key) => {
               return (
-                <div
-                  className="container-fluid buttonItem shadowbtn"
-                  key={name[1]}
-                >
-                  <button className="toggle-btn" data-active="inactive">
+                <div className="container-fluid buttonItem shadowbtn" key={name[1]}>
+                  <button id={name[1]} className="toggle-btn" onClick={viewAssets}>
                     <span className="btnLabel">{name[1]}</span>
                   </button>
                 </div>
