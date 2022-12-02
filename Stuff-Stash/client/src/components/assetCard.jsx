@@ -63,6 +63,9 @@ const Assetcard = (props) => {
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
+          <div className="delete-btn">
+            <div className="delete-icon">&#128465;</div>
+          </div>
         </div>
         <div className="back row">
           <div className="col">
