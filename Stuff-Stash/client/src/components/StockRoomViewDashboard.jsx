@@ -23,6 +23,7 @@ const StockRoomViewDashboard = () => {
     Axios.get(`http://localhost:3000/api/v1/users/viewstock/${orgName}`)
       .then((response) => {
         setListOfStockRoom(response.data);
+        
       })
       .catch((err) => {
         setError(err);
@@ -33,12 +34,19 @@ const StockRoomViewDashboard = () => {
   const handleClick = async (event) => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/v1/deleteStockroom",
+        "http://localhost:3000/api/v1/addAsset",
         {
           method: "POST",
           body: JSON.stringify({
-            org,
-            stockroomName,
+            stockroomName: stockroomName,
+          asset: {
+            identifier: "identifier",
+            category: "category",
+            isAvailable: "true",
+            condition: "mint",
+            serialCode: "Undefined",
+            warranty: "Undefined"
+          }
           }),
           headers: {
             "Content-Type": "application/json",
@@ -60,8 +68,10 @@ const StockRoomViewDashboard = () => {
     }
   };
 
-  const setsessions = (event) => {
+  const setsessions = (stock) => {
     document.getElementById("CreateAssetButton").hidden = false;
+    setStockroomName(stock);
+    //console.log(stock);
   };
 
   return (
@@ -80,7 +90,7 @@ const StockRoomViewDashboard = () => {
                       className="toggle-btn"
                       data-active="inactive"
                       id={name[1]}
-                      onClick={setsessions}
+                      onClick={()=>setsessions(name[1])}
                     >
                       <span className="btnLabel">{name[1]}</span>
                     </button>

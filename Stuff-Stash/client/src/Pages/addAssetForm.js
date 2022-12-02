@@ -9,42 +9,42 @@ export default function AssetForm() {
   const [category, setCategory] = useState("");
   let history = useHistory();
 
-  const addAsset = async (e) => {
-    e.preventDefault();
+  //const addAsset = async (e) => {
+  //  e.preventDefault();
     //const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/addStockroom/', {
-    const res = await fetch(
-      "http://localhost:3000/api/v1/addAsset",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          stockroomName: stockroomName,
-          asset: {
-            identifier: identifier,
-            category: category,
-            isAvailable: "true",
-            condition: "mint",
-            serialCode: "Undefined",
-            warranty: "Undefined"
-          },
-        }),
-      }
-    );
-    const data = res.json();
-    if (res.status == 200) {
-      alert(
-        "Successfully created " +
-          identifier +
-          " under the Stockroom named " +
-          stockroomName +
-          "!"
-      );
-    }
-    history.push("/dashboard");
-  };
+  //  const res = await fetch(
+  //    "http://localhost:3000/api/v1/addAsset",
+   //   {
+    //    method: "POST",
+    //    headers: {
+     //     Accept: "application/json",
+     //     "Content-Type": "application/json",
+     //   },
+     //   body: JSON.stringify({
+     //     stockroomName: stockroomName,
+     //     asset: {
+     //       identifier: identifier,
+     //       category: category,
+     //       isAvailable: "true",
+     //       condition: "mint",
+       //     serialCode: "Undefined",
+       //     warranty: "Undefined"
+      //    },
+      //  }),
+     // }
+   // );
+  //  const data = res.json();
+  //  if (res.status == 200) {
+   //   alert(
+   //     "Successfully created " +
+    //      identifier +
+    //      " under the Stockroom named " +
+    //      stockroomName +
+    //      "!"
+   //   );
+  //  }
+  //  history.push("/dashboard");
+  //};
 
   const handleStockName = (e) => {
     setStockRoomName(e.target.value);
