@@ -394,9 +394,7 @@ app.post("/api/v1/UpdateAsset", async (req, res) => {
   app.post("/api/v1/deleteAsset", async (req, res) => {
   console.log("delet asset");
   const stockroom = req.body.stockroomName;
-  const asset = req.body.asset;
-  const { identifier, category, isAvailable } = req.body.asset;
-  const {newIdentifer, newCategory, newIsAvailable} = req.body;
+  const { identifier } = req.body;
   const filter = { name: stockroom };
 
      StockroomModel.findOne(filter).update({},{$pull:{"assets": {identifier:identifier}}}).then((x) => {

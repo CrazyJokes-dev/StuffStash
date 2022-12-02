@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 import "./styles/assetCard.css";
 import UpdateForm from "../utils/UpdateForm";
-
-// function handleClick() {
-//   console.log(classes);
-//   if(classes !== "card__base row flipped") {
-//     classes += " flipped";
-//   } else {
-//     classes = "card__base row";
-//   }
-//   console.log(classes);
-//   //this.setState({classes: "card__base row flipped"});
-//   console.log("Click Handled");
-// }
-
+import { ReactSession } from "react-client-session";
 const Assetcard = (props) => {
   const [flip, setFlip] = useState(false);
 
+  var stockroom=ReactSession.get("selectedStockroom");
+   var identifier =props.name;
+  
   function test() {
     return (
       <span className="edit-opt" onClick={() => setFlip(!flip)}>
@@ -25,6 +16,36 @@ const Assetcard = (props) => {
       </span>
     );
   }
+  const deleteAsset = async (event) => {
+    // console.log(identifier);
+    // console.log(stockroom);
+   try {
+    const response = await fetch("http://localhost:3000/api/v1/deleteAsset", {
+      method: "POST",
+      body: JSON.stringify({
+        stockroomName:stockroom,
+        identifier:identifier,
+        
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+
+    console.log("result is: ", JSON.stringify(result, null, 4));
+  } catch (err) {
+  } finally {
+    window.location.reload();
+  }
+  };
+
 
   return (
     <React.Fragment>
@@ -63,7 +84,7 @@ const Assetcard = (props) => {
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
-          <div className="delete-btn">
+          <div className="delete-btn" onClick={deleteAsset}>
             <div className="delete-icon">&#128465;</div>
           </div>
         </div>
