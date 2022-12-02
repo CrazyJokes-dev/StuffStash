@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles/assetCard.css";
+import UpdateForm from "../utils/UpdateForm";
 
 // function handleClick() {
 //   console.log(classes);
@@ -13,7 +14,7 @@ import "./styles/assetCard.css";
 //   console.log("Click Handled");
 // }
 
-const Assetcard = () => {
+const Assetcard = (props) => {
   const [flip, setFlip] = useState(false);
 
   function test() {
@@ -29,7 +30,7 @@ const Assetcard = () => {
     <React.Fragment>
       {/** overall container for card */}
       <div className={`card-grid card ${flip ? "flip" : ""}`}>
-        <div className="front row" onClick={() => setFlip(!flip)}>
+        <div className="front row">
           <div className="edit-btn">
             <div className="edit-icon" onClick={() => setFlip(!flip)}>
               &#9998;
@@ -46,29 +47,27 @@ const Assetcard = () => {
               />
               <div className="img-info">
                 <div className="name">
-                  <span>Name: Cool Asset</span>
+                  <span>Name: {props.name}</span>
                 </div>
                 <div className="avail">
-                  <span>Availibility: Checked Out</span>
+                  <span>Availibility: {props.avail}</span>
                 </div>
               </div>
             </div>
             <hr />
             {/** contains condition and warrenty date */}
             <div className="asset-info">
-              <span className="">Asset Info </span>
-              <p className="cond-text">Condition: Mint</p>
-              <p className="cond-text">Warrenty Date: 12/12/2022</p>
+              <span className="">Asset Info</span>
+              <p className="cond-text">Condition: {props.cond}</p>
+              <p className="cond-text">Warranty Date: {props.date}</p>
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
-          <div className="delete-btn">
-            <div className="delete-icon">&#128465;</div>
-          </div>
         </div>
-
-        <div className="back row" onClick={() => setFlip(!flip)}>
-          <div className="col">Content</div>
+        <div className="back row">
+          <div className="col">
+            <UpdateForm />
+          </div>
         </div>
       </div>
     </React.Fragment>
