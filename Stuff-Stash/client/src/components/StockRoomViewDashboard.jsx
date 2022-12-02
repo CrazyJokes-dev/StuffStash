@@ -5,15 +5,15 @@ import Assetcard from "../components/assetCard";
 import React from "react";
 import Axios from "axios";
 
-const StockRoomViewDashboard = () => {
+const StockRoomViewDashboard = ({orgName}) => {
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
   const [listOfAssets, setListOfAssets] = useState([]);
   //const [orgName, setOrgName] = useState({});
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
   let history = useHistory();
   const userid = ReactSession.get("username");
 
-  const orgName = ReactSession.get("selectedOrg");
+ // const orgName = ReactSession.get("selectedOrg");
   var stockroomName = ReactSession.get("selectedStockroom");
 
   const linkStyle = {
@@ -22,14 +22,17 @@ const StockRoomViewDashboard = () => {
   };
 
   useEffect(() => {
+    console.log(orgName);
     Axios.get(
       `http://localhost:3000/api/v1/users/viewstock/${orgName}`
     )
       .then((response) => {
         setListOfStockRoom(response.data);
+        setError(null);
       })
-      .catch((err) => {
-        setError(err);
+      .catch((err) => { 
+        setListOfStockRoom("");
+        setError(err.response.data.msg);
       });
   }, [orgName]);
 
@@ -55,6 +58,7 @@ const StockRoomViewDashboard = () => {
 
   return (
     <React.Fragment>
+       {error && <div>{error}</div>}
       {Object.entries(listOfStockRoom).map(([key, value]) => {
         return (
           <li className="list-group-item bg-transparent" key={value.name}>
