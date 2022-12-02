@@ -30,12 +30,20 @@ const logoutUser = async (e) => {
 
 const username = ReactSession.get("username");
 
-const currentOrg = ReactSession.get("selectedOrg");
-console.log(currentOrg);
+//const currentOrg = ReactSession.get("selectedOrg");
+//console.log(currentOrg);
 
 class Dashboard extends Component {
-
-  state = {};
+  constructor(props)
+  {
+    super(props);
+    this.state={org: " "};
+  }
+  toggleOrg = (orgname) => {
+    this.setState(state => ({ org: orgname }));
+    document.getElementById("AssetList").setAttribute("hidden", "hidden");
+  };
+  
   render() {
     return (
       <div className="back-ground container-fluid d-flex m-0 p-0">
@@ -55,7 +63,7 @@ class Dashboard extends Component {
             <span className="display-6 p-3" style={{ color: "white" }}>
               Organizations
             </span>
-            <OrgViewDashboard />
+            <OrgViewDashboard onClick={this.toggleOrg} />
           </div>
           <div className="d-flex flex-column buttonDisplay p-2 justify-content-center">
             {/** Div for displaying the buttons to create an org or join existing or via orgID */}
@@ -89,10 +97,10 @@ class Dashboard extends Component {
         {/** COL 2 -- RIGHT SIDE */}
         <div className="container-fluid rightDisplay col">
           <div className="stckRoomDisplay justify-content-center">
-            <span className="display-3">Current Stockrooms</span>
+            <span className="display-3">Current Stockrooms {this.state.org}</span>
             {/** Div for displaying stockrooms of org when org button or link is clicked*/}
             <ul className="stockroom-list list-group list-group-flush">
-              <StockRoomViewDashboard />
+            <StockRoomViewDashboard orgName={this.state.org} />
             </ul>
           </div>
         </div>
