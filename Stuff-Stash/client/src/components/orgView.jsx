@@ -3,23 +3,20 @@ import { useHistory, Link } from "react-router-dom";
 import { ReactSession } from "react-client-session";
 import Axios from "axios";
 import React from "react";
-import ReactDOM from "react-dom";
 
-const OrgViewDashboard = ({onClick}) => {
+const OrgViewDashboard = () => {
   const [listOfOrgs, setListOfOrgs] = useState({});
- // const [org,setselectedorg]=useState();
   const [error, setError] = useState();
   let history = useHistory();
   const userid = ReactSession.get("username");
 
-  //function handleClick(orgname) {
-    //ReactSession.set("selectedOrg", orgname);
-    //let selectedOrg = ReactSession.get("selectedOrg");
-    //console.log(selectedOrg);
-   // setselectedorg(orgname);  
-    //history.push("/dashboard");
-  //}
-  
+  function handleClick(orgname) {
+    ReactSession.set("selectedOrg", orgname);
+    let selectedOrg = ReactSession.get("selectedOrg");
+    console.log("The currently selected organization" + selectedOrg);
+    document.getElementById("AssetList").setAttribute("hidden", "hidden");
+    history.push("/dashboard");
+  }
 
   const linkStyle = {
     textDecoration: "none",
@@ -53,11 +50,10 @@ const OrgViewDashboard = ({onClick}) => {
                     </Link> */}
                     <button
                       className="toggle-btn"
-                      onClick={()=>onClick(el.name)}
+                      onClick={() => handleClick(el.name)}
                     >
                       <span className="btnLabel">{el.name}</span>
                     </button>
-                    
                   </div>
                 </li>
               );
@@ -66,10 +62,6 @@ const OrgViewDashboard = ({onClick}) => {
         );
       })}
     </React.Fragment>
-   
- 
   );
 };
-
-
 export default OrgViewDashboard;
