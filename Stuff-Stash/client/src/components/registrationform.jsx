@@ -15,18 +15,21 @@ function RegForm() {
     // const res = await fetch(
     // "https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/createUser",
     // {
-    const res = await fetch("http://localhost:3000/api/v1/users/createUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-        password2,
-        organizationID,
-      }),
-    });
+    const res = await fetch(
+      "http://localhost:3000/api/v1/users/createUser",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          password2,
+          organizationID,
+        }),
+      }
+    );
 
     const data = res.json();
     console.log("data -- ", data);
@@ -48,7 +51,8 @@ function RegForm() {
     }
     if (username.length < 6) {
       // alert("Username must be longer then 6 chars");
-      document.getElementById("id1").innerHTML = "Username must be longer then 6 chars";
+      document.getElementById("id1").innerHTML =
+        "Username must be longer then 6 chars";
       document.getElementById("id1").style.color = "#Ff0000";
     }
     if (password.length < 6 || password.search(/\d/) == -1) {

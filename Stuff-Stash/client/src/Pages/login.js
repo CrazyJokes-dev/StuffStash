@@ -11,16 +11,19 @@ const UserLogin = () => {
   const loginUser = async (e) => {
     e.preventDefault();
     // const res = await fetch('https://api-dot-techstack-demo-deployment.ue.r.appspot.com/api/v1/users/login', {
-    const res = await fetch("http://localhost:3000/api/v1/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
+    const res = await fetch(
+      "http://localhost:3000/api/v1/users/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      }
+    );
     const data = res.json();
     console.log("data -- ", data);
     console.log(res.status);
