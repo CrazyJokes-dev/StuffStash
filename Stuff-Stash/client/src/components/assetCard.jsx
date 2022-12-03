@@ -6,6 +6,7 @@ const Assetcard = (props) => {
   const [flip, setFlip] = useState(false);
   var stockroom=ReactSession.get("selectedStockroom");
   var identifier =props.name;
+  ReactSession.set("identiferName", identifier);
   
   function test() {
     return (

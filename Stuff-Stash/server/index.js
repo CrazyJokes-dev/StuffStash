@@ -380,12 +380,13 @@ app.post("/api/v1/addAsset", async (req, res) => {
 app.post("/api/v1/UpdateAsset", async (req, res) => {
   console.log("updating asset");
   const stockroom = req.body.stockroomName;
-  const asset = req.body.asset;
-  const { identifier, category, isAvailable } = req.body.asset;
-  const {newIdentifer, newCategory, newIsAvailable} = req.body;
+
+  const { identifier, category, isAvailable } = req.body;
+  const {newIdentifer, newSerialCode, newIsAvailable,newCategory, newCondition, newWarranty} = req.body;
   const filter = { name: stockroom };
 
-     StockroomModel.findOne(filter).findOneAndUpdate({"assets.identifier":identifier}, {$set: {"assets.$.identifier": newIdentifer, "assets.$.category": newCategory, "assets.$.isAvailable":newIsAvailable}}).then((x) => {
+     StockroomModel.findOne(filter).findOneAndUpdate({"assets.identifier":identifier}, {$set: {"assets.$.identifier": newIdentifer,"assets.$.serialCode": newSerialCode, 
+		 "assets.$.isAvailable":newIsAvailable,"assets.$.category": newCategory,"assets.$.condition": newCondition,"assets.$.warranty": newWarranty }}).then((x) => {
       if (!x){
         return res.status(400).json({msg: "Error"});
       }
