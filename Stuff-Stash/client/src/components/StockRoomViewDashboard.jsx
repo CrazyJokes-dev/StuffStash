@@ -1,18 +1,24 @@
 import { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { ReactSession } from "react-client-session";
+import Assetcard from "../components/assetCard";
 import React from "react";
 import Axios from "axios";
 
-const StockRoomViewDashboard = () => {
+const orgName = ReactSession.get("selectedOrg");
+
+const StockRoomViewDashboard = ({orgName}) => {
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
   const [org, setOrg] = useState("");
-  const [stockroomName, setStockroomName] = useState("");
+  //const [stockroomName, setStockroomName] = useState("");
+  const [listOfAssets, setListOfAssets] = useState([]);
   //const [orgName, setOrgName] = useState({});
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
   let history = useHistory();
   const userid = ReactSession.get("username");
-  const orgName = ReactSession.get("selectedOrg");
+
+// const orgName = ReactSession.get("selectedOrg");
+  var stockroomName = ReactSession.get("selectedStockroom");
 
   const linkStyle = {
     textDecoration: "none",
@@ -20,17 +26,45 @@ const StockRoomViewDashboard = () => {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3000/api/v1/users/viewstock/${orgName}`)
+    console.log(orgName);
+    Axios.get(
+      `http://localhost:3000/api/v1/users/viewstock/${orgName}`
+    )
       .then((response) => {
         setListOfStockRoom(response.data);
-        
+        setError(null);
+      })
+      .catch((err) => { 
+        setListOfStockRoom("");
+        setError(err.response.data.msg);
+      });
+  }, [orgName]);
+
+  const viewStuff = (event) => {
+    // document.getElementById("CreateAssetButton").hidden = false;
+    // console.log(stock);
+    // setStockroomName(stock);
+
+    //This will set the stockroom session variable to the stockroom that the user just clicked on
+    ReactSession.set("selectedStockroom", event.currentTarget.id);
+    document.getElementById("CreateAssetButton").hidden = false;
+    stockroomName = ReactSession.get("selectedStockroom");
+    console.log("Selected Stockroom is currently " + stockroomName);
+
+    // This will get all the assets under whatever stockroom the user just clicked on
+    Axios.get(`http://localhost:3000/api/v1/users/viewAssets/${orgName}/${stockroomName}`)
+      .then((response) => {
+        setListOfAssets(response.data);
+        // This may look delayed by one click but don't worry it is receiving the correct assets
+        //console.log(listOfAssets);  
       })
       .catch((err) => {
         setError(err);
       });
-  }, [orgName]);
 
-  var check = false;
+      document.getElementById("AssetList").removeAttribute("hidden");
+  };
+
   const handleClick = async (event) => {
     try {
       const response = await fetch(
@@ -39,14 +73,14 @@ const StockRoomViewDashboard = () => {
           method: "POST",
           body: JSON.stringify({
             stockroomName: stockroomName,
-          asset: {
-            identifier: "identifier",
-            category: "category",
-            isAvailable: "true",
-            condition: "mint",
-            serialCode: "Undefined",
-            warranty: "Undefined"
-          }
+            asset: {
+              identifier: "identifier",
+              category: "category",
+              isAvailable: "true",
+              condition: "mint",
+              serialCode: "Undefined",
+              warranty: "Undefined"
+            }
           }),
           headers: {
             "Content-Type": "application/json",
@@ -68,14 +102,9 @@ const StockRoomViewDashboard = () => {
     }
   };
 
-  const setsessions = (stock) => {
-    document.getElementById("CreateAssetButton").hidden = false;
-    setStockroomName(stock);
-    //console.log(stock);
-  };
-
   return (
     <React.Fragment>
+       {error && <div>{error}</div>}
       {Object.entries(listOfStockRoom).map(([key, value]) => {
         return (
           <li className="list-group-item bg-transparent" key={value.name}>
@@ -90,7 +119,7 @@ const StockRoomViewDashboard = () => {
                       className="toggle-btn"
                       data-active="inactive"
                       id={name[1]}
-                      onClick={()=>setsessions(name[1])}
+                      onClick={viewStuff}
                     >
                       <span className="btnLabel">{name[1]}</span>
                     </button>
@@ -109,6 +138,23 @@ const StockRoomViewDashboard = () => {
           </li>
         );
       })}
+      <div id="AssetList" hidden="hidden">
+      {Object.entries(listOfAssets).map(([key, value]) => {
+        return (
+          <li className="list-group-item bg-transparent" key={value.name}>
+            { listOfAssets[0].assets.length === 0 && <h4>{stockroomName} currently has no assets to be viewed</h4>}
+            {Object.entries(value.assets).map((name, key) => {
+              return (
+                <div>
+                  {console.log(name[1])}
+                  <Assetcard name={name[1].identifier} avail={name[1].isAvailable} cond={name[1].condition} date={name[1].warranty}/>
+                </div>
+              )
+            })}
+          </li>
+        );
+      })}
+      </div>
     </React.Fragment>
   );
 };

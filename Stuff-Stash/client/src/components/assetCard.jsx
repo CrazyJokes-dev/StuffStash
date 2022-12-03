@@ -13,7 +13,7 @@ import "./styles/assetCard.css";
 //   console.log("Click Handled");
 // }
 
-const Assetcard = () => {
+const Assetcard = (props) => {
   const [flip, setFlip] = useState(false);
 
   function test() {
@@ -41,10 +41,10 @@ const Assetcard = () => {
               />
               <div className="img-info">
                 <div className="name">
-                  <span>Name: Cool Asset</span>
+                  <span>Name: {props.name}</span>
                 </div>
                 <div className="avail">
-                  <span>Availibility: Checked Out</span>
+                  <span>Availibility: {props.avail}</span>
                 </div>
               </div>
             </div>
@@ -52,8 +52,8 @@ const Assetcard = () => {
             {/** contains condition and warrenty date */}
             <div className="asset-info">
               <span className="">Asset Info</span>
-              <p className="cond-text">Condition: Mint</p>
-              <p className="cond-text">Warrenty Date: 12/12/2022</p>
+              <p className="cond-text">Condition: {props.cond}</p>
+              <p className="cond-text">Warranty Date: {props.date}</p>
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
