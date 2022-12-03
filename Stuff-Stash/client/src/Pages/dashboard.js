@@ -105,10 +105,10 @@ class Dashboard extends Component {
           </div>
         </div>
         {/** COL 3 -- RIGHT SIDE */}
-				<div className="container-fluid rightDisplay col">
-					<div className="stckRoomDisplay justify-content-center">
-						<span className="display-3">
-							Organization Members
+				<div >
+					<div className="orgMembersDisplay justify-content-center">
+						<span className="display-7">
+							<b>Organization Members</b>
 						</span>
 						{/** Div for displaying stockrooms of org when org button or link is clicked*/}
 						<ul className="stockroom-list list-group list-group-flush">
