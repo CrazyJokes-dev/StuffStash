@@ -112,7 +112,7 @@ class Dashboard extends Component {
 						</span>
 						{/** Div for displaying stockrooms of org when org button or link is clicked*/}
 						<ul className="stockroom-list list-group list-group-flush">
-							<ViewMembers />
+							<ViewMembers orgName={this.state.org} />
 						</ul>
 					</div>
 				</div>

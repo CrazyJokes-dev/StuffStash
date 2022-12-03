@@ -4,14 +4,14 @@ import { ReactSession } from "react-client-session";
 import React from "react";
 import Axios from "axios";
 
-const ViewMembers = () => {
+const ViewMembers = ({orgName}) => {
   const [listOfMembers, setListOfMembers] = useState([]);
   //const [orgName, setOrgName] = useState({});
   const [error, setError] = useState();
   let history = useHistory();
   const userid = ReactSession.get("username");
 
-  const orgName = ReactSession.get("selectedOrg");
+ // const orgName = ReactSession.get("selectedOrg");
 
   const linkStyle = {
     textDecoration: "none",
