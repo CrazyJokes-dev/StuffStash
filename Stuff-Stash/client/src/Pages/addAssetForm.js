@@ -70,7 +70,7 @@ export default function AssetForm() {
         <div className="col d-flex align-items-center text-center justify-content-center">
           <div className="col"></div>
           <div className="col">
-            <Form onSubmit={addAsset}>
+            <Form>
               <Form.Group size="sm" controlId="stockroomName">
                 <Form.Label>Enter Stockroom Name</Form.Label>
                 <Form.Control

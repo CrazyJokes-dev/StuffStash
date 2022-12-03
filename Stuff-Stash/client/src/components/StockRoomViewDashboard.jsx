@@ -10,14 +10,11 @@ const orgName = ReactSession.get("selectedOrg");
 const StockRoomViewDashboard = ({orgName}) => {
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
   const [org, setOrg] = useState("");
-  //const [stockroomName, setStockroomName] = useState("");
   const [listOfAssets, setListOfAssets] = useState([]);
-  //const [orgName, setOrgName] = useState({});
   const [error, setError] = useState(null);
   let history = useHistory();
   const userid = ReactSession.get("username");
 
-// const orgName = ReactSession.get("selectedOrg");
   var stockroomName = ReactSession.get("selectedStockroom");
 
   const linkStyle = {
@@ -41,15 +38,24 @@ const StockRoomViewDashboard = ({orgName}) => {
   }, [orgName]);
 
   const viewStuff = (event) => {
-    // document.getElementById("CreateAssetButton").hidden = false;
-    // console.log(stock);
-    // setStockroomName(stock);
+
+    //hide previously displayed create asset button
+    if(ReactSession.get("selectedStockroom") == null || document.getElementsByClassName("createButton") != null)
+    {
+      var buttons = document.getElementsByClassName("createButton");
+      for (var i = 0; i < buttons.length; i ++) {
+        buttons[i].hidden = true;
+    }
+      document.getElementsByClassName("createButton").hidden = true;
+    }
 
     //This will set the stockroom session variable to the stockroom that the user just clicked on
     ReactSession.set("selectedStockroom", event.currentTarget.id);
-    document.getElementById("CreateAssetButton").hidden = false;
     stockroomName = ReactSession.get("selectedStockroom");
     console.log("Selected Stockroom is currently " + stockroomName);
+
+    //display the create asset button for the correct stockroom
+    document.getElementById(stockroomName + "create").hidden = false;
 
     // This will get all the assets under whatever stockroom the user just clicked on
     Axios.get(`http://localhost:3000/api/v1/users/viewAssets/${orgName}/${stockroomName}`)
@@ -125,13 +131,14 @@ const StockRoomViewDashboard = ({orgName}) => {
                     </button>
                   </div>
                   <button
-                    id="CreateAssetButton"
-                    onClick={handleClick}
-                    type="hidden"
-                    hidden="true"
-                  >
-                    Create Asset
-                  </button>
+                      class = "createButton"
+                      id={name[1] + "create"}
+                      onClick={handleClick}
+                      type="hidden"
+                      hidden={true}
+                      >
+                      Create Asset
+                    </button>
                 </div>
               );
             })}
