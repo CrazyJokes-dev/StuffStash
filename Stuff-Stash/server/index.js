@@ -177,6 +177,7 @@ app.get("/api/v1/users/viewmembers/:orgName", (req, res) => {
 app.post("/api/v1/addAsset", async (req, res) => {
   console.log("Adding asset");
   const stockroom = req.body.stockroomName;
+  console.log(stockroom);
   const asset = req.body.asset;
   const { identifier, category, isAvailable, condition, serialCode, warranty } = req.body.asset;
   const filter = { name: stockroom };

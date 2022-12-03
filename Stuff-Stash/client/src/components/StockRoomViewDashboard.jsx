@@ -5,15 +5,16 @@ import Assetcard from "../components/assetCard";
 import React from "react";
 import Axios from "axios";
 
+const orgName = ReactSession.get("selectedOrg");
+
 const StockRoomViewDashboard = ({orgName}) => {
   const [listOfStockRoom, setListOfStockRoom] = useState([]);
+  const [org, setOrg] = useState("");
   const [listOfAssets, setListOfAssets] = useState([]);
-  //const [orgName, setOrgName] = useState({});
   const [error, setError] = useState(null);
   let history = useHistory();
   const userid = ReactSession.get("username");
 
- // const orgName = ReactSession.get("selectedOrg");
   var stockroomName = ReactSession.get("selectedStockroom");
 
   const linkStyle = {
@@ -36,11 +37,25 @@ const StockRoomViewDashboard = ({orgName}) => {
       });
   }, [orgName]);
 
-  const viewAssets = (event) => {
+  const viewStuff = (event) => {
+
+    //hide previously displayed create asset button
+    if(ReactSession.get("selectedStockroom") == null || document.getElementsByClassName("createButton") != null)
+    {
+      var buttons = document.getElementsByClassName("createButton");
+      for (var i = 0; i < buttons.length; i ++) {
+        buttons[i].hidden = true;
+    }
+      document.getElementsByClassName("createButton").hidden = true;
+    }
+
     //This will set the stockroom session variable to the stockroom that the user just clicked on
     ReactSession.set("selectedStockroom", event.currentTarget.id);
     stockroomName = ReactSession.get("selectedStockroom");
     console.log("Selected Stockroom is currently " + stockroomName);
+
+    //display the create asset button for the correct stockroom
+    document.getElementById(stockroomName + "create").hidden = false;
 
     // This will get all the assets under whatever stockroom the user just clicked on
     Axios.get(`http://localhost:3000/api/v1/users/viewAssets/${orgName}/${stockroomName}`)
@@ -56,6 +71,43 @@ const StockRoomViewDashboard = ({orgName}) => {
       document.getElementById("AssetList").removeAttribute("hidden");
   };
 
+  const handleClick = async (event) => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/v1/addAsset",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            stockroomName: stockroomName,
+            asset: {
+              identifier: "identifier",
+              category: "category",
+              isAvailable: "true",
+              condition: "mint",
+              serialCode: "Undefined",
+              warranty: "Undefined"
+            }
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      console.log("result is: ", JSON.stringify(result, null, 4));
+    } catch (err) {
+    } finally {
+      window.location.reload();
+    }
+  };
+
   return (
     <React.Fragment>
        {error && <div>{error}</div>}
@@ -64,10 +116,29 @@ const StockRoomViewDashboard = ({orgName}) => {
           <li className="list-group-item bg-transparent" key={value.name}>
             {Object.entries(value).map((name, key) => {
               return (
-                <div className="container-fluid buttonItem shadowbtn" key={name[1]}>
-                  <button id={name[1]} className="toggle-btn" onClick={viewAssets}>
-                    <span className="btnLabel">{name[1]}</span>
-                  </button>
+                <div>
+                  <div
+                    className="container-fluid buttonItem shadowbtn"
+                    key={name[1]}
+                  >
+                    <button
+                      className="toggle-btn"
+                      data-active="inactive"
+                      id={name[1]}
+                      onClick={viewStuff}
+                    >
+                      <span className="btnLabel">{name[1]}</span>
+                    </button>
+                  </div>
+                  <button
+                      class = "createButton"
+                      id={name[1] + "create"}
+                      onClick={handleClick}
+                      type="hidden"
+                      hidden={true}
+                      >
+                      Create Asset
+                    </button>
                 </div>
               );
             })}
