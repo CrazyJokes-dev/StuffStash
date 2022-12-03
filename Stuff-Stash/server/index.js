@@ -208,7 +208,21 @@ app.get("/api/v1/users/viewAssets/:orgName/:stockroomName", (req, res) => {
   });
 });
 
-//app.use("/stockrooms", room.changeName);
+//gets stockroom by name and org
+app.post("/api/v1/deleteStockroom", async (req, res) => {
+  console.log("deleting stockroom");
+
+  const { org, stockroomName } = req.body;
+  var query = { org: org, name: stockroomName };
+
+  StockroomModel.deleteOne(query, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
 
 //END STOCKROOM CALLS
 

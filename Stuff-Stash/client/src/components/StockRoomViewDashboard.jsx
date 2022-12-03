@@ -38,24 +38,31 @@ const StockRoomViewDashboard = ({orgName}) => {
   }, [orgName]);
 
   const viewStuff = (event) => {
+    setOrg(orgName);
 
     //hide previously displayed create asset button
     if(ReactSession.get("selectedStockroom") == null || document.getElementsByClassName("createButton") != null)
     {
       var buttons = document.getElementsByClassName("createButton");
+      var buttonDelete = document.getElementsByClassName("deleteButton");
       for (var i = 0; i < buttons.length; i ++) {
         buttons[i].hidden = true;
+        buttonDelete[i].hidden=true;
     }
       document.getElementsByClassName("createButton").hidden = true;
+      document.getElementsByClassName("deleteButton").hidden = true;
+      
     }
 
     //This will set the stockroom session variable to the stockroom that the user just clicked on
     ReactSession.set("selectedStockroom", event.currentTarget.id);
     stockroomName = ReactSession.get("selectedStockroom");
     console.log("Selected Stockroom is currently " + stockroomName);
+    
 
     //display the create asset button for the correct stockroom
     document.getElementById(stockroomName + "create").hidden = false;
+    document.getElementById("delete"+stockroomName).hidden = false;
 
     // This will get all the assets under whatever stockroom the user just clicked on
     Axios.get(`http://localhost:3000/api/v1/users/viewAssets/${orgName}/${stockroomName}`)
@@ -70,6 +77,33 @@ const StockRoomViewDashboard = ({orgName}) => {
 
       document.getElementById("AssetList").removeAttribute("hidden");
   };
+  const deleteStockroom = async (event) => {
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/deleteStockroom", {
+        method: "POST",
+        body: JSON.stringify({
+          org,
+          stockroomName,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    console.log("result is: ", JSON.stringify(result, null, 4));
+  } catch (err) {
+  } finally {
+    window.location.reload();
+  }
+};
 
   const handleClick = async (event) => {
     try {
@@ -139,6 +173,15 @@ const StockRoomViewDashboard = ({orgName}) => {
                       >
                       Create Asset
                     </button>
+
+                    <button 
+                      id={"delete" + name[1]}  
+                      class = "deleteButton" 
+                      onClick={deleteStockroom} 
+                      type="hidden" 
+                      hidden={true}>
+                    Delete
+                  </button>
                 </div>
               );
             })}
