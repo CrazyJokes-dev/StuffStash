@@ -16,6 +16,10 @@
   padding: 1em;
   overflow: auto;
 }
+.orgMembersDisplay {
+  max-height: 80vh;
+  width: 200px;
+}
 
 .stockroom-list {
   max-width: 600px;
