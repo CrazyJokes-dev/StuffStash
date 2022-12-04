@@ -7,7 +7,8 @@ const CreateOrg = () => {
   const [name, setorgname] = useState("");
   const [OrgAccessCode, setorgCode] = useState("");
   const [isShown, setIsSHown] = useState(false);
-
+ 
+  const userid = ReactSession.get("username");
   let history = useHistory();
 
   // Adds new Org
@@ -24,6 +25,7 @@ const CreateOrg = () => {
         body: JSON.stringify({
           name,
           OrgAccessCode,
+          userid,
         }),
       }
     );

@@ -26,7 +26,7 @@
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
   height: 350px;
-  width: 800px;
+  width: 500px;
   margin: 10px;
 }
 
@@ -122,3 +122,38 @@
 .right__card {
   /* background: teal; */
 }
+.edit-btn {
+  display: flex;
+}
+
+.edit-btn .edit-icon {
+  margin-left: auto;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.edit-icon:hover {
+  transform: scale(1.2);
+}
+
+.delete-btn {
+  display: flex;
+}
+.delete-btn .delete-icon {
+  margin-left: auto;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-icon:hover {
+  transform: scale(1.2);}
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.btn-confirm {
+  margin-left: auto;
+}
+
+

@@ -1,24 +1,14 @@
 import React, { useState } from "react";
 import "./styles/assetCard.css";
-
-// function handleClick() {
-//   console.log(classes);
-//   if(classes !== "card__base row flipped") {
-//     classes += " flipped";
-//   } else {
-//     classes = "card__base row";
-//   }
-//   console.log(classes);
-//   //this.setState({classes: "card__base row flipped"});
-//   console.log("Click Handled");
-// }
+import UpdateForm from "../utils/UpdateForm";
+import { ReactSession } from "react-client-session";
 
 const Assetcard = (props) => {
   const [flip, setFlip] = useState(false);
-  const [assetName, setAssetName] = useState("");
-
- 
-
+  var stockroom=ReactSession.get("selectedStockroom");
+  var identifier =props.name;
+  ReactSession.set("identiferName", identifier);
+  
   function test() {
     return (
       <span className="edit-opt" onClick={() => setFlip(!flip)}>
@@ -27,12 +17,45 @@ const Assetcard = (props) => {
       </span>
     );
   }
+  const deleteAsset = async (event) => {
+   try {
+    const response = await fetch("http://localhost:3000/api/v1/deleteAsset", {
+      method: "POST",
+      body: JSON.stringify({
+        stockroomName:stockroom,
+        identifier:identifier,
+        
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+
+    console.log("result is: ", JSON.stringify(result, null, 4));
+  } catch (err) {
+  } finally {
+    window.location.reload();
+  }
+  };
+
 
   return (
     <React.Fragment>
       {/** overall container for card */}
       <div className={`card-grid card ${flip ? "flip" : ""}`}>
-        <div className="front row" onClick={() => setFlip(!flip)}>
+        <div className="front row">
+          <div className="edit-btn">
+            <div className="edit-icon" onClick={() => setFlip(!flip)}>
+              &#9998;
+            </div>
+          </div>
           {/** left side container -- has static img and avail, warrenty, condition */}
           <div className="left__card col">
             {/** contains img and avail */}
@@ -49,20 +72,28 @@ const Assetcard = (props) => {
                 <div className="avail">
                   <span>Availibility: {props.avail}</span>
                 </div>
+                <div className="category">
+                  <span>Category: {props.category}</span>
+                </div>
               </div>
             </div>
             <hr />
             {/** contains condition and warrenty date */}
             <div className="asset-info">
-              <span className="">Asset Info</span>
               <p className="cond-text">Condition: {props.cond}</p>
-              <p className="cond-text">Warrenty Date: 12/12/2022</p>
+              <p className="cond-text">Warranty Date: {props.date}</p>
+              <p className="cond-text">Serial No.: {props.serialCode}</p>
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}
+          <div className="delete-btn" onClick={ () => {deleteAsset(); alert("Asset has been deleted"); }}>
+            <div className="delete-icon">&#128465;</div>
+          </div>
         </div>
-        <div className="back row" onClick={() => setFlip(!flip)}>
-          <div className="col">Content</div>
+        <div className="back row">
+          <div className="col">
+            <UpdateForm />
+          </div>
         </div>
       </div>
     </React.Fragment>

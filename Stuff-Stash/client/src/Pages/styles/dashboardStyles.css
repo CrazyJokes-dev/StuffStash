@@ -22,6 +22,10 @@
   margin-left: 0;
   overflow: auto;
 }
+.orgMembersDisplay {
+  max-height: 80vh;
+  width: 200px;
+}
 
 .assetDisplay {
   resize: vertical;
@@ -95,13 +99,13 @@
 .userDiv {
   display: flex;
   color: rgb(172, 82, 236);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 .userDiv p {
   color: rgb(255, 255, 255);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 45px;
+  font-size: 42px;
   text-align: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .imgDiv {
