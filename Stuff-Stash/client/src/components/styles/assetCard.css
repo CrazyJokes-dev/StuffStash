@@ -25,14 +25,13 @@
   transition: 150ms;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
-  height: 400px;
+  height: 350px;
   width: 500px;
   margin: 10px;
 }
 
 .card:hover {
-  --translate-y: -2px;
-
+  --translate-y: -4px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
   opacity: 1;
 }
@@ -156,3 +155,5 @@ label {
 .btn-confirm {
   margin-left: auto;
 }
+
+

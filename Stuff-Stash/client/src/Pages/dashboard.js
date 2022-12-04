@@ -2,22 +2,18 @@ import React, { Component } from "react";
 import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
+import "./styles/scrollbarStyle.css";
 import OrgViewDashboard from "../components/orgView";
 import StockRoomViewDashboard from "../components/StockRoomViewDashboard";
 import UserProfile from "../components/UserProfile";
 import ViewMembers from "../components/ViewMembers";
+import Assetcard from "../components/assetCard";
 
 //styles -----------------------------
-
-const styling = {
-	width: "300px",
-};
-
 const linkStyle = {
 	textDecoration: "none",
 	color: "white",
 };
-
 //-------------------------------------
 
 const logoutUser = async (e) => {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./styles/assetCard.css";
 import UpdateForm from "../utils/UpdateForm";
 import { ReactSession } from "react-client-session";
+
 const Assetcard = (props) => {
   const [flip, setFlip] = useState(false);
   var stockroom=ReactSession.get("selectedStockroom");
@@ -71,14 +72,17 @@ const Assetcard = (props) => {
                 <div className="avail">
                   <span>Availibility: {props.avail}</span>
                 </div>
+                <div className="category">
+                  <span>Category: {props.category}</span>
+                </div>
               </div>
             </div>
             <hr />
             {/** contains condition and warrenty date */}
             <div className="asset-info">
-              <span className="">Asset Info</span>
               <p className="cond-text">Condition: {props.cond}</p>
               <p className="cond-text">Warranty Date: {props.date}</p>
+              <p className="cond-text">Serial No.: {props.serialCode}</p>
             </div>
           </div>
           {/** contains name, product type, etc... TBD */}

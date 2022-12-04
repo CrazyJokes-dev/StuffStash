@@ -10,15 +10,39 @@
   padding: 1em;
 }
 
+.rightDisplay {
+  padding: 1em;
+  overflow: none;
+}
+
 .stckRoomDisplay {
   max-height: 80vh;
-  margin: 2em;
+  margin: 1em;
   padding: 1em;
+  padding-left: 0;
+  margin-left: 0;
   overflow: auto;
 }
 .orgMembersDisplay {
   max-height: 80vh;
   width: 200px;
+}
+
+.assetDisplay {
+  resize: vertical;
+  overflow: auto;
+  max-height: 100vh;
+  display: flexbox;
+  padding: 0.5em;
+  overflow-y: auto;
+}
+
+#AssetList {
+  overflow: auto;
+  max-height: 450px;
+  width: 1125px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .stockroom-list {
