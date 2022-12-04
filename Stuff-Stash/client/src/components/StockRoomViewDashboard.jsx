@@ -5,7 +5,6 @@ import Assetcard from "../components/assetCard";
 import React from "react";
 import Axios from "axios";
 
-
 const orgName = ReactSession.get("selectedOrg");
 
 const StockRoomViewDashboard = ({orgName}) => {
@@ -190,21 +189,21 @@ const StockRoomViewDashboard = ({orgName}) => {
         );
       })}
       <div id="AssetList" hidden="hidden">
-      {Object.entries(listOfAssets).map(([key, value]) => {
-        return (
-          <li className="list-group-item bg-transparent" key={value.name}>
-            { listOfAssets[0].assets.length === 0 && <h4>{stockroomName} currently has no assets to be viewed</h4>}
-            {Object.entries(value.assets).map((name, key) => {
-              return (
-                <div>
-                  {console.log(name[1])}
-                  <Assetcard name={name[1].identifier} avail={name[1].isAvailable} cond={name[1].condition} date={name[1].warranty} serialCode={name[1].serialCode} category={name[1].category}/>
-                </div>
-              )
-            })}
-          </li>
-        );
-      })}
+        {Object.entries(listOfAssets).map(([key, value]) => {
+          return (     
+            <>
+              { listOfAssets[0].assets.length === 0 && <h4>{stockroomName} currently has no assets to be viewed</h4>}
+              {Object.entries(value.assets).map((name, key) => {
+                return (
+                  <div>
+                    {console.log(name[1])}
+                    <Assetcard name={name[1].identifier} avail={name[1].isAvailable} cond={name[1].condition} date={name[1].warranty} serialCode={name[1].serialCode} category={name[1].category}/>
+                  </div>
+                )
+              })}
+            </> 
+          );
+        })}
       </div>
     </React.Fragment>
   );

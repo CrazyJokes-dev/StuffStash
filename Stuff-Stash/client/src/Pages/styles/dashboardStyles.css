@@ -12,6 +12,7 @@
 
 .rightDisplay {
   padding: 1em;
+  overflow: none;
 }
 
 .stckRoomDisplay {
@@ -34,6 +35,14 @@
   display: flexbox;
   padding: 0.5em;
   overflow-y: auto;
+}
+
+#AssetList {
+  overflow: auto;
+  max-height: 450px;
+  width: 1125px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .stockroom-list {
