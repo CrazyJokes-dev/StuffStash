@@ -1,6 +1,9 @@
 .asset-info > .cond-text {
   color: black;
 }
+.black {
+  color: black;
+}
 
 .card-grid {
   display: grid;
@@ -130,6 +133,7 @@
   margin-left: auto;
   cursor: pointer;
   transition: 0.2s;
+  color:black;
 }
 .edit-icon:hover {
   transform: scale(1.2);
@@ -137,6 +141,7 @@
 
 .delete-btn {
   display: flex;
+  color:black;
 }
 .delete-btn .delete-icon {
   margin-left: auto;

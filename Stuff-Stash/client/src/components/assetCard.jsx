@@ -52,7 +52,7 @@ const Assetcard = (props) => {
       <div className={`card-grid card ${flip ? "flip" : ""}`}>
         <div className="front row">
           <div className="edit-btn">
-            <div className="edit-icon" onClick={() => setFlip(!flip)}>
+            <div className="edit-icon black" onClick={() => setFlip(!flip)}>
               &#9998;
             </div>
           </div>
@@ -65,14 +65,14 @@ const Assetcard = (props) => {
                 alt="cheems-pets"
                 className="product-img"
               />
-              <div className="img-info">
-                <div className="name">
+              <div className="img-info ">
+                <div className="name black">
                   <span>Name: {props.name}</span>
                 </div>
-                <div className="avail">
+                <div className="avail black">
                   <span>Availibility: {props.avail}</span>
                 </div>
-                <div className="category">
+                <div className="category black">
                   <span>Category: {props.category}</span>
                 </div>
               </div>
