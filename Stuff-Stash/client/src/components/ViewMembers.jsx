@@ -35,7 +35,7 @@ const ViewMembers = ({orgName}) => {
     <React.Fragment>
       {Object.entries(listOfMembers).map(([key, value]) => {
         return (
-          <li className="list-group-item bg-transparent" key={value.name}>
+          <li className="list-group-item bg-transparent white" key={value.name}>
             {Object.entries(value).map((name, key) => {
               return (
                 <div

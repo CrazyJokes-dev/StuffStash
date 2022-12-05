@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./styles/dashboardStyles.css";
@@ -42,6 +43,9 @@ class Dashboard extends Component {
   
   render() {
     return (
+      <React.Fragment>
+      <div className="b2">
+    
       <div className="back-ground container-fluid d-flex m-0 p-0">
         {/** COL 1 -- LEFT SIDE */}
         <div className="leftDisplay">
@@ -63,27 +67,27 @@ class Dashboard extends Component {
           </div>
           <div className="d-flex flex-column buttonDisplay p-2 justify-content-center">
             {/** Div for displaying the buttons to create an org or join existing or via orgID */}
-            <div className="btn btn-success m-1 button button1">
+            <div className="btn btn-success m-1 button button1 btn-color">
               <Link to="/adduserOrg" exact style={linkStyle}>
                 Join Existing Organization
               </Link>
             </div>
-            <div className="btn btn-success m-1 button button2">
+            <div className="btn btn-success m-1 button button2 btn-color">
               <Link to="/org" exact style={linkStyle}>
                 Create Organization
               </Link>
             </div>
-            <div className="btn btn-success m-1 button button1">
+            <div className="btn btn-success m-1 button button1 btn-color">
               <Link to="/createStockRoom" exact style={linkStyle}>
                 Create Stockroom
               </Link>
             </div>
-            <div className="btn btn-success m-1 button button1 ">
+            <div className="btn btn-success m-1 button button1 btn-color ">
               <Link to="/addAssetForm" exact style={linkStyle}>
                 Create Asset
               </Link>
             </div>
-            <div className="btn btn-success m-1 button button1" onClick={logoutUser}>
+            <div className="btn btn-success m-1 button button1 btn-color" onClick={logoutUser}>
               <Link to="/#" exact style={linkStyle}>
                 Logout
               </Link>
@@ -93,7 +97,7 @@ class Dashboard extends Component {
         {/** COL 2 -- RIGHT SIDE */}
         <div className="container-fluid rightDisplay col">
           <div className="stckRoomDisplay justify-content-center">
-            <span className="display-3">Current Stockrooms {this.state.org}</span>
+            <span className="display-3 white">Current Stockrooms {this.state.org}</span>
             {/** Div for displaying stockrooms of org when org button or link is clicked*/}
             <ul className="stockroom-list list-group list-group-flush">
             <StockRoomViewDashboard orgName={this.state.org} />
@@ -102,17 +106,20 @@ class Dashboard extends Component {
         </div>
         {/** COL 3 -- RIGHT SIDE */}
 				<div >
-					<div className="orgMembersDisplay justify-content-center">
+					<div className="orgMembersDisplay justify-content-center white">
 						<span className="display-7">
 							<b>Organization Members</b>
 						</span>
 						{/** Div for displaying stockrooms of org when org button or link is clicked*/}
-						<ul className="stockroom-list list-group list-group-flush">
+						<ul className="stockroom-list list-group list-group-flush white">
 							<ViewMembers orgName={this.state.org} />
 						</ul>
 					</div>
 				</div>
       </div>
+      </div>
+    
+      </React.Fragment>
     );
   }
 }

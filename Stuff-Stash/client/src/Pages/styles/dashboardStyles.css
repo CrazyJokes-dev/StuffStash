@@ -5,6 +5,9 @@
   display: flex;
   z-index: 0;
 }
+.white{
+  color: white;
+}
 
 .leftDisplay {
   padding: 1em;
@@ -48,6 +51,7 @@
 .stockroom-list {
   max-width: 600px;
   text-align: start;
+  color: white;
 }
 
 .userDisplay {
@@ -80,6 +84,12 @@
   background-color: gray;
   border-radius: 100px;
 }
+.btn-color{
+  background-color: rgb(57, 59, 59);
+  border-color: rgb(57, 59, 59);
+}
+
+
 
 .buttonItem button.toggle-btn {
   color: white;
