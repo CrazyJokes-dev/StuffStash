@@ -1,5 +1,7 @@
 import React from "react";
 import { ReactSession } from "react-client-session";
+import "../components/styles/assetCard.css";
+
 var name ="";
 var serialCode ="";
 var availability ="";
@@ -67,26 +69,26 @@ const UpdateForm = () => {
    };
   return (
     <form onSubmit="{update}">
-      <div class="form-group m-3">
+      <div class="form-group m-3 black">
         <label for="Name" >Name : </label>
         <input onChange={setNewName}/>
       </div>
-      <div class="form-group m-3">
+      <div class="form-group m-3 black">
         <label for="Serial Code">Serial Code : </label>
         <input onChange={setNewSerialCode}/>
       </div>
-      <div class="form-group m-3">
+      <div class="form-group m-3 black">
         <label for="avail">Availability :</label>
         <input onChange={setNewAvailabity}/>
       </div>
 
-      <div class="form-group m-3">
+      <div class="form-group m-3 black">
         <label class="form-label" for="asset info">
           Asset Info :
         </label>
         <input onChange={setCategory}/>
       </div>
-      <div class="form-group m-3">
+      <div class="form-group m-3 black" >
         <label for="condition">Condition :</label>
         <select name="condition" id="condition" onChange={setCondition}>
           <option>Select Value</option>
@@ -95,15 +97,15 @@ const UpdateForm = () => {
           <option value="poor">Poor</option>
         </select>
       </div>
-      <div class="form-group m-3">
+      <div class="form-group m-3 black">
         <label for="WarrDate">Warranty Date :</label>
         <input onChange={setWarranty}/>
-      </div>
-      <div className="text-center">
+       <div className="text-center">
         <button className="btn btn-primary m-3 " onClick={update}>
           Confirm{" "}
         </button>
-      </div>
+      </div></div>
+     
     </form>
   );
 };
