@@ -25,6 +25,7 @@
   padding-left: 0;
   margin-left: 0;
   overflow: auto;
+  color: white;
 }
 .orgMembersDisplay {
   max-height: 80vh;
