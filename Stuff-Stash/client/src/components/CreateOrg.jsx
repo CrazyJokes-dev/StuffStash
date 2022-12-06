@@ -31,8 +31,8 @@ const CreateOrg = () => {
     );
 
     const data = res.json();
-    console.log("data -- ", data);
-    console.log(res.status);
+    // console.log("data -- ", data);
+    // console.log(res.status);
     if (res.status === 200) {
       data.then((vars) => {
         ReactSession.set("orgname", vars.newOrg.name);

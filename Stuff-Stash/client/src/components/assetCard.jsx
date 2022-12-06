@@ -61,8 +61,8 @@ const Assetcard = (props) => {
             {/** contains img and avail */}
             <div className="img-container">
               <img
-                src="https://i.pinimg.com/originals/f1/d2/fe/f1d2fe7bafb49df1e6a17cd43d1cc7e1.gif"
-                alt="cheems-pets"
+                src="https://media.istockphoto.com/id/1165294902/vector/desktop-computer-icon-flat-led-screen-monitor-pc-modern-personal-monitor-office-and-home.jpg?s=612x612&w=0&k=20&c=YtP0P84oPncvlV0JNTb2xNUWJ3lFoZwb03gsWwpLrW8="
+                alt="comp-icon"
                 className="product-img"
               />
               <div className="img-info ">

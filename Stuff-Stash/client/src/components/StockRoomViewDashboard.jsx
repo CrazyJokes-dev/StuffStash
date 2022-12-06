@@ -23,7 +23,7 @@ const StockRoomViewDashboard = ({ orgName }) => {
   };
 
   useEffect(() => {
-    console.log(orgName);
+    // console.log(orgName);
     Axios.get(`http://localhost:3000/api/v1/users/viewstock/${orgName}`)
       .then((response) => {
         setListOfStockRoom(response.data);
@@ -198,7 +198,7 @@ const StockRoomViewDashboard = ({ orgName }) => {
               {Object.entries(value.assets).map((name, key) => {
                 return (
                   <div>
-                    {console.log(name[1])}
+                    {/* {console.log(name[1])} */}
                     <Assetcard
                       name={name[1].identifier}
                       avail={name[1].isAvailable}

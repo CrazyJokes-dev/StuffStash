@@ -90,7 +90,14 @@
   border-color: rgb(57, 59, 59);
 }
 
-
+.createButton, .deleteButton {
+  border-radius: 99px;
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  margin: 5px;
+}
 
 .buttonItem button.toggle-btn {
   color: white;
@@ -102,13 +109,13 @@
 
 .buttonItem:hover {
   background-color: rgb(75, 75, 75);
-  box-shadow: 0px 5px 7px 0px rgb(119, 119, 119);
+  box-shadow: 0px 5px 7px 0px rgb(30, 30, 30);
   animation: smoothScale 0.15s ease-in forwards;
 }
 
 .buttonItem:active {
   background-color: rgb(32, 32, 32);
-  box-shadow: inset 0px 5px 7px 0px black;
+  box-shadow: inset 0px 5px 7px 0px rgb(23, 23, 23);
   animation: smoothShrink 0.13s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 

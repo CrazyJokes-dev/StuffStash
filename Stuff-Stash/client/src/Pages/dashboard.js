@@ -80,11 +80,6 @@ class Dashboard extends Component {
                     Create Stockroom
                   </Link>
                 </div>
-                <div className="btn btn-success m-1 button button1 btn-color ">
-                  <Link to="/addAssetForm" exact style={linkStyle}>
-                    Create Asset
-                  </Link>
-                </div>
                 <div
                   className="btn btn-success m-1 button button1 btn-color"
                   onClick={logoutUser}
