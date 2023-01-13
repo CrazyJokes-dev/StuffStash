@@ -1,5 +1,4 @@
 # Stuff Stash
-capstone-project-sour-patch-kids created by GitHub Classroom
 
 **Team name:** SourPatch Kids
 
